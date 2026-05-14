@@ -1,0 +1,110 @@
+{
+    "name": "La Fogata - Steak & Burger",
+    "logo": "/logo.png",
+    "whatsapp": "50586571443",
+    "categories": [
+        {
+        "name": "Entradas y Entremeses",
+        "items": [
+            {
+            "name": "Nachos La Fogata",
+            "price": 185,
+            "description": "Totopos artesanales con doble queso fundido, frijoles negros, pico de gallo y jalapeños.",
+            "image": "/images/nachos.jpg"
+            },
+            {
+            "name": "Alitas Ahumadas",
+            "price": 210,
+            "description": "6 piezas bañadas en salsa BBQ artesanal o Buffalo picante, acompañadas de aderezo Blue Cheese.",
+            "image": "/images/alitas.jpg"
+            },
+            {
+            "name": "Chicharrón de Rib Eye",
+            "price": 250,
+            "description": "200g de cubos de Rib Eye fritos, sobre una cama de guacamole fresco.",
+            "image": "/images/chicharron.jpg"
+            }
+        ]
+        },
+        {
+        "name": "Hamburguesas Gourmet",
+        "items": [
+            {
+            "name": "La Clásica Grill",
+            "price": 120,
+            "description": "200g de carne de res premium, queso cheddar, lechuga orgánica, tomate y cebolla caramelizada.",
+            "image": "/images/clasica.jpg"
+            },
+            {
+            "name": "Monster Bacon",
+            "price": 165,
+            "description": "Doble carne, triple tocino crujiente, huevo estrellado y salsa secreta de la casa.",
+            "image": "/images/bacon.jpg"
+            },
+            {
+            "name": "Volcán de Queso",
+            "price": 180,
+            "description": "Bañada en una costra de queso provolone fundido con champiñones al ajillo.",
+            "image": "/images/volcan.jpg"
+            }
+        ]
+        },
+        {
+        "name": "Cortes a la Leña",
+        "items": [
+            {
+            "name": "Puyazo (Coulotte)",
+            "price": 450,
+            "description": "350g de corte importado, asado a fuego lento con leña de encino. Incluye 2 guarniciones.",
+            "image": "/images/puyazo.jpg"
+            },
+            {
+            "name": "Rib Eye Prime",
+            "price": 580,
+            "description": "Corte marmoleado de 400g, sazonado con sal de grano y pimienta negra.",
+            "image": "/images/ribeye.jpg"
+            }
+        ]
+        },
+        {
+        "name": "Postres",
+        "items": [
+            {
+            "name": "Brownie con Helado",
+            "price": 95,
+            "description": "Brownie tibio de chocolate amargo con una bola de helado de vainilla y jarabe de caramelo.",
+            "image": "/images/brownie.jpg"
+            },
+            {
+            "name": "Cheesecake de Frutos Rojos",
+            "price": 110,
+            "description": "Receta cremosa de la casa con coulis de fresas y frambuesas frescas.",
+            "image": "/images/cheesecake.jpg"
+            }
+        ]
+        },
+        {
+        "name": "Bebidas y Coctelería",
+        "items": [
+            {
+            "name": "Limonada con Hierbabuena",
+            "price": 55,
+            "description": "Refrescante limonada natural con hojas de hierbabuena maceradas.",
+            "image": "/images/limonada.jpg"
+            },
+            {
+            "name": "Cerveza Artesanal",
+            "price": 85,
+            "description": "Consulte las variedades de temporada de nuestra micro-cervecería local.",
+            "image": "/images/cerveza.jpg"
+            },
+            {
+            "name": "Coca Cola",
+            "price": 40,
+            "description": "Presentación original en botella de vidrio de 355ml.",
+            "image": "/images/soda.jpg"
+            }
+        ]
+        }
+    ]
+}
