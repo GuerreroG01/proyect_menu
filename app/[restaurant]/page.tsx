@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { Utensils, MapPin, Clock, ArrowRight, Star, Info, ChevronLeft, ShieldCheck, Share2 } from "lucide-react";
+import { Utensils, MapPin, Clock, ArrowRight, Star, ChevronLeft, ShieldCheck } from "lucide-react";
 import { Montserrat } from "next/font/google";
+import fs from "fs";
+import path from "path";
 
 const montserrat = Montserrat({ 
   subsets: ["latin"],
@@ -23,11 +25,13 @@ interface RestaurantData {
   categories: any[];
 }
 
+// Configuración de Zona Horaria
+const TIMEZONE = "America/Managua";
+
 function verificarSiEstaAbierto(horarios: Horario[] | undefined): boolean {
   if (!horarios || horarios.length === 0) return false;
-  const zonaHoraria = "America/Managua"; 
   
-  const ahoraEnPunto = new Date().toLocaleString("en-US", { timeZone: zonaHoraria });
+  const ahoraEnPunto = new Date().toLocaleString("en-US", { timeZone: TIMEZONE });
   const ahora = new Date(ahoraEnPunto);
 
   const numeroDia = ahora.getDay();
@@ -88,26 +92,15 @@ export default async function RestaurantPage({
   let fetchError = false;
 
   try {
-    const host = process.env.NEXT_PUBLIC_BASE_URL 
-                ? process.env.NEXT_PUBLIC_BASE_URL 
-                : typeof window !== "undefined" 
-                  ? window.location.origin 
-                  : "http://127.0.0.1:3000";
-
-    const res = await fetch(`${host}/menus/${restaurant}.json`, { cache: "no-store" });
-    
-    if (res.ok) {
-      restaurantData = await res.json();
-    } else {
-      fetchError = true;
-    }
+    const filePath = path.join(process.cwd(), "public", "menus", `${restaurant}.json`);
+    const fileContent = fs.readFileSync(filePath, "utf8");
+    restaurantData = JSON.parse(fileContent);
   } catch (error) {
-    console.error("Error cargando el menú en el servidor:", error);
+    console.error("Error cargando el archivo del restaurante:", error);
     fetchError = true;
   }
 
   const displayName = restaurantData?.name || restaurant.replace(/_/g, " ");
-  
   const estaAbierto = verificarSiEstaAbierto(restaurantData?.horarios);
 
   return (
@@ -154,7 +147,6 @@ export default async function RestaurantPage({
       </div>
 
       <main className="flex-1 max-w-xl mx-auto w-full px-6 pt-24 pb-12 relative">
-        
         <div className="text-center mb-10">
           <div className="flex justify-center items-center gap-1.5 mb-5">
              <div className="flex bg-[#00A7E1]/10 px-3 py-1 rounded-full border border-[#00A7E1]/20">
@@ -191,7 +183,7 @@ export default async function RestaurantPage({
             </div>
             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Localización</span>
             <span className="text-sm text-[#002B5B] font-bold line-clamp-2">
-              {restaurantData?.labelUbicacion || (fetchError ? "Error al cargar dirección" : "Cargando...")}
+              {restaurantData?.labelUbicacion || (fetchError ? "Dirección no disponible" : "Cargando...")}
             </span>
           </a>
 
@@ -205,15 +197,17 @@ export default async function RestaurantPage({
                 if (!restaurantData?.horarios || restaurantData.horarios.length === 0) {
                   return fetchError ? "No disponible" : "Cargando...";
                 }
-                const numeroDia = new Date().getDay();
+                const ahoraEnPunto = new Date().toLocaleString("en-US", { timeZone: TIMEZONE });
+                const ahora = new Date(ahoraEnPunto);
+                const numeroDia = ahora.getDay();
                 const esFinDeSemana = numeroDia === 0 || numeroDia === 6;
 
                 const horarioHoy = restaurantData.horarios.find(h => {
                   const diasMinuscula = h.dias.toLowerCase();
                   if (esFinDeSemana) {
-                    return diasMinuscula.includes("sábado") || diasMinuscula.includes("domingo") || diasMinuscula.includes("fin de semana");
+                    return diasMinuscula.includes("sábado") || diasMinuscula.includes("domingo") || diasMinuscula.includes("fin de semana") || diasMinuscula.includes("todos los días");
                   } else {
-                    return diasMinuscula.includes("lunes") || diasMinuscula.includes("viernes") || diasMinuscula.includes("semana");
+                    return diasMinuscula.includes("lunes") || diasMinuscula.includes("viernes") || diasMinuscula.includes("semana") || diasMinuscula.includes("todos los días");
                   }
                 }) || restaurantData.horarios[0];
 
@@ -252,23 +246,11 @@ export default async function RestaurantPage({
           </Link>
         </div>
 
-        <div className="mt-12 space-y-6">
-          <div className="flex flex-col items-center gap-4">
-            <div className="flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-2xl">
-              <Info size={14} className="text-[#00A7E1]" />
-              <p className="text-[10px] font-black text-slate-500 tracking-wider uppercase">
-                Red Wi-Fi de alta velocidad disponible
-              </p>
-            </div>
-            
-            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-            
-            <div className="flex flex-col items-center gap-1 opacity-40">
-              <p className="text-[9px] font-black text-[#002B5B] uppercase tracking-[0.4em]">
-                Desarrollado por
-              </p>
-              <span className="text-[11px] font-bold text-[#00A7E1]">LocalNet Systems</span>
-            </div>
+        <div className="mt-12 space-y-6 text-center">
+          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+          <div className="opacity-40">
+            <p className="text-[9px] font-black text-[#002B5B] uppercase tracking-[0.4em]">Desarrollado por</p>
+            <span className="text-[11px] font-bold text-[#00A7E1]">LocalNet Systems</span>
           </div>
         </div>
       </main>
