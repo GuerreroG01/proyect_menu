@@ -71,8 +71,13 @@ export default async function RestaurantPage({
   let fetchError = false;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/menus/${restaurant}.json`, { cache: "no-store" });
+    const host = process.env.NEXT_PUBLIC_BASE_URL 
+                ? process.env.NEXT_PUBLIC_BASE_URL 
+                : typeof window !== "undefined" 
+                  ? window.location.origin 
+                  : "http://127.0.0.1:3000";
+
+    const res = await fetch(`${host}/menus/${restaurant}.json`, { cache: "no-store" });
     
     if (res.ok) {
       restaurantData = await res.json();
@@ -102,9 +107,6 @@ export default async function RestaurantPage({
           <Link href="/" className="p-3 bg-white/10 backdrop-blur-xl rounded-2xl text-white border border-white/20 hover:bg-white/20 transition-all shadow-lg">
             <ChevronLeft size={20} />
           </Link>
-          <button className="p-3 bg-white/10 backdrop-blur-xl rounded-2xl text-white border border-white/20 hover:bg-white/20 transition-all shadow-lg">
-            <Share2 size={20} />
-          </button>
         </div>
 
         <div className="absolute bottom-20 right-8 z-20">

@@ -1,20 +1,50 @@
 import Link from "next/link";
-import { Store, ArrowRight, LayoutGrid, Plus, Globe, Settings, Users } from "lucide-react";
-// Importamos Montserrat para igualar la tipografía del logo
+import { ArrowRight, LayoutGrid, Plus, Globe, Users } from "lucide-react";
 import { Montserrat } from "next/font/google";
+// Importamos módulos de Node.js para leer archivos
+import fs from "fs";
+import path from "path";
 
 const montserrat = Montserrat({ 
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"] 
 });
 
-export default function Home() {
-  const restaurants = [
-    { id: "la_fogata", name: "La Fogata", icon: "🍔", category: "Hamburguesas & Grill", status: "Online" },
-    { id: "asados-juan", name: "Asados Juan", icon: "🥩", category: "Carnes a la brasa", status: "Online" },
-  ];
+// Función para formatear el ID del archivo (la_fogata -> La Fogata)
+const formatName = (id: string) => {
+  return id
+    .replace(/_/g, " ")
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
 
-  // Configuración de WhatsApp
+export default function Home() {
+  // --- LÓGICA DINÁMICA DE ARCHIVOS ---
+  const menusDirectory = path.join(process.cwd(), "public", "menus");
+  let restaurants: any[] = [];
+
+  try {
+    // Leemos los archivos de la carpeta
+    const files = fs.readdirSync(menusDirectory);
+    
+    restaurants = files
+      .filter(file => file.endsWith('.json'))
+      .map(file => {
+        const id = file.replace('.json', '');
+        return {
+          id: id,
+          name: formatName(id),
+          icon: "🍽️",
+          category: "Menú Digital",
+          status: "Online"
+        };
+      });
+  } catch (error) {
+    console.error("Error leyendo menús:", error);
+  }
+
+  const totalActivos = restaurants.length;
   const whatsappNumber = "50586571443";
   const whatsappMessage = "Hola, me gustaría tener mi menú en la nube, quiero saber más información";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -22,6 +52,7 @@ export default function Home() {
   return (
     <div className={`${montserrat.className} min-h-screen bg-slate-50 flex flex-col text-slate-900`}>
       
+      {/* Navegación */}
       <nav className="bg-white border-b border-slate-200 px-6 py-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
@@ -42,6 +73,7 @@ export default function Home() {
 
       <main className="max-w-6xl mx-auto p-6 md:p-12 w-full">
         
+        {/* Header con Conteo Dinámico */}
         <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <h1 className="text-5xl font-[900] text-[#002B5B] mb-3 tracking-tight">
@@ -55,11 +87,12 @@ export default function Home() {
           <div className="flex gap-3">
              <div className="bg-white px-6 py-3 rounded-2xl border border-slate-100 shadow-sm text-center">
                 <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Activos</p>
-                <p className="text-2xl font-black text-[#002B5B]">{restaurants.length}</p>
+                <p className="text-2xl font-black text-[#002B5B]">{totalActivos}</p>
              </div>
           </div>
         </header>
 
+        {/* Grid de Restaurantes */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {restaurants.map((res) => (
             <Link
@@ -106,7 +139,7 @@ export default function Home() {
             </Link>
           ))}
 
-          {/* Botón convertido en Link de WhatsApp */}
+          {/* Botón de Añadir Negocio */}
           <a 
             href={whatsappUrl}
             target="_blank"
