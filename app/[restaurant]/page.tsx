@@ -25,28 +25,45 @@ interface RestaurantData {
 
 function verificarSiEstaAbierto(horarios: Horario[] | undefined): boolean {
   if (!horarios || horarios.length === 0) return false;
+  const zonaHoraria = "America/Managua"; 
+  
+  const ahoraEnPunto = new Date().toLocaleString("en-US", { timeZone: zonaHoraria });
+  const ahora = new Date(ahoraEnPunto);
 
-  const ahora = new Date();
   const numeroDia = ahora.getDay();
   const esFinDeSemana = numeroDia === 0 || numeroDia === 6;
 
   const horarioHoy = horarios.find(h => {
     const diasMinuscula = h.dias.toLowerCase();
     if (esFinDeSemana) {
-      return diasMinuscula.includes("sábado") || diasMinuscula.includes("domingo") || diasMinuscula.includes("fin de semana");
+      return (
+        diasMinuscula.includes("sábado") || 
+        diasMinuscula.includes("domingo") || 
+        diasMinuscula.includes("fin de semana") ||
+        diasMinuscula.includes("todos los días")
+      );
     } else {
-      return diasMinuscula.includes("lunes") || diasMinuscula.includes("viernes") || diasMinuscula.includes("semana");
+      return (
+        diasMinuscula.includes("lunes") || 
+        diasMinuscula.includes("viernes") || 
+        diasMinuscula.includes("semana") ||
+        diasMinuscula.includes("todos los días")
+      );
     }
   }) || horarios[0];
 
   const stringAMinutos = (horaStr: string) => {
-    const [horaMin, meridiano] = horaStr.trim().split(" ");
+    const partes = horaStr.trim().split(/\s+/);
+    if (partes.length < 2) return 0;
+
+    const [horaMin, meridiano] = partes;
     let [horas, minutos] = horaMin.split(":").map(Number);
     
-    if (meridiano?.toUpperCase() === "PM" && horas < 12) horas += 12;
-    if (meridiano?.toUpperCase() === "AM" && horas === 12) horas = 0;
+    const m = meridiano.toUpperCase();
+    if (m === "PM" && horas < 12) horas += 12;
+    if (m === "AM" && horas === 12) horas = 0;
     
-    return horas * 60 + minutos;
+    return horas * 60 + (minutos || 0);
   };
 
   const minutosAhora = ahora.getHours() * 60 + ahora.getMinutes();
