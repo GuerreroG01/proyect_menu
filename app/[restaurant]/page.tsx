@@ -165,7 +165,6 @@ export default async function RestaurantPage({
                 <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
               ))}
             </div>
-            <span className="text-sm font-bold text-slate-500">4.9 (120+ reseñas)</span>
           </div>
         </div>
 

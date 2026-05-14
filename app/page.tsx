@@ -1,168 +1,154 @@
-import Link from "next/link";
-import { ArrowRight, LayoutGrid, Plus, Globe, Users } from "lucide-react";
 import { Montserrat } from "next/font/google";
-// Importamos módulos de Node.js para leer archivos
-import fs from "fs";
-import path from "path";
 
-const montserrat = Montserrat({ 
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import FeatureCard from "./components/FeatureCard";
+import CTASection from "./components/CTASection";
+
+import { features } from "./data/features";
+import { getRestaurants } from "./lib/restaurants";
+
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"] 
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
-// Función para formatear el ID del archivo (la_fogata -> La Fogata)
-const formatName = (id: string) => {
-  return id
-    .replace(/_/g, " ")
-    .split(" ")
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
-
 export default function Home() {
-  // --- LÓGICA DINÁMICA DE ARCHIVOS ---
-  const menusDirectory = path.join(process.cwd(), "public", "menus");
-  let restaurants: any[] = [];
-
-  try {
-    // Leemos los archivos de la carpeta
-    const files = fs.readdirSync(menusDirectory);
-    
-    restaurants = files
-      .filter(file => file.endsWith('.json'))
-      .map(file => {
-        const id = file.replace('.json', '');
-        return {
-          id: id,
-          name: formatName(id),
-          icon: "🍽️",
-          category: "Menú Digital",
-          status: "Online"
-        };
-      });
-  } catch (error) {
-    console.error("Error leyendo menús:", error);
-  }
-
+  const restaurants = getRestaurants();
   const totalActivos = restaurants.length;
+
   const whatsappNumber = "50586571443";
-  const whatsappMessage = "Hola, me gustaría tener mi menú en la nube, quiero saber más información";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  const whatsappMessage =
+    "Hola, me gustaría tener mi restaurante en la nube y conocer más información.";
+
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    whatsappMessage
+  )}`;
 
   return (
-    <div className={`${montserrat.className} min-h-screen bg-slate-50 flex flex-col text-slate-900`}>
-      
-      {/* Navegación */}
-      <nav className="bg-white border-b border-slate-200 px-6 py-4 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="bg-[#002B5B] p-2.5 rounded-xl shadow-lg shadow-blue-100">
-              <Globe className="text-[#00A7E1]" size={20} />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-xl font-bold tracking-tight text-[#00A7E1]">
-                LocalNet
-              </span>
-              <span className="text-lg font-medium text-[#002B5B] -mt-1">
-                Systems
-              </span>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div
+      className={`${montserrat.className} min-h-screen bg-slate-50 flex flex-col text-slate-900`}
+    >
+      <Navbar />
 
-      <main className="max-w-6xl mx-auto p-6 md:p-12 w-full">
-        
-        {/* Header con Conteo Dinámico */}
-        <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <h1 className="text-5xl font-[900] text-[#002B5B] mb-3 tracking-tight">
-              Mis Negocios
+      <main className="max-w-7xl mx-auto px-6 md:px-12 py-20 w-full">
+
+        <section className="mb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12">
+
+          <div className="max-w-3xl">
+
+            <div className="inline-flex items-center gap-2 bg-[#00A7E1]/10 border border-[#00A7E1]/10 text-[#00A7E1] px-4 py-2 rounded-full text-sm font-bold mb-8">
+              <div className="w-2 h-2 rounded-full bg-[#00A7E1] animate-pulse" />
+              Plataforma Digital para Restaurantes
+            </div>
+
+            <h1 className="text-5xl md:text-6xl xl:text-7xl font-black text-[#002B5B] leading-[1.05] tracking-tight mb-8">
+              Lleva tu restaurante
+              <span className="block text-[#00A7E1]">a la nube</span>
             </h1>
-            <p className="text-slate-400 text-lg font-medium max-w-md">
-              Gestiona el ecosistema digital de tus establecimientos desde un solo lugar.
+
+            <p className="text-slate-500 text-lg md:text-xl leading-relaxed max-w-2xl">
+              Creamos una landing page interactiva para tu restaurante con menú digital,
+              pedidos por WhatsApp, horarios dinámicos y presencia online optimizada.
             </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mt-10">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#002B5B] hover:bg-[#001f42] text-white px-8 py-4 rounded-2xl font-bold transition-all duration-300 hover:scale-[1.02] shadow-lg text-center"
+              >
+                Solicitar Información
+              </a>
+
+              <a
+                href="#features"
+                className="border border-slate-200 hover:border-[#00A7E1] hover:text-[#00A7E1] px-8 py-4 rounded-2xl font-bold transition-all duration-300 text-center bg-white"
+              >
+                Explorar Plataforma
+              </a>
+            </div>
           </div>
-          
-          <div className="flex gap-3">
-             <div className="bg-white px-6 py-3 rounded-2xl border border-slate-100 shadow-sm text-center">
-                <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Activos</p>
-                <p className="text-2xl font-black text-[#002B5B]">{totalActivos}</p>
-             </div>
+
+          <div className="flex flex-col gap-5 min-w-[260px]">
+
+            <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+              <p className="text-[11px] uppercase tracking-[0.3em] text-slate-300 font-bold mb-3">
+                Restaurantes
+              </p>
+
+              <h3 className="text-5xl font-black text-[#002B5B]">
+                {totalActivos}
+              </h3>
+
+              <p className="text-slate-400 mt-2 font-medium">
+                En la plataforma
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-[#002B5B] to-[#003b7d] p-8 rounded-[2rem] text-white shadow-xl">
+              <p className="text-sm uppercase tracking-[0.3em] text-[#00A7E1] font-bold mb-3">
+                Experiencia
+              </p>
+
+              <h3 className="text-4xl font-black mb-2">
+                Mobile First
+              </h3>
+
+              <p className="text-blue-100">
+                Diseñado para clientes desde cualquier celular.
+              </p>
+            </div>
+
           </div>
-        </header>
 
-        {/* Grid de Restaurantes */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {restaurants.map((res) => (
-            <Link
-              key={res.id}
-              href={`/${res.id}`}
-              className="group relative bg-white border border-slate-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:shadow-blue-100/50 transition-all duration-500 overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-[5rem] -mr-10 -mt-10 group-hover:bg-blue-50 transition-colors duration-500" />
+        </section>
 
-              <div className="relative z-10 flex flex-col h-full">
-                <div className="flex justify-between items-start mb-8">
-                  <div className="text-4xl bg-white w-20 h-20 flex items-center justify-center rounded-3xl shadow-lg border border-slate-50 group-hover:scale-110 transition-transform duration-500">
-                    {res.icon}
-                  </div>
-                  <span className="flex items-center gap-1.5 bg-green-50 text-green-600 text-[10px] font-bold uppercase px-3 py-1 rounded-full border border-green-100">
-                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                    {res.status}
-                  </span>
-                </div>
-
-                <div className="flex-1">
-                  <h2 className="text-2xl font-bold text-[#002B5B] mb-2 group-hover:text-[#00A7E1] transition-colors">
-                    {res.name}
-                  </h2>
-                  <p className="text-slate-400 text-sm mb-8 flex items-center gap-2 font-medium">
-                    <LayoutGrid size={16} className="text-[#00A7E1]" />
-                    {res.category}
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-between pt-6 border-t border-slate-50">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center">
-                        <Users size={12} className="text-slate-400" />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="bg-[#002B5B] p-3 rounded-2xl text-white group-hover:bg-[#00A7E1] transition-all group-hover:translate-x-1">
-                    <ArrowRight size={20} />
-                  </div>
-                </div>
-              </div>
-            </Link>
+        <section
+          id="features"
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+        >
+          {features.map((feature) => (
+            <FeatureCard key={feature.title} {...feature} />
           ))}
 
-          {/* Botón de Añadir Negocio */}
-          <a 
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative group overflow-hidden border-2 border-dashed border-slate-200 p-8 rounded-[2.5rem] flex flex-col items-center justify-center gap-4 text-slate-300 hover:border-[#00A7E1] hover:text-[#00A7E1] transition-all duration-300 bg-transparent hover:bg-white"
-          >
-            <div className="p-5 bg-slate-100 rounded-full group-hover:bg-[#00A7E1] group-hover:text-white transition-all duration-300">
-              <Plus size={32} />
-            </div>
-            <div className="text-center">
-               <span className="font-bold text-lg block text-slate-400 group-hover:text-[#00A7E1]">Añadir Negocio</span>
-            </div>
-          </a>
-        </div>
+          <CTASection whatsappUrl={whatsappUrl} />
+        </section>
+
+        <section className="mt-28">
+          <div className="flex items-end justify-between mb-10">
+            <h2 className="text-3xl font-black text-[#002B5B]">
+              Restaurantes asociados
+            </h2>
+
+            <a
+              href="/catalogo"
+              className="text-[#00A7E1] font-bold hover:underline"
+            >
+              Ver catálogo completo →
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {restaurants.slice(0, 3).map((r) => (
+              <a
+                key={r.id}
+                href={`/${r.id}`}
+                className="bg-white border border-slate-100 rounded-2xl p-6 hover:shadow-lg transition"
+              >
+                <div className="text-3xl mb-3">{r.icon}</div>
+                <h3 className="font-bold text-[#002B5B]">{r.name}</h3>
+                <p className="text-slate-400 text-sm">{r.category}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+
       </main>
 
-      <footer className="mt-auto py-10 px-6 border-t border-slate-200 bg-white">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">
-            © 2026 LocalNet Systems
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

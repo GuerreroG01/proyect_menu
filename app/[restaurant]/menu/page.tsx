@@ -98,11 +98,13 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
       <motion.div 
         animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
-        className="w-16 h-16 bg-orange-500 rounded-[2rem] flex items-center justify-center shadow-xl shadow-orange-200"
+        className="w-16 h-16 bg-[#00A7E1] rounded-[2rem] flex items-center justify-center shadow-xl shadow-blue-100"
       >
         <Utensils className="text-white" size={32} />
       </motion.div>
-      <p className="mt-6 text-slate-400 font-bold tracking-widest uppercase text-[10px]">Preparando el Menú</p>
+      <p className="mt-6 text-slate-400 font-bold tracking-widest uppercase text-[10px]">
+        Preparando el Menú
+      </p>
     </div>
   );
 
@@ -113,10 +115,11 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
     : data.categories[activeCategory].items;
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col selection:bg-orange-100">
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col selection:bg-[#00A7E1]/20">
       
       <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100">
         <div className="max-w-2xl mx-auto px-5 py-4">
+          
           <div className="flex items-center justify-between mb-4">
             <button 
               onClick={() => router.back()}
@@ -124,14 +127,18 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
             >
               <ArrowLeft size={20} />
             </button>
+
             <div className="text-center">
-              <span className="text-[9px] font-black text-orange-500 uppercase tracking-[0.3em]">Menú Digital</span>
-              <h1 className="text-xl font-black text-slate-900 tracking-tight leading-none uppercase">
+              <span className="text-[9px] font-black text-[#00A7E1] uppercase tracking-[0.3em]">
+                Menú Digital
+              </span>
+              <h1 className="text-xl font-black text-[#002B5B] tracking-tight leading-none uppercase">
                 {data.name}
               </h1>
             </div>
-            <div className="w-10 h-10 bg-slate-900 rounded-2xl flex items-center justify-center shadow-lg shadow-slate-200">
-               <Utensils size={18} className="text-orange-500" />
+
+            <div className="w-10 h-10 bg-[#002B5B] rounded-2xl flex items-center justify-center shadow-lg shadow-blue-100">
+               <Utensils size={18} className="text-[#00A7E1]" />
             </div>
           </div>
 
@@ -141,7 +148,7 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
               type="text" 
               value={searchQuery} 
               placeholder="Busca tu plato favorito..." 
-              className="w-full bg-slate-100 border-none rounded-[1.5rem] py-3.5 pl-12 pr-12 text-sm text-slate-900 caret-orange-500 placeholder:text-slate-400 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
+              className="w-full bg-slate-100 border-none rounded-[1.5rem] py-3.5 pl-12 pr-12 text-sm text-slate-900 caret-[#00A7E1] placeholder:text-slate-400 focus:ring-2 focus:ring-[#00A7E1]/20 outline-none transition-all"
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             {searchQuery && (
@@ -163,7 +170,7 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
                 onClick={() => setActiveCategory(i)}
                 className={`px-6 py-2.5 rounded-[1.2rem] text-xs font-bold whitespace-nowrap transition-all ${
                   activeCategory === i 
-                    ? "bg-orange-500 text-white shadow-lg shadow-orange-200 scale-105" 
+                    ? "bg-[#00A7E1] text-white shadow-lg shadow-blue-100 scale-105" 
                     : "bg-white text-slate-400 border border-slate-100 hover:bg-slate-50"
                 }`}
               >
@@ -173,11 +180,13 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
           </nav>
         )}
       </header>
+
       <main className="p-5 max-w-2xl mx-auto w-full flex-1 mb-32">
+        
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-sm font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-8 h-[2px] bg-orange-500 rounded-full" />
-            {searchQuery ? 'Resultados' : data.categories[activeCategory].name}
+            <span className="w-8 h-[2px] bg-[#00A7E1] rounded-full" />
+            {searchQuery ? "Resultados" : data.categories[activeCategory].name}
           </h2>
           <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-3 py-1 rounded-full">
             {itemsToShow.length} items
@@ -188,6 +197,7 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
           <AnimatePresence>
             {itemsToShow.map((item, i) => {
               const quantity = cart[item.name]?.quantity || 0;
+
               return (
                 <motion.div 
                   layout
@@ -205,9 +215,10 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
                         <Utensils size={32} />
                       </div>
                     )}
+
                     {quantity > 0 && (
-                      <div className="absolute inset-0 bg-orange-500/20 backdrop-blur-[2px] flex items-center justify-center">
-                        <div className="bg-orange-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-black text-xs shadow-lg">
+                      <div className="absolute inset-0 bg-[#00A7E1]/20 backdrop-blur-[2px] flex items-center justify-center">
+                        <div className="bg-[#00A7E1] text-white w-8 h-8 rounded-full flex items-center justify-center font-black text-xs shadow-lg">
                           {quantity}
                         </div>
                       </div>
@@ -221,25 +232,25 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
                         {item.description}
                       </p>
                     )}
-                    
+
                     <div className="mt-3 flex items-center justify-between">
                       <span className="text-lg font-black text-slate-900 tracking-tighter">
                         ${item.price.toFixed(2)}
                       </span>
-                      
+
                       <div className="flex items-center">
                         {quantity > 0 ? (
-                          <div className="flex items-center bg-slate-900 rounded-2xl p-1 gap-2 shadow-lg">
+                          <div className="flex items-center bg-[#002B5B] rounded-2xl p-1 gap-2 shadow-lg">
                             <button 
                               onClick={() => removeFromCart(item.name)} 
-                              className="w-8 h-8 flex items-center justify-center text-white hover:text-orange-500 transition-colors"
+                              className="w-8 h-8 flex items-center justify-center text-white hover:text-[#00A7E1] transition-colors"
                             >
                               <Minus size={14} />
                             </button>
                             <span className="font-black text-white text-xs w-4 text-center">{quantity}</span>
                             <button 
                               onClick={() => addToCart(item)} 
-                              className="w-8 h-8 flex items-center justify-center bg-orange-500 rounded-xl text-white"
+                              className="w-8 h-8 flex items-center justify-center bg-[#00A7E1] rounded-xl text-white"
                             >
                               <Plus size={14} />
                             </button>
@@ -247,7 +258,7 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
                         ) : (
                           <button 
                             onClick={() => addToCart(item)}
-                            className="bg-slate-50 text-slate-900 h-10 px-4 rounded-[1.2rem] text-[10px] font-black uppercase tracking-widest hover:bg-orange-500 hover:text-white transition-all flex items-center gap-2 border border-slate-100"
+                            className="bg-slate-50 text-slate-900 h-10 px-4 rounded-[1.2rem] text-[10px] font-black uppercase tracking-widest hover:bg-[#00A7E1] hover:text-white transition-all flex items-center gap-2 border border-slate-100"
                           >
                             Añadir <Plus size={12} />
                           </button>
@@ -272,17 +283,19 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
           >
             <button 
               onClick={sendWhatsApp}
-              className="max-w-md mx-auto w-full bg-slate-900 text-white p-2 pl-6 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex items-center justify-between group overflow-hidden"
+              className="max-w-md mx-auto w-full bg-[#002B5B] text-white p-2 pl-6 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex items-center justify-between group overflow-hidden"
             >
               <div className="flex flex-col items-start">
-                <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.2em]">Total Pedido</span>
+                <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">
+                  Total Pedido
+                </span>
                 <div className="flex items-baseline gap-1">
                   <span className="text-xl font-black text-white">${totalPrice.toFixed(2)}</span>
-                  <span className="text-[10px] font-bold text-orange-500">({totalItems} items)</span>
+                  <span className="text-[10px] font-bold text-[#00A7E1]">({totalItems} items)</span>
                 </div>
               </div>
 
-              <div className="bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-[2.1rem] flex items-center gap-3 font-black text-xs uppercase tracking-widest transition-all group-active:scale-95 shadow-lg">
+              <div className="bg-[#00A7E1] hover:bg-[#0093c8] px-8 py-4 rounded-[2.1rem] flex items-center gap-3 font-black text-xs uppercase tracking-widest transition-all group-active:scale-95 shadow-lg">
                 Confirmar <Phone size={16} />
               </div>
             </button>

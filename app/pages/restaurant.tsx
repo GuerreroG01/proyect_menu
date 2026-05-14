@@ -33,7 +33,6 @@ export default function RestaurantPage() {
         .catch(err => console.error("Error cargando menú:", err));
     }, [restaurant]);
 
-    /* 3. Guard clause */
     if (!data) return <p>Cargando...</p>;
 
     return (
