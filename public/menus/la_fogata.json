@@ -2,6 +2,20 @@
     "name": "La Fogata - Steak & Burger",
     "logo": "/logo.png",
     "whatsapp": "50586571443",
+    "labelUbicacion": "Cra. 14 #14, Armenia, Quindío, Colombia",
+    "ubicacion": "https://maps.app.goo.gl/wFmUkCFWQprx9mdv8",
+    "horarios": [
+        {
+        "dias": "Lunes a Viernes",
+        "abre": "11:00 AM",
+        "cierra": "10:00 PM"
+        },
+        {
+        "dias": "Sábado y Domingo",
+        "abre": "12:00 PM",
+        "cierra": "11:30 PM"
+        }
+    ],
     "categories": [
         {
         "name": "Entradas y Entremeses",

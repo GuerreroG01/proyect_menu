@@ -7,17 +7,89 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700", "800", "900"] 
 });
 
+interface Horario {
+  dias: string;
+  abre: string;
+  cierra: string;
+}
+
+interface RestaurantData {
+  name: string;
+  logo: string;
+  whatsapp: string;
+  labelUbicacion: string;
+  ubicacion: string;
+  horarios: Horario[];
+  categories: any[];
+}
+
+function verificarSiEstaAbierto(horarios: Horario[] | undefined): boolean {
+  if (!horarios || horarios.length === 0) return false;
+
+  const ahora = new Date();
+  const numeroDia = ahora.getDay();
+  const esFinDeSemana = numeroDia === 0 || numeroDia === 6;
+
+  const horarioHoy = horarios.find(h => {
+    const diasMinuscula = h.dias.toLowerCase();
+    if (esFinDeSemana) {
+      return diasMinuscula.includes("sábado") || diasMinuscula.includes("domingo") || diasMinuscula.includes("fin de semana");
+    } else {
+      return diasMinuscula.includes("lunes") || diasMinuscula.includes("viernes") || diasMinuscula.includes("semana");
+    }
+  }) || horarios[0];
+
+  const stringAMinutos = (horaStr: string) => {
+    const [horaMin, meridiano] = horaStr.trim().split(" ");
+    let [horas, minutos] = horaMin.split(":").map(Number);
+    
+    if (meridiano?.toUpperCase() === "PM" && horas < 12) horas += 12;
+    if (meridiano?.toUpperCase() === "AM" && horas === 12) horas = 0;
+    
+    return horas * 60 + minutos;
+  };
+
+  const minutosAhora = ahora.getHours() * 60 + ahora.getMinutes();
+  const minutosAbre = stringAMinutos(horarioHoy.abre);
+  const minutosCierra = stringAMinutos(horarioHoy.cierra);
+
+  if (minutosCierra < minutosAbre) {
+    return minutosAhora >= minutosAbre || minutosAhora <= minutosCierra;
+  }
+
+  return minutosAhora >= minutosAbre && minutosAhora <= minutosCierra;
+}
+
 export default async function RestaurantPage({
   params,
 }: {
   params: Promise<{ restaurant: string }>;
 }) {
   const { restaurant } = await params;
-  const displayName = restaurant.replace(/_/g, " ");
+
+  let restaurantData: RestaurantData | null = null;
+  let fetchError = false;
+
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/menus/${restaurant}.json`, { cache: "no-store" });
+    
+    if (res.ok) {
+      restaurantData = await res.json();
+    } else {
+      fetchError = true;
+    }
+  } catch (error) {
+    console.error("Error cargando el menú en el servidor:", error);
+    fetchError = true;
+  }
+
+  const displayName = restaurantData?.name || restaurant.replace(/_/g, " ");
+  
+  const estaAbierto = verificarSiEstaAbierto(restaurantData?.horarios);
 
   return (
     <div className={`${montserrat.className} min-h-screen bg-[#FDFDFD] flex flex-col antialiased`}>
-      {/* Hero Section con profundidad dinámica */}
       <div className="relative h-[48vh] w-full overflow-hidden bg-[#001529]">
         <img
           src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1974&auto=format&fit=crop" 
@@ -26,7 +98,6 @@ export default async function RestaurantPage({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#FDFDFD] via-transparent to-black/20" />
         
-        {/* Barra superior de acciones */}
         <div className="absolute top-6 left-0 right-0 px-6 flex justify-between items-center z-30">
           <Link href="/" className="p-3 bg-white/10 backdrop-blur-xl rounded-2xl text-white border border-white/20 hover:bg-white/20 transition-all shadow-lg">
             <ChevronLeft size={20} />
@@ -36,18 +107,24 @@ export default async function RestaurantPage({
           </button>
         </div>
 
-        {/* Badge Flotante "Abierto" */}
         <div className="absolute bottom-20 right-8 z-20">
           <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl border border-slate-100 shadow-xl flex items-center gap-2">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              {estaAbierto ? (
+                <>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </>
+              ) : (
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+              )}
             </span>
-            <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">Abierto ahora</span>
+            <span className={`text-[10px] font-black uppercase tracking-wider ${estaAbierto ? 'text-slate-700' : 'text-rose-600'}`}>
+              {estaAbierto ? "Abierto ahora" : "Cerrado"}
+            </span>
           </div>
         </div>
 
-        {/* Logo con diseño de "Superellipse" */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20">
           <div className="w-32 h-32 bg-white rounded-[3rem] p-2 shadow-[0_30px_60px_-15px_rgba(0,43,91,0.25)] border border-slate-50">
             <div className="w-full h-full bg-gradient-to-br from-[#002B5B] to-[#001529] rounded-[2.6rem] flex items-center justify-center text-[#00A7E1] font-black text-4xl shadow-inner border border-blue-900/50">
@@ -59,7 +136,6 @@ export default async function RestaurantPage({
 
       <main className="flex-1 max-w-xl mx-auto w-full px-6 pt-24 pb-12 relative">
         
-        {/* Título y Verificado */}
         <div className="text-center mb-10">
           <div className="flex justify-center items-center gap-1.5 mb-5">
              <div className="flex bg-[#00A7E1]/10 px-3 py-1 rounded-full border border-[#00A7E1]/20">
@@ -68,7 +144,7 @@ export default async function RestaurantPage({
              </div>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-900 text-[#002B5B] capitalize mb-6 tracking-tight leading-[0.85] drop-shadow-sm">
+          <h1 className="text-5xl md:text-6xl font-[900] text-[#002B5B] capitalize mb-6 tracking-tight leading-[0.85] drop-shadow-sm">
             {displayName}
           </h1>
           
@@ -82,43 +158,81 @@ export default async function RestaurantPage({
           </div>
         </div>
 
-        {/* Bento Grid Info */}
         <div className="grid grid-cols-2 gap-4 mb-10">
-          <div className="group flex flex-col p-5 rounded-[2.5rem] bg-white border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all hover:shadow-md active:scale-95">
+          <a 
+            href={restaurantData?.ubicacion || "#"}
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={`group flex flex-col p-5 rounded-[2.5rem] bg-white border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all hover:shadow-md active:scale-95 ${
+              restaurantData?.ubicacion ? "cursor-pointer" : "pointer-events-none opacity-60"
+            }`}
+          >
             <div className="w-10 h-10 bg-[#00A7E1] rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-[#00A7E1]/20">
               <MapPin className="text-white" size={18} />
             </div>
             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Localización</span>
-            <span className="text-sm text-[#002B5B] font-bold">Centro Histórico, Calle 5</span>
-          </div>
+            <span className="text-sm text-[#002B5B] font-bold line-clamp-2">
+              {restaurantData?.labelUbicacion || (fetchError ? "Error al cargar dirección" : "Cargando...")}
+            </span>
+          </a>
 
           <div className="group flex flex-col p-5 rounded-[2.5rem] bg-white border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all hover:shadow-md active:scale-95">
             <div className="w-10 h-10 bg-[#002B5B] rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-[#002B5B]/20">
               <Clock className="text-white" size={18} />
             </div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Horario</span>
-            <span className="text-sm text-[#002B5B] font-bold">Cierra a las 22:00</span>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Horario Hoy</span>
+            <span className="text-sm text-[#002B5B] font-bold line-clamp-2">
+              {(() => {
+                if (!restaurantData?.horarios || restaurantData.horarios.length === 0) {
+                  return fetchError ? "No disponible" : "Cargando...";
+                }
+                const numeroDia = new Date().getDay();
+                const esFinDeSemana = numeroDia === 0 || numeroDia === 6;
+
+                const horarioHoy = restaurantData.horarios.find(h => {
+                  const diasMinuscula = h.dias.toLowerCase();
+                  if (esFinDeSemana) {
+                    return diasMinuscula.includes("sábado") || diasMinuscula.includes("domingo") || diasMinuscula.includes("fin de semana");
+                  } else {
+                    return diasMinuscula.includes("lunes") || diasMinuscula.includes("viernes") || diasMinuscula.includes("semana");
+                  }
+                }) || restaurantData.horarios[0];
+
+                return `${horarioHoy.abre} - ${horarioHoy.cierra}`;
+              })()}
+            </span>
           </div>
         </div>
 
-        {/* Acción Principal Mejorada */}
         <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#00A7E1] to-[#002B5B] rounded-[2.8rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+          {estaAbierto && (
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#00A7E1] to-[#002B5B] rounded-[2.8rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+          )}
+          
           <Link
             href={`/${restaurant}/menu`}
-            className="relative flex items-center justify-between pl-8 pr-4 w-full bg-[#002B5B] text-white py-6 rounded-[2.5rem] font-extrabold text-xl transition-all shadow-xl active:scale-[0.97]"
+            className={`relative flex items-center justify-between pl-8 pr-4 w-full py-6 rounded-[2.5rem] font-extrabold text-xl transition-all shadow-xl ${
+              estaAbierto
+                ? "bg-[#002B5B] text-white active:scale-[0.97] cursor-pointer"
+                : "bg-slate-200 text-slate-400 pointer-events-none select-none shadow-none"
+            }`}
           >
             <div className="flex items-center gap-4">
-              <Utensils size={24} className="text-[#00A7E1]" />
-              <span className="tracking-tight uppercase">Explorar la Carta</span>
+              <Utensils size={24} className={estaAbierto ? "text-[#00A7E1]" : "text-slate-400"} />
+              <span className="tracking-tight uppercase">
+                {estaAbierto ? "Explorar la Carta" : "Local Cerrado"}
+              </span>
             </div>
-            <div className="h-14 w-14 bg-[#00A7E1] rounded-[1.8rem] flex items-center justify-center text-white shadow-inner">
+            <div 
+              className={`h-14 w-14 rounded-[1.8rem] flex items-center justify-center text-white shadow-inner ${
+                estaAbierto ? "bg-[#00A7E1]" : "bg-slate-300"
+              }`}
+            >
               <ArrowRight size={28} />
             </div>
           </Link>
         </div>
 
-        {/* Footer info con más estilo */}
         <div className="mt-12 space-y-6">
           <div className="flex flex-col items-center gap-4">
             <div className="flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-2xl">
@@ -134,7 +248,7 @@ export default async function RestaurantPage({
               <p className="text-[9px] font-black text-[#002B5B] uppercase tracking-[0.4em]">
                 Desarrollado por
               </p>
-              <span className="text-[11px] font-bold text-[#00A7E1]">LocalNet Systems v2.4</span>
+              <span className="text-[11px] font-bold text-[#00A7E1]">LocalNet Systems</span>
             </div>
           </div>
         </div>

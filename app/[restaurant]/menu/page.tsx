@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Phone, Utensils, Search, Plus, Minus, ShoppingBag, ArrowLeft } from "lucide-react";
+import { 
+  Phone, Utensils, Search, Plus, Minus, 
+  ShoppingBag, ArrowLeft, X 
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-// --- Definición de Tipos ---
 type MenuItem = { 
   name: string; 
   description?: string; 
@@ -32,14 +35,12 @@ type CartItem = {
 export default function MenuPage({ params }: { params: Promise<{ restaurant: string }> }) {
   const router = useRouter();
   
-  // --- Estados ---
   const [data, setData] = useState<Menu | null>(null);
   const [activeCategory, setActiveCategory] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [cart, setCart] = useState<{ [key: string]: CartItem }>({});
   const [loading, setLoading] = useState(true);
 
-  // --- Carga de Datos ---
   useEffect(() => {
     params.then(async (resParams) => {
       try {
@@ -56,7 +57,6 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
     });
   }, [params]);
 
-  // --- Lógica del Carrito ---
   const addToCart = (item: MenuItem) => {
     setCart((prev) => ({
       ...prev,
@@ -83,80 +83,88 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
   const totalItems = Object.values(cart).reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = Object.values(cart).reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  // --- Envío a WhatsApp ---
   const sendWhatsApp = () => {
     if (totalItems === 0 || !data) return;
-    
     let message = `*¡Nuevo Pedido - ${data.name}!* 📝\n\n`;
-    message += `*Detalle:*\n`;
     Object.values(cart).forEach(item => {
       message += `• ${item.quantity}x ${item.name} ($${(item.price * item.quantity).toFixed(2)})\n`;
     });
-    message += `\n*Total a pagar: $${totalPrice.toFixed(2)}*`;
-    
+    message += `\n*Total: $${totalPrice.toFixed(2)}*`;
     window.open(`https://wa.me/${data.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
   };
 
-  // --- Filtrado ---
   if (loading) return (
     <div className="h-screen flex flex-col items-center justify-center bg-white">
-      <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center animate-bounce">
-        <Utensils className="text-white" size={24} />
-      </div>
-      <p className="mt-4 text-slate-400 font-medium animate-pulse">Cargando menú...</p>
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
+        transition={{ repeat: Infinity, duration: 2 }}
+        className="w-16 h-16 bg-orange-500 rounded-[2rem] flex items-center justify-center shadow-xl shadow-orange-200"
+      >
+        <Utensils className="text-white" size={32} />
+      </motion.div>
+      <p className="mt-6 text-slate-400 font-bold tracking-widest uppercase text-[10px]">Preparando el Menú</p>
     </div>
   );
 
-  if (!data) return <div className="p-10 text-center">Menú no encontrado.</div>;
+  if (!data) return <div className="p-10 text-center font-bold text-slate-400">Menú no encontrado.</div>;
 
   const itemsToShow = searchQuery 
     ? data.categories.flatMap(c => c.items).filter(i => i.name.toLowerCase().includes(searchQuery.toLowerCase()))
     : data.categories[activeCategory].items;
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col selection:bg-orange-100">
       
-      {/* HEADER NAVBAR */}
-      <header className="bg-white sticky top-0 z-50 shadow-sm border-b border-slate-100">
-        <div className="max-w-2xl mx-auto px-5 pt-6 pb-4">
-          <div className="flex items-center justify-between mb-5">
+      <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100">
+        <div className="max-w-2xl mx-auto px-5 py-4">
+          <div className="flex items-center justify-between mb-4">
             <button 
               onClick={() => router.back()}
-              className="p-2 hover:bg-slate-100 active:scale-90 rounded-full transition-all text-slate-500"
+              className="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-2xl transition-colors text-slate-600"
             >
-              <ArrowLeft size={22} />
+              <ArrowLeft size={20} />
             </button>
-            <h1 className="text-xl font-black text-slate-800 tracking-tight uppercase italic">
-              {data.name}
-            </h1>
-            <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center border-2 border-white shadow-sm">
-               <Utensils size={18} className="text-orange-600" />
+            <div className="text-center">
+              <span className="text-[9px] font-black text-orange-500 uppercase tracking-[0.3em]">Menú Digital</span>
+              <h1 className="text-xl font-black text-slate-900 tracking-tight leading-none uppercase">
+                {data.name}
+              </h1>
+            </div>
+            <div className="w-10 h-10 bg-slate-900 rounded-2xl flex items-center justify-center shadow-lg shadow-slate-200">
+               <Utensils size={18} className="text-orange-500" />
             </div>
           </div>
 
-          {/* BUSCADOR */}
-          <div className="relative group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-orange-500 transition-colors" size={18} />
+          <div className="relative flex items-center">
+            <Search className="absolute left-4 text-slate-400" size={18} />
             <input 
               type="text" 
-              placeholder="¿Qué vas a pedir hoy?" 
-              className="w-full bg-slate-100 border-none rounded-2xl py-3.5 pl-12 pr-4 text-sm focus:ring-2 focus:ring-orange-500/20 outline-none text-slate-700 font-medium"
+              value={searchQuery} 
+              placeholder="Busca tu plato favorito..." 
+              className="w-full bg-slate-100 border-none rounded-[1.5rem] py-3.5 pl-12 pr-12 text-sm text-slate-900 caret-orange-500 placeholder:text-slate-400 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
               onChange={(e) => setSearchQuery(e.target.value)}
             />
+            {searchQuery && (
+              <button 
+                onClick={() => setSearchQuery("")}
+                className="absolute right-4 p-1 bg-slate-200/60 hover:bg-slate-200 text-slate-500 rounded-full transition-colors active:scale-90"
+              >
+                <X size={14} />
+              </button>
+            )}
           </div>
         </div>
 
-        {/* CATEGORÍAS */}
         {!searchQuery && (
-          <nav className="flex gap-2 overflow-x-auto px-5 pb-4 no-scrollbar">
+          <nav className="flex gap-3 overflow-x-auto px-5 pb-4 no-scrollbar">
             {data.categories.map((cat, i) => (
               <button
                 key={i}
                 onClick={() => setActiveCategory(i)}
-                className={`px-6 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                className={`px-6 py-2.5 rounded-[1.2rem] text-xs font-bold whitespace-nowrap transition-all ${
                   activeCategory === i 
-                    ? "bg-orange-500 text-white shadow-lg shadow-orange-200" 
-                    : "bg-slate-100 text-slate-400"
+                    ? "bg-orange-500 text-white shadow-lg shadow-orange-200 scale-105" 
+                    : "bg-white text-slate-400 border border-slate-100 hover:bg-slate-50"
                 }`}
               >
                 {cat.name}
@@ -165,90 +173,122 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
           </nav>
         )}
       </header>
-
-      {/* CUERPO DEL MENÚ */}
       <main className="p-5 max-w-2xl mx-auto w-full flex-1 mb-32">
-        <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-6">
-          {searchQuery ? 'Resultados de búsqueda' : data.categories[activeCategory].name}
-        </h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-sm font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-8 h-[2px] bg-orange-500 rounded-full" />
+            {searchQuery ? 'Resultados' : data.categories[activeCategory].name}
+          </h2>
+          <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-3 py-1 rounded-full">
+            {itemsToShow.length} items
+          </span>
+        </div>
 
-        <div className="grid gap-4">
-          {itemsToShow.map((item, i) => {
-            const quantity = cart[item.name]?.quantity || 0;
-            return (
-              <div key={i} className="bg-white p-4 rounded-[2rem] shadow-sm border border-slate-100 flex gap-4 items-center animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <div className="flex-1">
-                  <h3 className="font-bold text-slate-800 text-lg">{item.name}</h3>
-                  {item.description && (
-                    <p className="text-slate-400 text-xs mt-1 leading-relaxed italic">{item.description}</p>
-                  )}
-                  
-                  <div className="mt-4 flex items-center justify-between">
-                    <span className="text-xl font-black text-slate-900">${item.price.toFixed(2)}</span>
-                    
-                    {/* CONTROLES DE CANTIDAD */}
-                    <div className="flex items-center bg-slate-50 rounded-2xl p-1">
-                      {quantity > 0 ? (
-                        <div className="flex items-center gap-3">
-                          <button 
-                            onClick={() => removeFromCart(item.name)} 
-                            className="w-8 h-8 flex items-center justify-center bg-white rounded-xl shadow-sm text-slate-600 active:scale-90 transition-transform"
-                          >
-                            <Minus size={14} />
-                          </button>
-                          <span className="font-bold text-slate-800 text-sm">{quantity}</span>
-                          <button 
-                            onClick={() => addToCart(item)} 
-                            className="w-8 h-8 flex items-center justify-center bg-orange-500 rounded-xl shadow-md text-white active:scale-90 transition-transform"
-                          >
-                            <Plus size={14} />
-                          </button>
+        <div className="grid gap-6">
+          <AnimatePresence>
+            {itemsToShow.map((item, i) => {
+              const quantity = cart[item.name]?.quantity || 0;
+              return (
+                <motion.div 
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  key={item.name} 
+                  className="group bg-white p-2 rounded-[2.5rem] shadow-sm border border-slate-100 flex gap-4 items-center hover:shadow-md transition-all"
+                >
+                  <div className="h-24 w-24 rounded-[2rem] bg-slate-50 overflow-hidden flex-shrink-0 relative">
+                    {item.image ? (
+                      <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-slate-200">
+                        <Utensils size={32} />
+                      </div>
+                    )}
+                    {quantity > 0 && (
+                      <div className="absolute inset-0 bg-orange-500/20 backdrop-blur-[2px] flex items-center justify-center">
+                        <div className="bg-orange-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-black text-xs shadow-lg">
+                          {quantity}
                         </div>
-                      ) : (
-                        <button 
-                          onClick={() => addToCart(item)}
-                          className="bg-slate-900 text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-tighter hover:bg-orange-600 transition-colors"
-                        >
-                          Agregar
-                        </button>
-                      )}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex-1 pr-4">
+                    <h3 className="font-black text-slate-800 text-base leading-tight">{item.name}</h3>
+                    {item.description && (
+                      <p className="text-slate-400 text-[11px] mt-1 line-clamp-2 leading-relaxed">
+                        {item.description}
+                      </p>
+                    )}
+                    
+                    <div className="mt-3 flex items-center justify-between">
+                      <span className="text-lg font-black text-slate-900 tracking-tighter">
+                        ${item.price.toFixed(2)}
+                      </span>
+                      
+                      <div className="flex items-center">
+                        {quantity > 0 ? (
+                          <div className="flex items-center bg-slate-900 rounded-2xl p-1 gap-2 shadow-lg">
+                            <button 
+                              onClick={() => removeFromCart(item.name)} 
+                              className="w-8 h-8 flex items-center justify-center text-white hover:text-orange-500 transition-colors"
+                            >
+                              <Minus size={14} />
+                            </button>
+                            <span className="font-black text-white text-xs w-4 text-center">{quantity}</span>
+                            <button 
+                              onClick={() => addToCart(item)} 
+                              className="w-8 h-8 flex items-center justify-center bg-orange-500 rounded-xl text-white"
+                            >
+                              <Plus size={14} />
+                            </button>
+                          </div>
+                        ) : (
+                          <button 
+                            onClick={() => addToCart(item)}
+                            className="bg-slate-50 text-slate-900 h-10 px-4 rounded-[1.2rem] text-[10px] font-black uppercase tracking-widest hover:bg-orange-500 hover:text-white transition-all flex items-center gap-2 border border-slate-100"
+                          >
+                            Añadir <Plus size={12} />
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="h-20 w-20 bg-slate-100 rounded-3xl flex items-center justify-center text-slate-300">
-                  <Utensils size={28} />
-                </div>
-              </div>
-            );
-          })}
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
       </main>
 
-      {/* FOOTER WHATSAPP */}
-      {totalItems > 0 && (
-        <div className="fixed bottom-8 inset-x-0 px-6 z-50">
-          <button 
-            onClick={sendWhatsApp}
-            className="max-w-md mx-auto w-full bg-slate-900 text-white p-4 rounded-[2.5rem] shadow-2xl flex items-center justify-between transition-all active:scale-95 animate-in slide-in-from-bottom-10"
+      <AnimatePresence>
+        {totalItems > 0 && (
+          <motion.div 
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            className="fixed bottom-6 inset-x-0 px-6 z-50"
           >
-            <div className="flex items-center gap-4">
-              <div className="bg-orange-500 p-3 rounded-2xl relative">
-                <ShoppingBag size={22} className="text-white" />
-                <span className="absolute -top-1 -right-1 bg-white text-slate-900 text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-slate-900">
-                  {totalItems}
-                </span>
+            <button 
+              onClick={sendWhatsApp}
+              className="max-w-md mx-auto w-full bg-slate-900 text-white p-2 pl-6 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex items-center justify-between group overflow-hidden"
+            >
+              <div className="flex flex-col items-start">
+                <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.2em]">Total Pedido</span>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-xl font-black text-white">${totalPrice.toFixed(2)}</span>
+                  <span className="text-[10px] font-bold text-orange-500">({totalItems} items)</span>
+                </div>
               </div>
-              <div className="text-left">
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Total Pedido</p>
-                <p className="font-black text-xl text-orange-500">${totalPrice.toFixed(2)}</p>
+
+              <div className="bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-[2.1rem] flex items-center gap-3 font-black text-xs uppercase tracking-widest transition-all group-active:scale-95 shadow-lg">
+                Confirmar <Phone size={16} />
               </div>
-            </div>
-            <div className="bg-green-500 px-6 py-3 rounded-[1.5rem] flex items-center gap-2 font-black text-xs uppercase shadow-lg shadow-green-500/20">
-              Pedir <Phone size={14} />
-            </div>
-          </button>
-        </div>
-      )}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
