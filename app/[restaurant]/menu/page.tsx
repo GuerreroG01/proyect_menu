@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { 
@@ -7,6 +6,7 @@ import {
   ShoppingBag, ArrowLeft, X 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Bike, Store } from "lucide-react";
 
 type MenuItem = { 
   name: string; 
@@ -17,12 +17,13 @@ type MenuItem = {
 
 type Category = { 
   name: string; 
-  items: MenuItem[] 
+  items: MenuItem[]
 };
 
 type Menu = { 
   name: string; 
   whatsapp: string; 
+  delivery: number;
   categories: Category[] 
 };
 
@@ -40,6 +41,7 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
   const [searchQuery, setSearchQuery] = useState("");
   const [cart, setCart] = useState<{ [key: string]: CartItem }>({});
   const [loading, setLoading] = useState(true);
+  const [orderType, setOrderType] = useState<"local" | "delivery">("local");
 
   useEffect(() => {
     params.then(async (resParams) => {
@@ -81,16 +83,40 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
   };
 
   const totalItems = Object.values(cart).reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = Object.values(cart).reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const subtotal = Object.values(cart).reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
+  const deliveryFee =
+    orderType === "delivery" ? (data?.delivery ?? 0) : 0;
+
+  const totalPrice = subtotal + deliveryFee;
 
   const sendWhatsApp = () => {
     if (totalItems === 0 || !data) return;
-    let message = `*¡Nuevo Pedido - ${data.name}!* 📝\n\n`;
+
+    let message = `¡Nuevo Pedido - ${data.name}!\n\n`;
+
     Object.values(cart).forEach(item => {
       message += `• ${item.quantity}x ${item.name} ($${(item.price * item.quantity).toFixed(2)})\n`;
     });
-    message += `\n*Total: $${totalPrice.toFixed(2)}*`;
-    window.open(`https://wa.me/${data.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
+
+    message += `\nSubtotal: $${subtotal.toFixed(2)}\n`;
+
+    if (orderType === "delivery") {
+      message += `Delivery: $${deliveryFee.toFixed(2)}\n`;
+    }
+
+    message += `*Total: $${totalPrice.toFixed(2)}*\n`;
+    message += `\nTipo de pedido: ${
+      orderType === "delivery" ? "A domicilio" : "En el local"
+    }`;
+
+    window.open(
+      `https://wa.me/${data.whatsapp}?text=${encodeURIComponent(message)}`,
+      "_blank"
+    );
   };
 
   if (loading) return (
@@ -283,21 +309,55 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
           >
             <button 
               onClick={sendWhatsApp}
-              className="max-w-md mx-auto w-full bg-[#002B5B] text-white p-2 pl-6 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex items-center justify-between group overflow-hidden"
+              className="max-w-md mx-auto w-full bg-[#002B5B] text-white px-5 py-4 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex items-center justify-between gap-4 group overflow-hidden"
             >
-              <div className="flex flex-col items-start">
-                <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">
-                  Total Pedido
-                </span>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-xl font-black text-white">${totalPrice.toFixed(2)}</span>
-                  <span className="text-[10px] font-bold text-[#00A7E1]">({totalItems} items)</span>
+              
+              <div className="flex flex-col gap-3">
+                
+                <div className="flex gap-2">
+                  
+                  <div
+                    onClick={(e) => { e.stopPropagation(); setOrderType("local"); }}
+                    role="button"
+                    className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-[10px] font-bold transition-all cursor-pointer ${
+                      orderType === "local"
+                        ? "bg-[#00A7E1] text-white"
+                        : "bg-white/10 text-white/60"
+                    }`}
+                  >
+                    <Store size={14} />
+                    Local
+                  </div>
+
+                  <div
+                    onClick={(e) => { e.stopPropagation(); setOrderType("delivery"); }}
+                    role="button"
+                    className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-[10px] font-bold transition-all cursor-pointer ${
+                      orderType === "delivery"
+                        ? "bg-[#00A7E1] text-white"
+                        : "bg-white/10 text-white/60"
+                    }`}
+                  >
+                    <Bike size={14} />
+                    Delivery
+                  </div>
+
+                </div>
+
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-black text-white">
+                    ${totalPrice.toFixed(2)}
+                  </span>
+                  <span className="text-[10px] font-bold text-[#00A7E1]">
+                    ({totalItems} items)
+                  </span>
                 </div>
               </div>
 
-              <div className="bg-[#00A7E1] hover:bg-[#0093c8] px-8 py-4 rounded-[2.1rem] flex items-center gap-3 font-black text-xs uppercase tracking-widest transition-all group-active:scale-95 shadow-lg">
-                Confirmar <Phone size={16} />
+              <div className="bg-[#00A7E1] px-6 py-3 rounded-[2rem] flex items-center gap-2 font-black text-[11px] uppercase tracking-widest transition-all group-active:scale-95 shadow-lg whitespace-nowrap">
+                Confirmar
               </div>
+
             </button>
           </motion.div>
         )}
