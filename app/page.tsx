@@ -62,13 +62,6 @@ export default function Home() {
               >
                 Solicitar Información
               </a>
-
-              <a
-                href="#features"
-                className="border border-slate-200 hover:border-[#00A7E1] hover:text-[#00A7E1] px-8 py-4 rounded-2xl font-bold transition-all duration-300 text-center bg-white"
-              >
-                Explorar Plataforma
-              </a>
             </div>
           </div>
 
