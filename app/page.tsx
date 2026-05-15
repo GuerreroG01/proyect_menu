@@ -32,7 +32,7 @@ export default function Home() {
     >
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-6 md:px-12 py-20 w-full">
+      <main className="max-w-7xl mx-auto px-6 md:px-12 py-5 w-full">
 
         <section className="mb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12">
 
