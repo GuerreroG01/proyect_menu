@@ -1,0 +1,24 @@
+{
+    "id": "hamburguesas_gourmet",
+    "name": "Hamburguesas Gourmet",
+    "items": [
+        {
+        "name": "La Clásica Grill",
+        "price": 120,
+        "description": "200g de carne de res premium, queso cheddar, lechuga orgánica, tomate y cebolla caramelizada.",
+        "image": "https://th.bing.com/th/id/OIP.PbmjzQR70lB33NbybxB6FgHaEK?w=303&h=180&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3"
+        },
+        {
+        "name": "Monster Bacon",
+        "price": 165,
+        "description": "Doble carne, triple tocino crujiente, huevo estrellado y salsa secreta de la casa.",
+        "image": "/images/monster_bacon.webp"
+        },
+        {
+        "name": "Volcán de Queso",
+        "price": 180,
+        "description": "Bañada en una costra de queso provolone fundido con champiñones al ajillo.",
+        "image": "https://th.bing.com/th/id/R.32b4c96ee7e42eb74910351d300b2839?rik=NFRDhLkFt%2bskug&pid=ImgRaw&r=0"
+        }
+    ]
+}

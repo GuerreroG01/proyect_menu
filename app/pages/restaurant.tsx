@@ -1,4 +1,6 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type MenuItem = {
@@ -15,28 +17,42 @@ type Category = {
 type Menu = {
     name: string;
     whatsapp: string;
+    type: string;
     categories: Category[];
 };
 
 export default function RestaurantPage() {
-    const router = useRouter();
-    const { restaurant } = router.query;
+
+    const params = useParams();
+
+    const restaurant = params.restaurant as string;
+    const type = params.type as string;
 
     const [data, setData] = useState<Menu | null>(null);
 
     useEffect(() => {
-        if (!restaurant || Array.isArray(restaurant)) return;
+
+        if (!restaurant) return;
 
         fetch(`/menus/${restaurant}.json`)
         .then(res => res.json())
         .then(setData)
-        .catch(err => console.error("Error cargando menú:", err));
+        .catch(err =>
+            console.error("Error cargando menú:", err)
+        );
+
     }, [restaurant]);
 
-    if (!data) return <p>Cargando...</p>;
+    if (!data) {
+        return <p>Cargando...</p>;
+    }
 
     return (
         <div className="p-4 max-w-2xl mx-auto">
+
+        <p className="text-sm text-slate-400 mb-2">
+            Tipo: {type}
+        </p>
 
         <h1 className="text-2xl font-bold">
             {data.name}
@@ -50,7 +66,10 @@ export default function RestaurantPage() {
             </h2>
 
             {cat.items.map((item, j) => (
-                <div key={j} className="border p-3 rounded mt-2">
+                <div
+                key={j}
+                className="border p-3 rounded mt-2"
+                >
 
                 <p className="font-bold">
                     {item.name}

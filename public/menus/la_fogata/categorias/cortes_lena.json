@@ -1,0 +1,18 @@
+{
+    "id": "cortes_lena",
+    "name": "Cortes a la Leña",
+    "items": [
+        {
+        "name": "Puyazo (Coulotte)",
+        "price": 450,
+        "description": "350g de corte importado, asado a fuego lento con leña de encino. Incluye 2 guarniciones.",
+        "image": "https://th.bing.com/th/id/OIP.mNn7kNXAGajKW2ABNG-OGAHaHa?w=202&h=202&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3"
+        },
+        {
+        "name": "Rib Eye Prime",
+        "price": 580,
+        "description": "Corte marmoleado de 400g, sazonado con sal de grano y pimienta negra.",
+        "image": "https://ichef.bbci.co.uk/food/ic/food_16x9_1600/recipes/rib-eye_steak_with_61963_16x9.jpg"
+        }
+    ]
+}

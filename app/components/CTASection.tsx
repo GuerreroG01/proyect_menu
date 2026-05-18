@@ -27,13 +27,13 @@ export default function CTASection({ whatsappUrl }: Props) {
             </div>
 
             <h3 className="text-3xl font-black text-[#002B5B] mb-4">
-            Lleva Tu Restaurante Online
+            Lleva Tu Negocio Online
             </h3>
 
             <p className="text-slate-500 leading-relaxed mb-8 max-w-sm">
 
             Moderniza la experiencia de tus clientes con una landing
-            interactiva y un menú digital conectado con WhatsApp.
+            interactiva y un catálogo o menú digital conectado con WhatsApp.
 
             </p>
 

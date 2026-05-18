@@ -1,16 +1,7 @@
 import Link from "next/link";
-import {
-  Utensils,
-  MapPin,
-  Clock,
-  ArrowRight,
-  Star,
-  ChevronLeft,
-  ShieldCheck,
-} from "lucide-react";
+import { MapPin, Clock, ArrowRight, Star, ChevronLeft, ShieldCheck } from "lucide-react";
 import { Montserrat } from "next/font/google";
-import fs from "fs";
-import path from "path";
+import { getBusiness } from "@/app/lib/data";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -32,12 +23,13 @@ interface RestaurantData {
   horarios: Horario[];
   categories: any[];
   QR_URL?: string;
+  type: string;
 }
 
 const TIMEZONE = "America/Managua";
 
-function verificarSiEstaAbierto(horarios: Horario[] | undefined): boolean {
-  if (!horarios?.length) return false;
+function verificarSiEstaAbierto(horarios: Horario[] = []): boolean {
+  if (!horarios.length) return false;
 
   const ahora = new Date(
     new Date().toLocaleString("en-US", { timeZone: TIMEZONE })
@@ -51,13 +43,13 @@ function verificarSiEstaAbierto(horarios: Horario[] | undefined): boolean {
       const d = h.dias.toLowerCase();
       return esFindes
         ? d.includes("sábado") ||
-            d.includes("domingo") ||
-            d.includes("fin de semana") ||
-            d.includes("todos los días")
+          d.includes("domingo") ||
+          d.includes("fin de semana") ||
+          d.includes("todos los días")
         : d.includes("lunes") ||
-            d.includes("viernes") ||
-            d.includes("semana") ||
-            d.includes("todos los días");
+          d.includes("viernes") ||
+          d.includes("semana") ||
+          d.includes("todos los días");
     }) || horarios[0];
 
   const toMin = (h: string) => {
@@ -80,32 +72,26 @@ function verificarSiEstaAbierto(horarios: Horario[] | undefined): boolean {
     : now >= open && now <= close;
 }
 
-export default async function RestaurantPage({
-  params,
-}: {
-  params: Promise<{ restaurant: string }>;
-}) {
-  const { restaurant } = await params;
+export default async function Page({ params }: { params: Promise<{ type: string; id_type: string; slug: string; }>; }) {
+  const { type, id_type, slug } = await params;
 
-  let restaurantData: RestaurantData | null = null;
+  const folder =
+    id_type === "1"
+      ? "menus"
+      : id_type === "2"
+      ? "catalogos"
+      : "menus";
 
-  try {
-    const filePath = path.join(
-      process.cwd(),
-      "public",
-      "menus",
-      `${restaurant}.json`
-    );
-    restaurantData = JSON.parse(fs.readFileSync(filePath, "utf8"));
-  } catch {}
+  const restaurantData = getBusiness(folder, slug);
+  const name =
+    restaurantData?.name ||
+    slug.replace(/_/g, " ");
 
-  const name = restaurantData?.name || restaurant.replace(/_/g, " ");
   const open = verificarSiEstaAbierto(restaurantData?.horarios);
 
   return (
     <div className={`${montserrat.className} min-h-screen bg-[#F8FAFC]`}>
-      
-      {/* HERO ULTRA COMPACTO */}
+
       <div className="relative h-[28vh] w-full overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1974&auto=format&fit=crop"
@@ -114,35 +100,23 @@ export default async function RestaurantPage({
 
         <div className="absolute inset-0 bg-black/40" />
 
-        {/* BACK */}
         <div className="absolute top-4 left-4">
-          <Link
-            href="/"
-            className="p-2 bg-white/20 backdrop-blur-md rounded-xl text-white"
-          >
+          <Link href="/" className="p-2 bg-white/20 backdrop-blur-md rounded-xl text-white">
             <ChevronLeft size={18} />
           </Link>
         </div>
 
-        {/* STATUS BADGE MEJORADO */}
         <div className="absolute top-4 right-4">
           <div
             className={`flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold backdrop-blur-md ${
-              open
-                ? "bg-emerald-500/20 text-emerald-200"
-                : "bg-red-500/20 text-red-200"
+              open ? "bg-emerald-500/20 text-emerald-200" : "bg-red-500/20 text-red-200"
             }`}
           >
-            <span
-              className={`w-2 h-2 rounded-full ${
-                open ? "bg-emerald-400" : "bg-red-400"
-              }`}
-            />
+            <span className={`w-2 h-2 rounded-full ${open ? "bg-emerald-400" : "bg-red-400"}`} />
             {open ? "Abierto ahora" : "Cerrado"}
           </div>
         </div>
 
-        {/* VERIFIED BADGE */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
           <div className="flex items-center gap-2 px-4 py-1 rounded-full bg-white/90 text-[#002B5B] text-[11px] font-bold shadow">
             <ShieldCheck size={14} className="text-[#00A7E1]" />
@@ -151,59 +125,44 @@ export default async function RestaurantPage({
         </div>
       </div>
 
-      {/* CONTENT */}
       <main className="max-w-6xl mx-auto px-6 py-6 grid lg:grid-cols-2 gap-6">
 
-        {/* LEFT */}
         <div className="space-y-4">
-
-          {/* TITLE */}
           <h1 className="text-3xl md:text-4xl font-black text-[#002B5B] leading-tight">
             {name}
           </h1>
 
-          {/* RATING */}
           <div className="flex gap-1">
             {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                size={14}
-                className="text-amber-400 fill-amber-400"
-              />
+              <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
             ))}
           </div>
 
-          {/* INFO CARDS */}
-          <div className="space-y-3">
+          <a
+            href={restaurantData?.ubicacion || "#"}
+            className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm"
+          >
+            <MapPin className="text-[#00A7E1]" />
+            <div>
+              <p className="text-xs text-slate-400">Ubicación</p>
+              <p className="font-bold text-[#002B5B] text-sm">
+                {restaurantData?.labelUbicacion}
+              </p>
+            </div>
+          </a>
 
-            <a
-              href={restaurantData?.ubicacion || "#"}
-              className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm"
-            >
-              <MapPin className="text-[#00A7E1]" />
-              <div>
-                <p className="text-xs text-slate-400">Ubicación</p>
-                <p className="font-bold text-[#002B5B] text-sm">
-                  {restaurantData?.labelUbicacion}
-                </p>
-              </div>
-            </a>
-
-            <div className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm">
-              <Clock className="text-[#002B5B]" />
-              <div>
-                <p className="text-xs text-slate-400">Horario</p>
-                <p className="font-bold text-sm text-[#002B5B]">
-                  {restaurantData?.horarios?.[0]?.abre} -{" "}
-                  {restaurantData?.horarios?.[0]?.cierra}
-                </p>
-              </div>
+          <div className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm">
+            <Clock className="text-[#002B5B]" />
+            <div>
+              <p className="text-xs text-slate-400">Horario</p>
+              <p className="font-bold text-sm text-[#002B5B]">
+                {restaurantData?.horarios?.[0]?.abre} - {restaurantData?.horarios?.[0]?.cierra}
+              </p>
             </div>
           </div>
 
-          {/* CTA */}
           <Link
-            href={`/${restaurant}/menu`}
+            href={`/${type}/${id_type}/${slug}/menu`}
             className="flex items-center justify-between p-5 bg-[#002B5B] text-white rounded-2xl font-bold hover:opacity-95"
           >
             Ver Menú
@@ -211,7 +170,6 @@ export default async function RestaurantPage({
           </Link>
         </div>
 
-        {/* RIGHT QR */}
         {restaurantData?.QR_URL && (
           <div className="flex items-center justify-center">
             <div className="bg-white rounded-3xl shadow-xl p-8 text-center w-full max-w-sm">
@@ -234,7 +192,6 @@ export default async function RestaurantPage({
         )}
       </main>
 
-      {/* FOOTER */}
       <div className="text-center text-xs text-slate-400 pb-6">
         LocalNet Systems
       </div>

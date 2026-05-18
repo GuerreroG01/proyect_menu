@@ -1,0 +1,53 @@
+{
+    "name": "La Fogata - Steak & Burger",
+    "slug": "la_fogata",
+    "logo": "/logo.png",
+    "whatsapp": "50586571443",
+    "labelUbicacion": "Cra. 14 #14, Armenia, Quindío, Colombia",
+    "ubicacion": "https://maps.app.goo.gl/wFmUkCFWQprx9mdv8",
+    "QR_URL": "https://raw.githubusercontent.com/GuerreroG01/Logos/8db9e8b1f53153a04ee94758b974966be172fc6f/QRS/proyect_menu_vercel_app_la_fogata_menu.png",
+    "delivery": 80,
+    "type": "restaurant",
+    "id_type": 1,
+
+    "horarios": [
+        {
+        "dias": "Lunes a Viernes",
+        "abre": "11:00 AM",
+        "cierra": "10:00 PM"
+        },
+        {
+        "dias": "Sábado y Domingo",
+        "abre": "12:00 PM",
+        "cierra": "11:30 PM"
+        }
+    ],
+
+    "categories": [
+        {
+        "id": "entradas_entremeses",
+        "name": "Entradas y Entremeses",
+        "file": "/menus/la_fogata/categorias/entradas_entremeses.json"
+        },
+        {
+        "id": "hamburguesas_gourmet",
+        "name": "Hamburguesas Gourmet",
+        "file": "/menus/la_fogata/categorias/hamburguesas_gourmet.json"
+        },
+        {
+        "id": "cortes_lena",
+        "name": "Cortes a la Leña",
+        "file": "/menus/la_fogata/categorias/cortes_lena.json"
+        },
+        {
+        "id": "postres",
+        "name": "Postres",
+        "file": "/menus/la_fogata/categorias/postres.json"
+        },
+        {
+        "id": "bebidas_cocteleria",
+        "name": "Bebidas y Coctelería",
+        "file": "/menus/la_fogata/categorias/bebidas_cocteleria.json"
+        }
+    ]
+}

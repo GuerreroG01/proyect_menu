@@ -2,37 +2,37 @@ export const features = [
     {
         title: "Landing Interactiva",
         description:
-        "Tu restaurante tendrá una presencia digital moderna donde los clientes podrán visualizar información importante, horarios, ubicación y acceso rápido al menú.",
+        "Tu negocio tendrá una presencia digital moderna donde los clientes podrán visualizar información importante, horarios, ubicación y acceso rápido a su catálogo o menú.",
         icon: "🚀",
     },
     {
-        title: "Menú en la Nube",
+        title: "Catálogo o Menú Digital",
         description:
-        "Nos encargamos de mantener actualizado el menú digital de tu negocio para que tus clientes siempre tengan acceso a la información más reciente.",
+        "Nos encargamos de mantener actualizado el catálogo o menú digital de tu negocio para que tus clientes siempre tengan acceso a la información más reciente.",
         icon: "📋",
     },
     {
         title: "Pedidos por WhatsApp",
         description:
-        "Los clientes podrán seleccionar productos desde el menú y generar automáticamente un pedido listo para enviarse por WhatsApp.",
+        "Los clientes podrán seleccionar productos o servicios desde el catálogo y generar automáticamente una solicitud lista para enviarse por WhatsApp.",
         icon: "💬",
     },
     {
         title: "Atención Directa",
         description:
-        "Los pedidos llegan directamente al WhatsApp del negocio para que el personal pueda atender a los clientes de manera rápida y personalizada.",
+        "Las solicitudes llegan directamente al WhatsApp del negocio para que el equipo pueda atender a los clientes de manera rápida y personalizada.",
         icon: "🟢",
     },
     {
         title: "Ubicación y Horarios",
         description:
-        "Incluye acceso rápido a la ubicación del restaurante, horarios y estado dinámico de abierto o cerrado.",
+        "Incluye acceso rápido a la ubicación del negocio, horarios de atención y estado dinámico de abierto o cerrado.",
         icon: "📍",
     },
     {
         title: "Presencia Digital",
         description:
-        "Tu negocio estará disponible en internet en una experiencia optimizada para móviles, permitiendo que nuevos clientes descubran tu restaurante fácilmente.",
+        "Tu negocio estará disponible en internet con una experiencia optimizada para móviles, permitiendo que nuevos clientes lo descubran fácilmente.",
         icon: "📱",
     },
 ];

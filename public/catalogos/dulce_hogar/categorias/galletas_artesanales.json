@@ -1,0 +1,27 @@
+{
+    "category": "Galletas Artesanales",
+
+    "items": [
+        {
+        "id": "galletas_avena_miel",
+        "name": "Galletas de Avena y Miel",
+        "price": 20,
+        "description": "Galletas caseras con avena, miel natural y pasas.",
+        "image": "https://images.unsplash.com/photo-1590080876356-8a3f7a1b3f7a?w=400&q=70"
+        },
+        {
+        "id": "galletas_chocolate",
+        "name": "Galletas con Chispas de Chocolate",
+        "price": 22,
+        "description": "Galletas suaves con abundantes chispas de chocolate.",
+        "image": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&q=70"
+        },
+        {
+        "id": "galletas_mantequilla",
+        "name": "Galletas de Mantequilla",
+        "price": 18,
+        "description": "Galletas suaves y crujientes con sabor clásico a mantequilla.",
+        "image": "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=70"
+        }
+    ]
+}

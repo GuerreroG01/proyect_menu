@@ -1,0 +1,24 @@
+{
+    "id": "bebidas_cocteleria",
+    "name": "Bebidas y Coctelería",
+    "items": [
+        {
+        "name": "Limonada con Hierbabuena",
+        "price": 55,
+        "description": "Refrescante limonada natural con hojas de hierbabuena maceradas.",
+        "image": "/images/limonada_hierbabuena.webp"
+        },
+        {
+        "name": "Cerveza Artesanal",
+        "price": 85,
+        "description": "Consulte las variedades de temporada de nuestra micro-cervecería local.",
+        "image": "https://www.losvinos.com.ar/wp-content/uploads/2019/09/Cerveza-Artesanal1.jpg"
+        },
+        {
+        "name": "Coca Cola",
+        "price": 40,
+        "description": "Presentación original en botella de vidrio de 355ml.",
+        "image": "https://tse3.mm.bing.net/th/id/OIP.HlRzXzC6XleyXwgwh_72VwHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+        }
+    ]
+}

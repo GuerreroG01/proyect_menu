@@ -1,0 +1,34 @@
+{
+    "category": "Bebidas Calientes y Frías",
+
+    "items": [
+        {
+        "id": "cafe_negro_artesanal",
+        "name": "Café Negro Artesanal",
+        "price": 25,
+        "description": "Café fuerte de grano seleccionado recién molido.",
+        "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=70"
+        },
+        {
+        "id": "capuccino_espumoso",
+        "name": "Capuccino Espumoso",
+        "price": 35,
+        "description": "Café con leche cremosa y espuma de leche artesanal.",
+        "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=70"
+        },
+        {
+        "id": "chocolate_caliente",
+        "name": "Chocolate Caliente Espeso",
+        "price": 30,
+        "description": "Chocolate tradicional espeso con leche caliente.",
+        "image": "https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=400&q=70"
+        },
+        {
+        "id": "jugo_naranja",
+        "name": "Jugo Natural de Naranja",
+        "price": 28,
+        "description": "Jugo fresco exprimido al momento.",
+        "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=70"
+        }
+    ]
+}

@@ -1,9 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { 
-  Phone, Utensils, Search, Plus, Minus, 
-  ShoppingBag, ArrowLeft, X 
+  Utensils, Search, Plus, Minus, ArrowLeft, X 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bike, Store } from "lucide-react";
@@ -33,8 +32,9 @@ type CartItem = {
   quantity: number 
 };
 
-export default function MenuPage({ params }: { params: Promise<{ restaurant: string }> }) {
+export default function MenuPage(props: { params: Promise<{ type: string; id_type: string; slug: string }>; }) {
   const router = useRouter();
+  const params = use(props.params);
   
   const [data, setData] = useState<Menu | null>(null);
   const [activeCategory, setActiveCategory] = useState(0);
@@ -42,22 +42,58 @@ export default function MenuPage({ params }: { params: Promise<{ restaurant: str
   const [cart, setCart] = useState<{ [key: string]: CartItem }>({});
   const [loading, setLoading] = useState(true);
   const [orderType, setOrderType] = useState<"local" | "delivery">("local");
-
+  const folder = params.id_type === "1" ? "menus" : "catalogos";
   useEffect(() => {
-    params.then(async (resParams) => {
+    const load = async () => {
       try {
-        const res = await fetch(`/menus/${resParams.restaurant}.json`);
-        if (res.ok) {
-          const json = await res.json();
-          setData(json);
+        const res = await fetch(`/${folder}/${params.slug}/info.json`);
+        if (!res.ok) {
+          setData(null);
+          return;
         }
+
+        const json = await res.json();
+
+        const normalizedCategories = await Promise.all(
+          json.categories.map(async (cat: any) => {
+            try {
+              const res = await fetch(cat.file);
+              const raw = await res.json();
+
+              const items = Array.isArray(raw)
+                ? raw
+                : raw?.items || [];
+
+              return {
+                id: cat.id,
+                name: cat.name,
+                items,
+              };
+            } catch {
+              return {
+                id: cat.id,
+                name: cat.name,
+                items: [],
+              };
+            }
+          })
+        );
+
+        setData({
+          ...json,
+          categories: normalizedCategories,
+        });
+
       } catch (error) {
         console.error("Error cargando el menú:", error);
+        setData(null);
       } finally {
         setLoading(false);
       }
-    });
-  }, [params]);
+    };
+
+    load();
+  }, [folder, params.slug]);
 
   const addToCart = (item: MenuItem) => {
     setCart((prev) => ({

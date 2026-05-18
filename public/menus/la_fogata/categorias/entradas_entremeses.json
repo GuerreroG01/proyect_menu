@@ -1,0 +1,24 @@
+{
+    "id": "entradas_entremeses",
+    "name": "Entradas y Entremeses",
+    "items": [
+        {
+        "name": "Nachos La Fogata",
+        "price": 185,
+        "description": "Totopos artesanales con doble queso fundido, frijoles negros, pico de gallo y jalapeños.",
+        "image": "https://www.thebestspanishrecipes.com/wp-content/uploads/2014/09/Mexican-nachos-1080x884.jpg"
+        },
+        {
+        "name": "Alitas Ahumadas",
+        "price": 210,
+        "description": "6 piezas bañadas en salsa BBQ artesanal o Buffalo picante, acompañadas de aderezo Blue Cheese.",
+        "image": "https://laverdaddemonagas.com/wp-content/uploads/2022/08/prepara-una-ricas-alitas-de-pollo-ahumadas-desde-la-comodidad-de-tu-casa-laverdaddemonagas.com-alitas-de-pollo.jpg"
+        },
+        {
+        "name": "Chicharrón de Rib Eye",
+        "price": 250,
+        "description": "200g de cubos de Rib Eye fritos, sobre una cama de guacamole fresco.",
+        "image": "https://th.bing.com/th/id/OIP.wq0mEGx8VYGCbvNO-1QT2QHaHa?w=176&h=183&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3"
+        }
+    ]
+}

@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LocalNet Systems | Menú Digital",
-  description: "La plataforma inteligente para la gestión de tu menú digital.",
+  title: "LocalNet Systems | Catalogo Digital",
+  description: "La plataforma inteligente para la gestión de tu catálogo digital.",
 };
 
 export default function RootLayout({

@@ -6,7 +6,8 @@ import FeatureCard from "./components/FeatureCard";
 import CTASection from "./components/CTASection";
 
 import { features } from "./data/features";
-import { getRestaurants } from "./lib/restaurants";
+import { getItems } from "./lib/data";
+import { buildWhatsAppUrl, DEFAULT_WHATSAPP_MESSAGE } from "./lib/whatsapp";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -14,22 +15,15 @@ const montserrat = Montserrat({
 });
 
 export default function Home() {
-  const restaurants = getRestaurants();
-  const totalActivos = restaurants.length;
+  const restaurants = getItems("menus");
+  const bakery = getItems("catalogos");
+  const negocios = [...restaurants, ...bakery];
+  const totalActivos = negocios.length;
 
-  const whatsappNumber = "50586571443";
-
-  const whatsappMessage =
-    "Hola, me gustaría tener mi restaurante en la nube y conocer más información.";
-
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    whatsappMessage
-  )}`;
+  const whatsappUrl = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE);
 
   return (
-    <div
-      className={`${montserrat.className} min-h-screen bg-slate-50 flex flex-col text-slate-900`}
-    >
+    <div className={`${montserrat.className} min-h-screen bg-slate-50 flex flex-col text-slate-900`}>
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-6 md:px-12 py-5 w-full">
@@ -40,16 +34,16 @@ export default function Home() {
 
             <div className="inline-flex items-center gap-2 bg-[#00A7E1]/10 border border-[#00A7E1]/10 text-[#00A7E1] px-4 py-2 rounded-full text-sm font-bold mb-8">
               <div className="w-2 h-2 rounded-full bg-[#00A7E1] animate-pulse" />
-              Plataforma Digital para Restaurantes
+              Plataforma Digital para Negocios
             </div>
 
             <h1 className="text-5xl md:text-6xl xl:text-7xl font-black text-[#002B5B] leading-[1.05] tracking-tight mb-8">
-              Lleva tu restaurante
+              Lleva tu negocio
               <span className="block text-[#00A7E1]">a la nube</span>
             </h1>
 
             <p className="text-slate-500 text-lg md:text-xl leading-relaxed max-w-2xl">
-              Creamos una landing page interactiva para tu restaurante con menú digital,
+              Creamos una landing page interactiva para tu negocio con catálogo o menú digital,
               pedidos por WhatsApp, horarios dinámicos y presencia online optimizada.
             </p>
 
@@ -69,7 +63,7 @@ export default function Home() {
 
             <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
               <p className="text-[11px] uppercase tracking-[0.3em] text-slate-300 font-bold mb-3">
-                Restaurantes
+                Negocios
               </p>
 
               <h3 className="text-5xl font-black text-[#002B5B]">
@@ -81,28 +75,11 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-[#002B5B] to-[#003b7d] p-8 rounded-[2rem] text-white shadow-xl">
-              <p className="text-sm uppercase tracking-[0.3em] text-[#00A7E1] font-bold mb-3">
-                Experiencia
-              </p>
-
-              <h3 className="text-4xl font-black mb-2">
-                Mobile First
-              </h3>
-
-              <p className="text-blue-100">
-                Diseñado para clientes desde cualquier celular.
-              </p>
-            </div>
-
           </div>
-
         </section>
 
-        <section
-          id="features"
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
-        >
+        {/* FEATURES */}
+        <section id="features" className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {features.map((feature) => (
             <FeatureCard key={feature.title} {...feature} />
           ))}
@@ -110,30 +87,32 @@ export default function Home() {
           <CTASection whatsappUrl={whatsappUrl} />
         </section>
 
+        {/* NEGOCIOS */}
         <section className="mt-28">
           <div className="flex items-end justify-between mb-10">
             <h2 className="text-3xl font-black text-[#002B5B]">
-              Restaurantes asociados
+              Negocios asociados
             </h2>
 
-            <a
-              href="/catalogo"
-              className="text-[#00A7E1] font-bold hover:underline"
-            >
+            <a href="/catalogo" className="text-[#00A7E1] font-bold hover:underline">
               Ver catálogo completo →
             </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {restaurants.slice(0, 3).map((r) => (
+            {negocios.slice(0, 3).map((n) => (
               <a
-                key={r.id}
-                href={`/${r.id}`}
+                key={n.id_type || n.id}
+                href={
+                  n.type && n.id_type && n.slug
+                    ? `/${n.type}/${n.id_type}/${n.slug}`
+                    : "#"
+                }
                 className="bg-white border border-slate-100 rounded-2xl p-6 hover:shadow-lg transition"
               >
-                <div className="text-3xl mb-3">{r.icon}</div>
-                <h3 className="font-bold text-[#002B5B]">{r.name}</h3>
-                <p className="text-slate-400 text-sm">{r.category}</p>
+                <div className="text-3xl mb-3">{n.icon}</div>
+                <h3 className="font-bold text-[#002B5B]">{n.name}</h3>
+                <p className="text-slate-400 text-sm">{n.category}</p>
               </a>
             ))}
           </div>

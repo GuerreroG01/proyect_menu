@@ -1,0 +1,59 @@
+{
+    "name": "Panadería Dulce Hogar",
+    "slug": "dulce_hogar",
+    "logo": "/logo.png",
+    "whatsapp": "50586571443",
+    "labelUbicacion": "Av. Central, León, Nicaragua",
+    "ubicacion": "https://maps.app.goo.gl/",
+    "QR_URL": "https://raw.githubusercontent.com/GuerreroG01/Logos/main/QRS/panaderia_catalogo.png",
+    "delivery": 50,
+    "type": "bakery",
+    "id_type": 2,
+
+    "horarios": [
+        {
+        "dias": "Lunes a Sábado",
+        "abre": "06:00 AM",
+        "cierra": "08:00 PM"
+        },
+        {
+        "dias": "Domingo",
+        "abre": "07:00 AM",
+        "cierra": "02:00 PM"
+        }
+    ],
+
+    "categories": [
+        {
+        "id": "bebidas",
+        "name": "Bebidas Calientes y Frías",
+        "file": "/catalogos/dulce_hogar/categorias/bebidas.json"
+        },
+        
+        {
+        "id": "bolleria_dulce",
+        "name": "Bollería Dulce",
+        "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce.json"
+        },
+        {
+        "id": "galletas_artesanales",
+        "name": "Galletas Artesanales",
+        "file": "/catalogos/dulce_hogar/categorias/galletas_artesanales.json"
+        },
+        {
+        "id": "pan_artesanal",
+        "name": "Pan Artesanal",
+        "file": "/catalogos/dulce_hogar/categorias/pan_artesanal.json"
+        },
+        {
+        "id": "pasteleria_premium",
+        "name": "Pastelería Premium",
+        "file": "/catalogos/dulce_hogar/categorias/pasteleria_premium.json"
+        },
+        {
+        "id": "reposteria_fina",
+        "name": "Repostería Fina y Especialidades",
+        "file": "/catalogos/dulce_hogar/categorias/reposteria_fina.json"
+        }
+    ]
+}
