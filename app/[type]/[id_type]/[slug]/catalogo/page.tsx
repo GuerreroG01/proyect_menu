@@ -21,7 +21,8 @@ type Category = {
 
 type Menu = { 
   name: string; 
-  whatsapp: string; 
+  whatsapp: string;
+  logo?: string;
   delivery: number;
   categories: Category[] 
 };
@@ -206,8 +207,17 @@ export default function MenuPage(props: { params: Promise<{ type: string; id_typ
               </h1>
             </div>
 
-            <div className="w-10 h-10 bg-[#3A2E2A] rounded-2xl flex items-center justify-center">
-              <Coffee size={18} className="text-[#C97B2A]" />
+            <div className="w-10 h-10 bg-slate-50 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-100/50 border border-slate-100 overflow-hidden relative group-hover:scale-110 transition-transform duration-500">
+              {data.logo ? (
+                <img
+                  src={data.logo}
+                  alt={`Logo de ${data.name}`}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                /* Icono de respaldo en caso de que no tenga logo en el JSON */
+                <Coffee size={18} className="text-[#00A7E1]" />
+              )}
             </div>
           </div>
 

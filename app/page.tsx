@@ -38,8 +38,10 @@ export default function Home() {
             </div>
 
             <h1 className="text-5xl md:text-6xl xl:text-7xl font-black text-[#002B5B] leading-[1.05] tracking-tight mb-8">
-              Lleva tu negocio
-              <span className="block text-[#00A7E1]">a la nube</span>
+              Lleva tu negocio{" "}
+              <span className="block bg-gradient-to-r from-[#002B5B] via-[#00A7E1] to-[#002B5B] bg-clip-text text-transparent">
+                a la nube
+              </span>
             </h1>
 
             <p className="text-slate-500 text-lg md:text-xl leading-relaxed max-w-2xl">
@@ -78,7 +80,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* FEATURES */}
         <section id="features" className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {features.map((feature) => (
             <FeatureCard key={feature.title} {...feature} />
@@ -87,11 +88,10 @@ export default function Home() {
           <CTASection whatsappUrl={whatsappUrl} />
         </section>
 
-        {/* NEGOCIOS */}
         <section className="mt-28">
           <div className="flex items-end justify-between mb-10">
             <h2 className="text-3xl font-black text-[#002B5B]">
-              Negocios asociados
+              Negocios de demostración
             </h2>
 
             <a href="/catalogo" className="text-[#00A7E1] font-bold hover:underline">

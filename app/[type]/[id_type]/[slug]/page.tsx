@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MapPin, Clock, ArrowRight, Star, ChevronLeft, ShieldCheck } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import { getBusiness } from "@/app/lib/data";
+import HorariosModal from "./HorariosModal";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -27,7 +28,18 @@ interface RestaurantData {
 }
 
 const TIMEZONE = "America/Managua";
-
+const TYPE_CONFIG: Record<string, { label: string; route: string; folder: string }> = {
+  "1": {
+    label: "Menú",
+    route: "menu",
+    folder: "menus",
+  },
+  "2": {
+    label: "Catálogo",
+    route: "catalogo",
+    folder: "catalogos",
+  },
+};
 function verificarSiEstaAbierto(horarios: Horario[] = []): boolean {
   if (!horarios.length) return false;
 
@@ -75,12 +87,8 @@ function verificarSiEstaAbierto(horarios: Horario[] = []): boolean {
 export default async function Page({ params }: { params: Promise<{ type: string; id_type: string; slug: string; }>; }) {
   const { type, id_type, slug } = await params;
 
-  const folder =
-    id_type === "1"
-      ? "menus"
-      : id_type === "2"
-      ? "catalogos"
-      : "menus";
+  const config = TYPE_CONFIG[id_type] ?? TYPE_CONFIG["1"];
+  const folder = config.folder;
 
   const restaurantData = getBusiness(folder, slug);
   const name =
@@ -151,21 +159,13 @@ export default async function Page({ params }: { params: Promise<{ type: string;
             </div>
           </a>
 
-          <div className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm">
-            <Clock className="text-[#002B5B]" />
-            <div>
-              <p className="text-xs text-slate-400">Horario</p>
-              <p className="font-bold text-sm text-[#002B5B]">
-                {restaurantData?.horarios?.[0]?.abre} - {restaurantData?.horarios?.[0]?.cierra}
-              </p>
-            </div>
-          </div>
+          <HorariosModal horarios={restaurantData?.horarios || []} businessName={name} />
 
           <Link
-            href={`/${type}/${id_type}/${slug}/menu`}
+            href={`/${type}/${id_type}/${slug}/${config.route}`}
             className="flex items-center justify-between p-5 bg-[#002B5B] text-white rounded-2xl font-bold hover:opacity-95"
           >
-            Ver Menú
+            ver {config.label}
             <ArrowRight />
           </Link>
         </div>
@@ -175,7 +175,7 @@ export default async function Page({ params }: { params: Promise<{ type: string;
             <div className="bg-white rounded-3xl shadow-xl p-8 text-center w-full max-w-sm">
 
               <p className="text-xs uppercase tracking-widest text-slate-400 mb-4">
-                Escanea el menú
+                Escanea el {config.label.toLowerCase()}
               </p>
 
               <img

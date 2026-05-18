@@ -69,3 +69,28 @@ export const getCategory = cache(
         return JSON.parse(file);
     }
 );
+export const getBusinessStats = cache(() => {
+    const menusPath = path.join(process.cwd(), "public", "menus");
+    const catalogosPath = path.join(process.cwd(), "public", "catalogos");
+
+    const countDirs = (dir: string) => {
+        try {
+            return fs.readdirSync(dir).filter((item) => {
+                const itemPath = path.join(dir, item);
+                return fs.statSync(itemPath).isDirectory();
+            }).length;
+        } catch (error) {
+            console.error("Error contando directorios:", error);
+            return 0;
+        }
+    };
+
+    const menus = countDirs(menusPath);
+    const catalogos = countDirs(catalogosPath);
+
+    return {
+        menus,
+        catalogos,
+        total: menus + catalogos,
+    };
+});
