@@ -12,7 +12,7 @@
         "name": "Monster Bacon",
         "price": 165,
         "description": "Doble carne, triple tocino crujiente, huevo estrellado y salsa secreta de la casa.",
-        "image": "/images/monster_bacon.webp"
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuTd2DKOF6sHa-IzrFUPVjIMw80iqjTJVOBw&s"
         },
         {
         "name": "Volcán de Queso",
