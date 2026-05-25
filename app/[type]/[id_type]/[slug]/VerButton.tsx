@@ -16,7 +16,7 @@ export default function VerButton({ href, label }: { href: string; label: string
 
         setTimeout(() => {
           router.push(href);
-        }, 400);
+        }, 100);
       }}
       disabled={loading}
       className="

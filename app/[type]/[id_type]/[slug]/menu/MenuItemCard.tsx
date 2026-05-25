@@ -119,7 +119,6 @@ export default function MenuItemCard({
                     <X size={16} />
                 </button>
 
-                {/* IMAGE */}
                 <img
                     src={item.image}
                     alt={item.name}

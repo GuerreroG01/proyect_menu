@@ -91,7 +91,6 @@ export default function CartBar({
               </div>
             </div>
 
-            {/* RIGHT CTA */}
             <div className="relative z-10">
               <div className="flex items-center gap-2 bg-[#00A7E1] px-5 py-3 rounded-[2rem]
               font-black text-[11px] uppercase tracking-widest

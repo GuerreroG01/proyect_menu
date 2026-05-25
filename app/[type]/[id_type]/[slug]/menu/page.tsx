@@ -10,6 +10,7 @@ import CartBar from "./CartBar";
 import LoadingMenu from "./LoadingMenu";
 import { useMenu } from "./useMenu";
 import { useCart } from "./useCart";
+import LocationAlert from "./LocationAlert";
 
 type MenuItem = {
   name: string;
@@ -34,6 +35,7 @@ export default function MenuPage(props: {
   const [activeCategory, setActiveCategory] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [orderType, setOrderType] = useState<"local" | "delivery">("local");
+  const [locationError, setLocationError] = useState("");
 
   if (loading) return <LoadingMenu />;
 
@@ -60,29 +62,127 @@ export default function MenuPage(props: {
     orderType === "delivery" ? (data.delivery ?? 0) : 0;
 
   const totalPrice = subtotal + deliveryFee;
-
-  const sendWhatsApp = () => {
-    if (totalItems === 0) return;
-
-    let message = `¡Nuevo Pedido - ${data.name}!\n\n`;
-
-    Object.values(cart).forEach((item: any) => {
-      message += `• ${item.quantity}x ${item.name} ($${(
-        item.price * item.quantity
-      ).toFixed(2)})\n`;
-    });
-
-    message += `\nSubtotal: $${subtotal.toFixed(2)}\n`;
-
-    if (orderType === "delivery") {
-      message += `Delivery: $${deliveryFee.toFixed(2)}\n`;
+  const getLocation = async (): Promise<
+    { lat: number; lng: number } | "denied" | null
+  > => {
+    if (!navigator.geolocation) {
+      return null;
     }
 
-    message += `*Total: $${totalPrice.toFixed(2)}*\n`;
+    try {
+      if (navigator.permissions) {
+        const permission = await navigator.permissions.query({
+          name: "geolocation",
+        });
 
-    message += `\nTipo de pedido: ${
-      orderType === "delivery" ? "A domicilio" : "En el local"
-    }`;
+        if (permission.state === "denied") {
+          return "denied";
+        }
+      }
+    } catch (error) {
+      console.log("Permission API error:", error);
+    }
+
+    return new Promise((resolve) => {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          resolve({
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+          });
+        },
+        (error) => {
+          console.log("Geolocation error:", error);
+
+          resolve(null);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 0,
+        }
+      );
+    });
+  };
+
+  const sendWhatsApp = async () => {
+    if (totalItems === 0) return;
+
+    setLocationError("");
+
+    let locationSection = "";
+
+    if (orderType === "delivery") {
+      const location = await getLocation();
+
+      if (location === "denied") {
+        setLocationError(`
+          La ubicación está bloqueada.
+
+          Para habilitarla accede a la configuración de tu navegador:
+          Privacidad y seguridad → Configuración del sitio → Busca este sitio → Ubicación → Permitir
+        `);
+
+        return;
+      }
+
+      if (!location) {
+        setLocationError(
+          "Debes autorizar tu ubicación para realizar pedidos a domicilio."
+        );
+
+        return;
+      }
+
+      const mapLink = `https://www.google.com/maps?q=${location.lat},${location.lng}`;
+
+      locationSection = `
+  *UBICACIÓN DEL CLIENTE*
+
+  ${mapLink}
+  `;
+    }
+
+    const itemsText = Object.values(cart)
+      .map(
+        (item: any) =>
+          `• ${item.quantity}x ${item.name} — $${(
+            item.price * item.quantity
+          ).toFixed(2)}`
+      )
+      .join("\n");
+
+    const deliveryText =
+      orderType === "delivery"
+        ? `Delivery: $${deliveryFee.toFixed(2)}`
+        : "";
+
+    const message = `
+  *${data.name}*
+
+  ━━━━━━━━━━━━━━
+
+  *PEDIDO*
+
+  ${itemsText}
+
+  ━━━━━━━━━━━━━━
+
+  *RESUMEN*
+
+  Subtotal: $${subtotal.toFixed(2)}
+  ${deliveryText}
+
+  *TOTAL: $${totalPrice.toFixed(2)}*
+
+  ━━━━━━━━━━━━━━
+
+  *TIPO DE ENTREGA*
+
+  ${orderType === "delivery" ? "A domicilio" : "Retiro en local"}
+
+  ${locationSection}
+  `.trim();
 
     window.open(
       `https://wa.me/${data.whatsapp}?text=${encodeURIComponent(message)}`,
@@ -105,7 +205,10 @@ export default function MenuPage(props: {
       />
 
       <main className="p-5 max-w-2xl mx-auto w-full flex-1 mb-32">
-
+        <LocationAlert
+          show={!!locationError}
+          message={locationError}
+        />
         <div className="flex justify-between mb-6">
           <h2 className="font-bold uppercase text-slate-900 tracking-wide">
             {searchQuery
@@ -141,7 +244,6 @@ export default function MenuPage(props: {
         </AnimatePresence>
 
       </main>
-
       <CartBar
         totalItems={totalItems}
         totalPrice={totalPrice}

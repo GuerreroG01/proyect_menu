@@ -25,7 +25,7 @@ export default function ClientBusinessGrid({ negocios }: { negocios: Negocio[]; 
 
         setTimeout(() => {
         router.push(`/${n.type}/${n.id_type}/${n.slug}`);
-        }, 450);
+        }, 100);
     };
 
     return (
