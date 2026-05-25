@@ -3,6 +3,7 @@ import { MapPin, Clock, ArrowRight, Star, ChevronLeft, ShieldCheck } from "lucid
 import { Montserrat } from "next/font/google";
 import { getBusiness } from "@/app/lib/data";
 import HorariosModal from "./HorariosModal";
+import VerButton from "./VerButton";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -161,13 +162,10 @@ export default async function Page({ params }: { params: Promise<{ type: string;
 
           <HorariosModal horarios={restaurantData?.horarios || []} businessName={name} />
 
-          <Link
+          <VerButton
             href={`/${type}/${id_type}/${slug}/${config.route}`}
-            className="flex items-center justify-between p-5 bg-[#002B5B] text-white rounded-2xl font-bold hover:opacity-95"
-          >
-            ver {config.label}
-            <ArrowRight />
-          </Link>
+            label={config.label}
+          />
         </div>
 
         {restaurantData?.QR_URL && (

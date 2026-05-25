@@ -1,5 +1,5 @@
 import { Montserrat } from "next/font/google";
-
+import ClientBusinessGrid from "./components/ClientBusinessGrid";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FeatureCard from "./components/FeatureCard";
@@ -21,7 +21,6 @@ export default function Home() {
   const totalActivos = negocios.length;
 
   const whatsappUrl = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE);
-
   return (
     <div className={`${montserrat.className} min-h-screen bg-slate-50 flex flex-col text-slate-900`}>
       <Navbar />
@@ -88,35 +87,7 @@ export default function Home() {
           <CTASection whatsappUrl={whatsappUrl} />
         </section>
 
-        <section className="mt-28">
-          <div className="flex items-end justify-between mb-10">
-            <h2 className="text-3xl font-black text-[#002B5B]">
-              Negocios de demostración
-            </h2>
-
-            <a href="/catalogo" className="text-[#00A7E1] font-bold hover:underline">
-              Ver catálogo completo →
-            </a>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {negocios.slice(0, 3).map((n) => (
-              <a
-                key={n.id_type || n.id}
-                href={
-                  n.type && n.id_type && n.slug
-                    ? `/${n.type}/${n.id_type}/${n.slug}`
-                    : "#"
-                }
-                className="bg-white border border-slate-100 rounded-2xl p-6 hover:shadow-lg transition"
-              >
-                <div className="text-3xl mb-3">{n.icon}</div>
-                <h3 className="font-bold text-[#002B5B]">{n.name}</h3>
-                <p className="text-slate-400 text-sm">{n.category}</p>
-              </a>
-            ))}
-          </div>
-        </section>
+        <ClientBusinessGrid negocios={negocios} />
 
       </main>
 
