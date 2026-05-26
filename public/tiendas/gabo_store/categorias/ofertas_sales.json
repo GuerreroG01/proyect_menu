@@ -1,0 +1,15 @@
+[
+    {
+        "id": "promo_hoodie_01",
+        "name": "Sudadera Básica con Capucha (OFERTA)",
+        "description": "Sudadera de felpa de algodón con bolsillo canguro frontal. Precio regular: 600.",
+        "price": 350,
+        "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500",
+        "inStock": true,
+        "target": "unisex",
+        "features": {
+        "tallas": ["S", "M", "L", "XL"],
+        "colores": ["Gris Oscuro", "Amarillo Mostaza"]
+        }
+    }
+]

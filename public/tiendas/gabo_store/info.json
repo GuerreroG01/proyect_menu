@@ -1,0 +1,64 @@
+{
+    "name": "Gabo Store - Ropa y Accesorios",
+    "slug": "gabo_store",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKcbxosSpVrxbJWTovFOb18SMspJ2-4DAFeA&s",
+    "whatsapp": "50586571443",
+    "labelUbicacion": "pte entre Rio de las cañas y Río Fuerte 1401, Calle Obregón, 81245 Los Mochis, Sin., México",
+    "ubicacion": "https://maps.app.goo.gl/CQZtMMyatNfPCgui6",
+    "QR_URL": "https://raw.githubusercontent.com/GuerreroG01/Logos/main/QRS/proyect_menu_vercel_app_gabo_store.png",
+    "delivery": 50,
+    "type": "store",
+    "id_type": 3,
+    "line": "varon",
+
+    "horarios": [
+        {
+            "dias": "Lunes a Sábado",
+            "abre": "08:30 AM",
+            "cierra": "06:30 PM"
+        },
+        {
+            "dias": "Domingo",
+            "abre": "09:00 AM",
+            "cierra": "02:00 PM"
+        }
+    ],
+
+    "categories": [
+    {
+        "id": "chaquetas_abrigos",
+        "name": "Chaquetas y Abrigos",
+        "file": "/tiendas/gabo_store/categorias/chaquetas_abrigos.json"
+    },
+    {
+        "id": "vestidos_faldas",
+        "name": "Vestidos y Faldas",
+        "file": "/tiendas/gabo_store/categorias/vestidos_faldas.json"
+    },
+    {
+        "id": "ropa_deportiva",
+        "name": "Ropa Deportiva (Activewear)",
+        "file": "/tiendas/gabo_store/categorias/ropa_deportiva.json"
+    },
+    {
+        "id": "calzado",
+        "name": "Calzado y Zapatillas",
+        "file": "/tiendas/gabo_store/categorias/calzado.json"
+    },
+    {
+        "id": "accesorios_bolsos",
+        "name": "Accesorios y Bolsos",
+        "file": "/tiendas/gabo_store/categorias/accesorios_bolsos.json"
+    },
+    {
+        "id": "ropa_interior_pijamas",
+        "name": "Ropa Interior y Pijamas",
+        "file": "/tiendas/gabo_store/categorias/ropa_interior_pijamas.json"
+    },
+    {
+        "id": "ofertas_sales",
+        "name": "Rebajas y Ofertas",
+        "file": "/tiendas/gabo_store/categorias/ofertas_sales.json"
+    }
+    ]
+}

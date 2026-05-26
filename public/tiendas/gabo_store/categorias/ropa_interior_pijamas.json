@@ -1,0 +1,28 @@
+[
+    {
+        "id": "pijama_seda_01",
+        "name": "Pijama de Seda Satinada de Dos Piezas",
+        "description": "Camisa de botones de manga corta y pantalón corto a juego, tela ultra suave y fresca.",
+        "price": 550,
+        "image": "https://m.media-amazon.com/images/I/71iKaCdL6FL._AC_UY1000_.jpg",
+        "inStock": true,
+        "target": "femenino",
+        "features": {
+        "tallas": ["S", "M", "L"],
+        "colores": ["Rosado Viejo", "Negro Satinado", "Blanco Marfil"]
+        }
+    },
+    {
+        "id": "boxer_cotton_02",
+        "name": "Pack x3 Bóxers de Algodón Stretch",
+        "description": "Bóxers clásicos con banda elástica cómoda que no aprieta ni deforma.",
+        "price": 420,
+        "image": "https://images.unsplash.com/photo-1582966772680-860e372bb558?w=500",
+        "inStock": true,
+        "target": "masculino",
+        "features": {
+        "tallas": ["S", "M", "L", "XL"],
+        "colores": ["Surtido (Negro, Gris, Azul)"]
+        }
+    }
+]

@@ -1,0 +1,28 @@
+[
+    {
+        "id": "vestido_gala_01",
+        "name": "Vestido de Noche Ajustado",
+        "description": "Vestido largo de fiesta con escote en V y espalda descubierta, tela elástica brillante.",
+        "price": 1200,
+        "image": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500",
+        "inStock": true,
+        "target": "femenino",
+        "features": {
+        "tallas": ["XS", "S", "M", "L"],
+        "colores": ["Rojo Vino", "Negro Elegante", "Azul Noche"]
+        }
+    },
+    {
+        "id": "falda_plisada_02",
+        "name": "Falda Plisada Midi",
+        "description": "Falda de cintura alta con pliegues definidos y caída ligera, ideal para oficina o salidas.",
+        "price": 480,
+        "image": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500",
+        "inStock": true,
+        "target": "femenino",
+        "features": {
+        "tallas": ["S", "M", "L"],
+        "colores": ["Verde Oliva", "Negro", "Gris"]
+        }
+    }
+]

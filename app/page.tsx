@@ -17,7 +17,8 @@ const montserrat = Montserrat({
 export default function Home() {
   const restaurants = getItems("menus");
   const bakery = getItems("catalogos");
-  const negocios = [...restaurants, ...bakery];
+  const tiendas = getItems("tiendas");
+  const negocios = [...restaurants, ...bakery, ...tiendas];
   const totalActivos = negocios.length;
 
   const whatsappUrl = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE);

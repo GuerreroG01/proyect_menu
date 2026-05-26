@@ -1,0 +1,28 @@
+[
+  {
+    "id": "chaqueta_cuero_01",
+    "name": "Chaqueta de Cuero Biker",
+    "description": "Chaqueta de cuero sintético premium con cremalleras metálicas y forro interior suave.",
+    "price": 1450,
+    "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500",
+    "inStock": true,
+    "target": "masculino",
+    "features": {
+      "tallas": ["M", "L", "XL"],
+      "colores": ["Negro", "Marrón Oscuro"]
+    }
+  },
+  {
+    "id": "gabardina_clasica_02",
+    "name": "Gabardina Elegante de Otoño",
+    "description": "Gabardina larga impermeable con cinturón ajustable y botones frontales.",
+    "price": 1800,
+    "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500",
+    "inStock": true,
+    "target": "femenino",
+    "features": {
+      "tallas": ["S", "M", "L"],
+      "colores": ["Beige", "Negro"]
+    }
+  }
+]

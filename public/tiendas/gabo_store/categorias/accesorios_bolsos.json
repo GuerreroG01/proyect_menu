@@ -1,0 +1,28 @@
+[
+    {
+        "id": "mochila_canvas_01",
+        "name": "Mochila Canvas Vintage para Laptop",
+        "description": "Lona resistente al agua con detalles de correas de cuero. Espacio para laptop de 15.6\".",
+        "price": 890,
+        "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500",
+        "inStock": true,
+        "target": "unisex",
+        "features": {
+        "tallas": ["Única"],
+        "colores": ["Verde Militar", "Marrón", "Negro"]
+        }
+    },
+    {
+        "id": "gafas_sol_02",
+        "name": "Gafas de Sol Polarizadas Aviador",
+        "description": "Protección UV400 con montura metálica ligera y estuche de cuero incluido.",
+        "price": 320,
+        "image": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500",
+        "inStock": true,
+        "target": "unisex",
+        "features": {
+        "tallas": ["Estándar"],
+        "colores": ["Negro/Plata", "Oro/Verde"]
+        }
+    }
+]

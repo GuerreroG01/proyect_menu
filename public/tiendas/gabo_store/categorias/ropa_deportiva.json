@@ -1,0 +1,28 @@
+[
+    {
+        "id": "conjunto_seamless_01",
+        "name": "Conjunto Deportivo Seamless (Top + Legging)",
+        "description": "Tejido sin costuras de alta compresión, absorbe el sudor y permite máxima flexibilidad.",
+        "price": 750,
+        "image": "https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=500",
+        "inStock": true,
+        "target": "femenino",
+        "features": {
+        "tallas": ["S", "M", "L"],
+        "colores": ["Gris Jaspeado", "Azul Eléctrico", "Lila"]
+        }
+    },
+    {
+        "id": "pantaloneta_pro_02",
+        "name": "Pantaloneta de Running Pro 2-en-1",
+        "description": "Pantaloneta exterior ligera con licra interior integrada para evitar rozaduras.",
+        "price": 390,
+        "image": "https://images.unsplash.com/photo-1539185441755-769473a23570?w=500",
+        "inStock": true,
+        "target": "masculino",
+        "features": {
+        "tallas": ["M", "L", "XL", "XXL"],
+        "colores": ["Negro", "Azul Naval"]
+        }
+    }
+]
