@@ -31,7 +31,7 @@ export default function StoreItemCard({ item, quantity, addToCart, removeFromCar
 
     const hasSizes = item.features?.tallas && item.features.tallas.length > 0;
     const hasColors = item.features?.colores && item.features.colores.length > 0;
-
+    const [expandedImage, setExpandedImage] = useState(false);
     const handleAdd = () => {
         if ((hasSizes && !selectedSize) || (hasColors && !selectedColor)) {
             setShowWarning(true);
@@ -50,23 +50,26 @@ export default function StoreItemCard({ item, quantity, addToCart, removeFromCar
             transition={{ duration: 0.4, delay: index * 0.04, ease: [0.215, 0.610, 0.355, 1.000] }}
             className="bg-white rounded-3xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-slate-100 flex gap-4 items-stretch relative overflow-hidden group hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow duration-300"
         >
-            {/* Imagen de Producto Estilizada */}
             {item.image && (
-                <div className="w-24 h-32 rounded-2xl overflow-hidden bg-slate-50 flex-shrink-0 relative border border-slate-100">
+                <button
+                    type="button"
+                    onClick={() => setExpandedImage(true)}
+                    className="w-24 h-32 rounded-2xl overflow-hidden bg-slate-50 flex-shrink-0 relative border border-slate-100 cursor-zoom-in"
+                >
                     <img
                         src={item.image}
                         alt={item.name}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
+
                     {quantity > 0 && (
                         <div className="absolute top-1.5 right-1.5 bg-slate-950 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-in zoom-in-50 duration-200">
                             {quantity}
                         </div>
                     )}
-                </div>
+                </button>
             )}
 
-            {/* Contenido */}
             <div className="flex-1 flex flex-col justify-between min-w-0 py-0.5">
                 <div>
                     <h3 className="font-bold text-slate-900 text-sm md:text-base truncate tracking-tight">{item.name}</h3>
@@ -76,9 +79,7 @@ export default function StoreItemCard({ item, quantity, addToCart, removeFromCar
                         </p>
                     )}
 
-                    {/* Selectores de Variante Internos */}
                     <div className="flex flex-col gap-2 mt-3">
-                        {/* Tallas */}
                         {hasSizes && (
                             <div className="flex items-center gap-2">
                                 <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest min-w-[36px]">Talla:</span>
@@ -100,7 +101,6 @@ export default function StoreItemCard({ item, quantity, addToCart, removeFromCar
                             </div>
                         )}
 
-                        {/* Colores Adaptativos */}
                         {hasColors && (
                             <div className="flex items-center gap-2">
                                 <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest min-w-[36px]">Color:</span>
@@ -140,14 +140,12 @@ export default function StoreItemCard({ item, quantity, addToCart, removeFromCar
                     </div>
                 </div>
 
-                {/* Pie de Tarjeta: Precio y Acciones */}
                 <div className="flex justify-between items-center mt-3 pt-2.5 border-t border-slate-50">
                     <span className="font-black text-slate-950 text-base font-mono">${item.price.toFixed(2)}</span>
 
                     <div className="flex items-center gap-2">
                         <AnimatePresence mode="wait">
                             {quantity > 0 ? (
-                                // Controles de Píldora cuando ya está agregado
                                 <motion.div 
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     animate={{ opacity: 1, scale: 1 }}
@@ -169,7 +167,6 @@ export default function StoreItemCard({ item, quantity, addToCart, removeFromCar
                                     </button>
                                 </motion.div>
                             ) : (
-                                // Botón Agregar de diseño limpio
                                 <motion.button
                                     onClick={handleAdd}
                                     className={`h-8 px-4 rounded-xl text-[11px] font-black tracking-widest uppercase transition-all duration-300 shadow-sm ${
@@ -187,6 +184,29 @@ export default function StoreItemCard({ item, quantity, addToCart, removeFromCar
                     </div>
                 </div>
             </div>
+            <AnimatePresence>
+                {expandedImage && item.image && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setExpandedImage(false)}
+                        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                    >
+                        <motion.img
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            transition={{ duration: 0.25 }}
+                            src={item.image}
+                            alt={item.name}
+                            onClick={(e) => e.stopPropagation()}
+                            className="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain"
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.div>
+        
     );
 }
