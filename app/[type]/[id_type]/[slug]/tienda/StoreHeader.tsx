@@ -61,25 +61,50 @@ export default function StoreHeader({
                 
                 <div className="flex items-center justify-between h-16 md:h-20 gap-4 md:gap-8">
                     
-                    <div 
-                        onClick={() => router.push("/")}
-                        className={`items-center gap-3 shrink-0 cursor-pointer select-none transition-all duration-200 ${
-                            isMobileSearchOpen ? "hidden md:flex" : "flex"
-                        }`}
-                    >
-                        <img 
-                            src={logo} 
-                            alt={name} 
-                            className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-slate-50 object-cover ring-1 ring-slate-200/60 p-0.5" 
-                        />
-                        <div className="hidden sm:block">
-                            <h1 className="font-black text-slate-900 text-sm md:text-base tracking-widest uppercase font-mono leading-none">
-                                {name}
-                            </h1>
-                            <p className="text-[9px] text-emerald-600 flex items-center gap-1 font-bold tracking-wider uppercase mt-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
-                                Tienda En Linea
-                            </p>
+                    <div className="flex items-center gap-3 shrink-0">
+
+                        <button
+                            onClick={() => router.back()}
+                            className="p-2 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-all duration-200"
+                        >
+                            <svg
+                                className="w-5 h-5 text-slate-700"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M15 19l-7-7 7-7"
+                                />
+                            </svg>
+                        </button>
+
+                        {/* Logo */}
+                        <div 
+                            onClick={() => router.push("/")}
+                            className={`items-center gap-3 cursor-pointer select-none transition-all duration-200 ${
+                                isMobileSearchOpen ? "hidden md:flex" : "flex"
+                            }`}
+                        >
+                            <img 
+                                src={logo} 
+                                alt={name} 
+                                className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-slate-50 object-cover ring-1 ring-slate-200/60 p-0.5" 
+                            />
+
+                            <div className="hidden sm:block">
+                                <h1 className="font-black text-slate-900 text-sm md:text-base tracking-widest uppercase font-mono leading-none">
+                                    {name}
+                                </h1>
+
+                                <p className="text-[9px] text-emerald-600 flex items-center gap-1 font-bold tracking-wider uppercase mt-1">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+                                    Tienda En Linea
+                                </p>
+                            </div>
                         </div>
                     </div>
 

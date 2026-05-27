@@ -43,7 +43,7 @@ const TYPE_CONFIG: Record<string, { label: string; route: string; folder: string
     banner: "https://wallpapers.com/images/hd/bakery-sweet-delicacies-4yybowlofjci72ik.jpg",
   },
   "3": {
-    label: "Tienda",
+    label: "Catálogo",
     route: "tienda",
     folder: "tiendas",
     banner: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
