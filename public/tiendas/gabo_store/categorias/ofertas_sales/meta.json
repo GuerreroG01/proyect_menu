@@ -1,0 +1,9 @@
+{
+    "id": "ofertas_sales",
+    "name": "Ofertas y Promociones",
+    "slug": "ofertas_sales",
+
+    "totalPages": 1,
+    "itemsPerPage": 20,
+    "totalItems": 1
+}

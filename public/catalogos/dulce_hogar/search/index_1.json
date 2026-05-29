@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Café Negro Artesanal",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Capuccino Espumoso",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json",
+    "index": 1
+  },
+  {
+    "name": "Chocolate Caliente Espeso",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json",
+    "index": 2
+  },
+  {
+    "name": "Jugo Natural de Naranja",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json",
+    "index": 3
+  },
+  {
+    "name": "Croissant de Mantequilla",
+    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Croissant de Chocolate",
+    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json",
+    "index": 1
+  },
+  {
+    "name": "Dona Glaseada Clásica",
+    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json",
+    "index": 2
+  },
+  {
+    "name": "Dona Rellena de Crema",
+    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json",
+    "index": 3
+  },
+  {
+    "name": "Galletas de Avena y Miel",
+    "file": "/catalogos/dulce_hogar/categorias/galletas_artesanales/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Galletas con Chispas de Chocolate",
+    "file": "/catalogos/dulce_hogar/categorias/galletas_artesanales/page_1.json",
+    "index": 1
+  }
+]

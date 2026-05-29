@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -9,8 +9,11 @@ import MenuItemCard from "./MenuItemCard";
 import CartBar from "./CartBar";
 import LoadingMenu from "./LoadingMenu";
 import { useMenu } from "./useMenu";
+import { useCategory } from "./useCategory";
 import { useCart } from "./useCart";
 import LocationAlert from "./LocationAlert";
+import { useGlobalSearch } from "../../../../lib/useGlobalSearch";
+import { useDebounce } from "use-debounce";
 
 type MenuItem = {
   name: string;
@@ -32,10 +35,34 @@ export default function MenuPage(props: {
   const { cart, addToCart, removeFromCart, totalItems, subtotal } =
     useCart();
 
-  const [activeCategory, setActiveCategory] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [orderType, setOrderType] = useState<"local" | "delivery">("local");
   const [locationError, setLocationError] = useState("");
+
+  const [activeCategory, setActiveCategory] = useState<string>("");
+  const [debouncedSearch] = useDebounce(searchQuery, 600);
+  const isTyping = searchQuery !== debouncedSearch;
+  const safeCategory =
+    activeCategory || data?.categories?.[0]?.id || "";
+
+  useEffect(() => {
+    if (data?.categories?.length && !activeCategory) {
+      setActiveCategory(data.categories[0].id);
+    }
+  }, [data, activeCategory]);
+
+  const { category } = useCategory(
+    folder,
+    params.slug,
+    safeCategory
+  );
+
+  const { results: searchResults, loading: searchLoading } =
+  useGlobalSearch(folder, params.slug, debouncedSearch);
+  const inputLoading = isTyping || searchLoading;
+  const itemsToShow = searchQuery
+    ? searchResults
+    : category?.items || [];
 
   if (loading) return <LoadingMenu />;
 
@@ -47,27 +74,15 @@ export default function MenuPage(props: {
     );
   }
 
-  const safeCategory =
-    activeCategory >= data.categories.length ? 0 : activeCategory;
-
-  const itemsToShow = searchQuery
-    ? data.categories
-        .flatMap((c: any) => c.items || [])
-        .filter((i: MenuItem) =>
-          i.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-    : data.categories[safeCategory].items || [];
-
   const deliveryFee =
     orderType === "delivery" ? (data.delivery ?? 0) : 0;
 
   const totalPrice = subtotal + deliveryFee;
+
   const getLocation = async (): Promise<
     { lat: number; lng: number } | "denied" | null
   > => {
-    if (!navigator.geolocation) {
-      return null;
-    }
+    if (!navigator.geolocation) return null;
 
     try {
       if (navigator.permissions) {
@@ -75,13 +90,9 @@ export default function MenuPage(props: {
           name: "geolocation",
         });
 
-        if (permission.state === "denied") {
-          return "denied";
-        }
+        if (permission.state === "denied") return "denied";
       }
-    } catch (error) {
-      console.log("Permission API error:", error);
-    }
+    } catch {}
 
     return new Promise((resolve) => {
       navigator.geolocation.getCurrentPosition(
@@ -91,11 +102,7 @@ export default function MenuPage(props: {
             lng: pos.coords.longitude,
           });
         },
-        (error) => {
-          console.log("Geolocation error:", error);
-
-          resolve(null);
-        },
+        () => resolve(null),
         {
           enableHighAccuracy: true,
           timeout: 15000,
@@ -119,28 +126,22 @@ export default function MenuPage(props: {
         setLocationError(`
           La ubicación está bloqueada.
 
-          Para habilitarla accede a la configuración de tu navegador:
-          Privacidad y seguridad → Configuración del sitio → Busca este sitio → Ubicación → Permitir
+          Actívala en tu navegador para continuar.
         `);
-
         return;
       }
 
       if (!location) {
-        setLocationError(
-          "Debes autorizar tu ubicación para realizar pedidos a domicilio."
-        );
-
+        setLocationError("Debes permitir ubicación para delivery.");
         return;
       }
 
       const mapLink = `https://www.google.com/maps?q=${location.lat},${location.lng}`;
 
       locationSection = `
-  *UBICACIÓN DEL CLIENTE*
-
-  ${mapLink}
-  `;
+*UBICACIÓN DEL CLIENTE*
+${mapLink}
+      `;
     }
 
     const itemsText = Object.values(cart)
@@ -152,37 +153,31 @@ export default function MenuPage(props: {
       )
       .join("\n");
 
-    const deliveryText =
-      orderType === "delivery"
-        ? `Delivery: $${deliveryFee.toFixed(2)}`
-        : "";
-
     const message = `
-  *${data.name}*
+*${data.name}*
 
-  ━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━
 
-  *PEDIDO*
+*PEDIDO*
 
-  ${itemsText}
+${itemsText}
 
-  ━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━
 
-  *RESUMEN*
+*RESUMEN*
 
-  Subtotal: $${subtotal.toFixed(2)}
-  ${deliveryText}
+Subtotal: $${subtotal.toFixed(2)}
+${orderType === "delivery" ? `Delivery: $${deliveryFee.toFixed(2)}` : ""}
 
-  *TOTAL: $${totalPrice.toFixed(2)}*
+*TOTAL: $${totalPrice.toFixed(2)}*
 
-  ━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━
 
-  *TIPO DE ENTREGA*
+*ENTREGA*
+${orderType === "delivery" ? "A domicilio" : "Retiro en local"}
 
-  ${orderType === "delivery" ? "A domicilio" : "Retiro en local"}
-
-  ${locationSection}
-  `.trim();
+${locationSection}
+    `.trim();
 
     window.open(
       `https://wa.me/${data.whatsapp}?text=${encodeURIComponent(message)}`,
@@ -197,23 +192,21 @@ export default function MenuPage(props: {
         name={data.name}
         logo={data.logo}
         categories={data.categories}
-        activeCategory={safeCategory}
+        activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        searchLoading={inputLoading}
         router={router}
       />
 
       <main className="p-5 max-w-2xl mx-auto w-full flex-1 mb-32">
-        <LocationAlert
-          show={!!locationError}
-          message={locationError}
-        />
+
+        <LocationAlert show={!!locationError} message={locationError} />
+
         <div className="flex justify-between mb-6">
           <h2 className="font-bold uppercase text-slate-900 tracking-wide">
-            {searchQuery
-              ? "Resultados"
-              : data.categories[safeCategory].name}
+            {searchQuery ? "Resultados" : category?.name}
           </h2>
 
           <span className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-full">
@@ -223,7 +216,7 @@ export default function MenuPage(props: {
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={safeCategory + searchQuery}
+            key={activeCategory + searchQuery}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -244,6 +237,7 @@ export default function MenuPage(props: {
         </AnimatePresence>
 
       </main>
+
       <CartBar
         totalItems={totalItems}
         totalPrice={totalPrice}

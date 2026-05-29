@@ -8,34 +8,21 @@ export function useStore(folder: string, slug: string) {
 
     useEffect(() => {
         const load = async () => {
-        try {
-            const res = await fetch(`/${folder}/${slug}/info.json`);
-            console.log(`Cargando datos de /${folder}/${slug}/info.json`, res);
-            if (!res.ok) return setData(null);
-
-            const json = await res.json();
-
-            const normalizedCategories = await Promise.all(
-            json.categories.map(async (cat: any) => {
-                try {
-                const res = await fetch(cat.file);
-                const raw = await res.json();
-
-                const items = Array.isArray(raw) ? raw : raw?.items || [];
-
-                return { ...cat, items };
-                } catch {
-                return { ...cat, items: [] };
+            try {
+                const res = await fetch(`/${folder}/${slug}/info.json`);
+                if (!res.ok) {
+                    setData(null);
+                    return;
                 }
-            })
-            );
 
-            setData({ ...json, categories: normalizedCategories });
-        } catch {
-            setData(null);
-        } finally {
-            setLoading(false);
-        }
+                const json = await res.json();
+                setData(json);
+
+            } catch {
+                setData(null);
+            } finally {
+                setLoading(false);
+            }
         };
 
         load();

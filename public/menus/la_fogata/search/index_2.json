@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Volcán de Queso",
+    "file": "/menus/la_fogata/categorias/hamburguesas_gourmet/page_1.json",
+    "index": 2
+  },
+  {
+    "name": "Brownie con Helado",
+    "file": "/menus/la_fogata/categorias/postres/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Cheesecake de Frutos Rojos",
+    "file": "/menus/la_fogata/categorias/postres/page_1.json",
+    "index": 1
+  }
+]

@@ -1,0 +1,9 @@
+{
+    "id": "postres",
+    "name": "Postres",
+    "slug": "postres",
+
+    "totalPages": 1,
+    "itemsPerPage": 20,
+    "totalItems": 2
+}

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build-search": "tsx scripts/build-indexes.ts"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
@@ -14,7 +15,8 @@
     "next": "16.2.6",
     "qrcode": "^1.5.4",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "use-debounce": "^10.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -28,6 +30,7 @@
     "postcss": "^8.5.14",
     "tailwindcss": "^4.3.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.22.3",
     "typescript": "^5.9.3"
   }
 }

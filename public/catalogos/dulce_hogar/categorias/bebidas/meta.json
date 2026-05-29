@@ -1,0 +1,9 @@
+{
+    "id": "bebidas_calientes_frias",
+    "name": "Bebidas Calientes y Frías",
+    "slug": "bebidas_calientes_frias",
+
+    "totalPages": 1,
+    "itemsPerPage": 20,
+    "totalItems": 4
+}

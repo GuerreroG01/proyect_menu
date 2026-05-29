@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Limonada con Hierbabuena",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Cerveza Artesanal",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json",
+    "index": 1
+  },
+  {
+    "name": "Coca Cola",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json",
+    "index": 2
+  },
+  {
+    "name": "Puyazo (Coulotte)",
+    "file": "/menus/la_fogata/categorias/cortes_lena/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Rib Eye Prime",
+    "file": "/menus/la_fogata/categorias/cortes_lena/page_1.json",
+    "index": 1
+  },
+  {
+    "name": "Nachos La Fogata",
+    "file": "/menus/la_fogata/categorias/entradas_entremeses/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Alitas Ahumadas",
+    "file": "/menus/la_fogata/categorias/entradas_entremeses/page_1.json",
+    "index": 1
+  },
+  {
+    "name": "Chicharrón de Rib Eye",
+    "file": "/menus/la_fogata/categorias/entradas_entremeses/page_1.json",
+    "index": 2
+  },
+  {
+    "name": "La Clásica Grill",
+    "file": "/menus/la_fogata/categorias/hamburguesas_gourmet/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Monster Bacon",
+    "file": "/menus/la_fogata/categorias/hamburguesas_gourmet/page_1.json",
+    "index": 1
+  }
+]

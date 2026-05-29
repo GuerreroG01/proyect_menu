@@ -1,0 +1,9 @@
+{
+    "id": "entradas_entremeses",
+    "name": "Entradas y Entremeses",
+    "slug": "entradas_entremeses",
+
+    "totalPages": 1,
+    "itemsPerPage": 20,
+    "totalItems": 3
+}

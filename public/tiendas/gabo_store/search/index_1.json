@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Mochila Canvas Vintage para Laptop",
+    "file": "/tiendas/gabo_store/categorias/accesorios_bolsos/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Gafas de Sol Polarizadas Aviador",
+    "file": "/tiendas/gabo_store/categorias/accesorios_bolsos/page_1.json",
+    "index": 1
+  },
+  {
+    "name": "Zapatillas Urbanas Retro White",
+    "file": "/tiendas/gabo_store/categorias/calzado/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Chaqueta de Cuero Biker",
+    "file": "/tiendas/gabo_store/categorias/chaquetas_abrigos/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Gabardina Elegante de Otoño",
+    "file": "/tiendas/gabo_store/categorias/chaquetas_abrigos/page_1.json",
+    "index": 1
+  },
+  {
+    "name": "Sudadera Básica con Capucha (OFERTA)",
+    "file": "/tiendas/gabo_store/categorias/ofertas_sales/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Conjunto Deportivo Seamless (Top + Legging)",
+    "file": "/tiendas/gabo_store/categorias/ropa_deportiva/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Pantaloneta de Running Pro 2-en-1",
+    "file": "/tiendas/gabo_store/categorias/ropa_deportiva/page_1.json",
+    "index": 1
+  },
+  {
+    "name": "Pijama de Seda Satinada de Dos Piezas",
+    "file": "/tiendas/gabo_store/categorias/ropa_interior_pijamas/page_1.json",
+    "index": 0
+  },
+  {
+    "name": "Pack x3 Bóxers de Algodón Stretch",
+    "file": "/tiendas/gabo_store/categorias/ropa_interior_pijamas/page_1.json",
+    "index": 1
+  }
+]

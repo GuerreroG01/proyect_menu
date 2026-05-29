@@ -12,6 +12,7 @@ export default function MenuHeader({
   setActiveCategory,
   searchQuery,
   setSearchQuery,
+  searchLoading,
   router,
 }: any) {
     return (
@@ -51,6 +52,7 @@ export default function MenuHeader({
             value={searchQuery}
             onChange={setSearchQuery}
             onClear={() => setSearchQuery("")}
+            loading={searchLoading}
             />
         </div>
 

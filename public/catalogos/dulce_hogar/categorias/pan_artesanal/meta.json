@@ -1,0 +1,9 @@
+{
+    "id": "pan_artesanal",
+    "name": "Pan Artesanal",
+    "slug": "pan_artesanal",
+
+    "totalPages": 1,
+    "itemsPerPage": 20,
+    "totalItems": 4
+}

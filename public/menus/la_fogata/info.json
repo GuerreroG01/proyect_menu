@@ -26,28 +26,23 @@
     "categories": [
         {
         "id": "entradas_entremeses",
-        "name": "Entradas y Entremeses",
-        "file": "/menus/la_fogata/categorias/entradas_entremeses.json"
+        "name": "Entradas y Entremeses"
         },
         {
         "id": "hamburguesas_gourmet",
-        "name": "Hamburguesas Gourmet",
-        "file": "/menus/la_fogata/categorias/hamburguesas_gourmet.json"
+        "name": "Hamburguesas Gourmet"
         },
         {
         "id": "cortes_lena",
-        "name": "Cortes a la Leña",
-        "file": "/menus/la_fogata/categorias/cortes_lena.json"
+        "name": "Cortes a la Leña"
         },
         {
         "id": "postres",
-        "name": "Postres",
-        "file": "/menus/la_fogata/categorias/postres.json"
+        "name": "Postres"
         },
         {
         "id": "bebidas_cocteleria",
-        "name": "Bebidas y Coctelería",
-        "file": "/menus/la_fogata/categorias/bebidas_cocteleria.json"
+        "name": "Bebidas y Coctelería"
         }
     ]
 }

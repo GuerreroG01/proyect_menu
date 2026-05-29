@@ -1,0 +1,9 @@
+{
+    "id": "galletas_artesanales",
+    "name": "Galletas Artesanales",
+    "slug": "galletas_artesanales",
+
+    "totalPages": 1,
+    "itemsPerPage": 20,
+    "totalItems": 3
+}

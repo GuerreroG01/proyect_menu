@@ -1,0 +1,9 @@
+{
+    "id": "accesorios_bolsos",
+    "name": "Accesorios y Bolsos",
+    "slug": "accesorios_bolsos",
+
+    "itemsPerPage": 20,
+    "totalItems": 2,
+    "totalPages": 1
+}

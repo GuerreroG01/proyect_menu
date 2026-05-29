@@ -1,0 +1,9 @@
+{
+    "id": "calzado",
+    "name": "Calzado",
+    "slug": "calzado",
+
+    "totalPages": 1,
+    "itemsPerPage": 20,
+    "totalItems": 1
+}

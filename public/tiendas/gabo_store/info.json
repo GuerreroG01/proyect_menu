@@ -13,52 +13,45 @@
 
     "horarios": [
         {
-            "dias": "Lunes a Sábado",
-            "abre": "08:30 AM",
-            "cierra": "06:30 PM"
+        "dias": "Lunes a Sábado",
+        "abre": "08:30 AM",
+        "cierra": "06:30 PM"
         },
         {
-            "dias": "Domingo",
-            "abre": "09:00 AM",
-            "cierra": "02:00 PM"
+        "dias": "Domingo",
+        "abre": "09:00 AM",
+        "cierra": "02:00 PM"
         }
     ],
 
     "categories": [
-    {
-        "id": "chaquetas_abrigos",
-        "name": "Chaquetas y Abrigos",
-        "file": "/tiendas/gabo_store/categorias/chaquetas_abrigos.json"
-    },
-    {
+        {
         "id": "vestidos_faldas",
-        "name": "Vestidos y Faldas",
-        "file": "/tiendas/gabo_store/categorias/vestidos_faldas.json"
-    },
-    {
+        "name": "Vestidos y Faldas"
+        },
+        {
         "id": "ropa_deportiva",
-        "name": "Ropa Deportiva (Activewear)",
-        "file": "/tiendas/gabo_store/categorias/ropa_deportiva.json"
-    },
-    {
+        "name": "Ropa Deportiva (Activewear)"
+        },
+        {
         "id": "calzado",
-        "name": "Calzado y Zapatillas",
-        "file": "/tiendas/gabo_store/categorias/calzado.json"
-    },
-    {
+        "name": "Calzado y Zapatillas"
+        },
+        {
         "id": "accesorios_bolsos",
-        "name": "Accesorios y Bolsos",
-        "file": "/tiendas/gabo_store/categorias/accesorios_bolsos.json"
-    },
-    {
+        "name": "Accesorios y Bolsos"
+        },
+        {
         "id": "ropa_interior_pijamas",
-        "name": "Ropa Interior y Pijamas",
-        "file": "/tiendas/gabo_store/categorias/ropa_interior_pijamas.json"
-    },
-    {
+        "name": "Ropa Interior y Pijamas"
+        },
+        {
         "id": "ofertas_sales",
-        "name": "Rebajas y Ofertas",
-        "file": "/tiendas/gabo_store/categorias/ofertas_sales.json"
-    }
+        "name": "Rebajas y Ofertas"
+        },
+        {
+        "id": "chaquetas_abrigos",
+        "name": "Chaquetas y Abrigos"
+        }
     ]
 }

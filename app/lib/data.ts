@@ -48,25 +48,42 @@ export const getItems = cache((folder: string) => {
         })
         .filter(Boolean);
 });
-
+//Aqui hay que corregir para que funcione con la nueva estructura de paginación
 export const getCategory = cache(
     (
         folder: string,
         slug: string,
-        categoryFile: string
+        categorySlug: string,
+        page: number = 1
     ) => {
-        const filePath = path.join(
+
+        const categoryPath = path.join(
             process.cwd(),
             "public",
             folder,
             slug,
             "categorias",
-            categoryFile
+            categorySlug
         );
 
-        const file = fs.readFileSync(filePath, "utf8");
+        // meta.json
+        const metaPath = path.join(categoryPath, "meta.json");
 
-        return JSON.parse(file);
+        const pagePath = path.join(
+            categoryPath,
+            `page_${page}.json`
+        );
+
+        const metaFile = fs.readFileSync(metaPath, "utf8");
+        const pageFile = fs.readFileSync(pagePath, "utf8");
+
+        const meta = JSON.parse(metaFile);
+        const products = JSON.parse(pageFile);
+
+        return {
+            ...meta,
+            products
+        };
     }
 );
 export const getBusinessStats = cache(() => {

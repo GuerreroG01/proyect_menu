@@ -14,13 +14,18 @@ interface HeaderProps {
     name: string;
     logo: string;
     categories: Category[];
-    activeCategory: number;
-    setActiveCategory: (index: number) => void;
+
+    activeCategory: string;
+    setActiveCategory: (id: string) => void;
+
     searchQuery: string;
     setSearchQuery: (query: string) => void;
+
     router: AppRouterInstance;
-    gender: GenderType;               // Recibido del padre
-    setGender: (type: GenderType) => void; // Recibido del padre
+
+    gender: GenderType;
+    setGender: (type: GenderType) => void;
+    inputLoading: boolean;
 }
 
 export default function StoreHeader({
@@ -34,6 +39,7 @@ export default function StoreHeader({
     router,
     gender,
     setGender,
+    inputLoading
 }: HeaderProps) {
     const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
     const [isGenderMenuOpen, setIsGenderMenuOpen] = useState(false);
@@ -54,7 +60,6 @@ export default function StoreHeader({
         caballero: "Caballero",
         dama: "Dama"
     };
-
     return (
         <header className="bg-white/95 border-b border-slate-100 sticky top-0 z-40 backdrop-blur-md transition-all duration-300">
             <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
@@ -82,7 +87,6 @@ export default function StoreHeader({
                             </svg>
                         </button>
 
-                        {/* Logo */}
                         <div 
                             onClick={() => router.push("/")}
                             className={`items-center gap-3 cursor-pointer select-none transition-all duration-200 ${
@@ -113,29 +117,32 @@ export default function StoreHeader({
                     } max-w-md lg:max-w-xl mx-auto relative`}>
                         <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none text-slate-400">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </div>
-                        <input
-                            type="text"
-                            placeholder="Buscar prendas, calzado, accesorios..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-slate-50/70 border border-slate-200/60 rounded-full py-2 pl-10 pr-10 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-900 focus:bg-white transition-all duration-200 shadow-inner"
-                        />
-                        
-                        {searchQuery && (
-                            <button
-                                onClick={() => setSearchQuery("")}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 bg-slate-200/50 rounded-full w-5 h-5 flex items-center justify-center transition-colors"
-                            >
-                                <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        )}
+                        <div className="relative flex-1 transition-all duration-300 max-w-md lg:max-w-xl mx-auto">
+    
+                            <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none text-slate-400">
+                                {inputLoading ? (
+                                    <div className="w-4 h-4 border-2 border-slate-300 border-t-slate-900 rounded-full animate-spin" />
+                                ) : (
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                )}
+                            </div>
+
+                            <input
+                                type="text"
+                                placeholder="Buscar prendas, calzado, accesorios..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full bg-slate-50/70 border border-slate-200/60 rounded-full py-2 pl-10 pr-10 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-900 focus:bg-white transition-all duration-200 shadow-inner"
+                            />
+                        </div>
                     </div>
 
+                    {/* GENDER (NO CAMBIO) */}
                     <div className={`items-center gap-2 sm:gap-3 shrink-0 ${isMobileSearchOpen ? "hidden md:flex" : "flex"}`}>
                         
                         <div className="relative" ref={dropdownRef}>
@@ -191,60 +198,38 @@ export default function StoreHeader({
                                 </div>
                             )}
                         </div>
-
-                        <div className="h-5 w-[1px] bg-slate-200 mx-1 hidden sm:block"></div>
-
-                        <button 
-                            onClick={() => setIsMobileSearchOpen(true)}
-                            className="p-2 text-slate-700 hover:text-black hover:bg-slate-50 rounded-full transition-colors md:hidden"
-                        >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </button>
                     </div>
-
-                    {isMobileSearchOpen && (
-                        <button
-                            onClick={() => setIsMobileSearchOpen(false)}
-                            className="p-2 text-slate-500 hover:text-slate-800 md:hidden shrink-0"
-                        >
-                            <span className="text-xs font-bold tracking-wider uppercase">Cancelar</span>
-                        </button>
-                    )}
-
                 </div>
-                {categories && categories.length > 0 && (
-                    <nav className={`transition-all duration-200 gap-1.5 overflow-x-auto pb-3 pt-1 justify-start md:justify-center border-t border-slate-100/70 ${
-                        isMobileSearchOpen ? "hidden md:flex" : "flex"
-                    } 
-                    [&::-webkit-scrollbar]:h-1 
-                    [&::-webkit-scrollbar-track]:bg-slate-50 
-                    [&::-webkit-scrollbar-thumb]:bg-slate-200 
-                    [&::-webkit-scrollbar-thumb]:rounded-full 
-                    [scrollbar-width:thin] 
-                    [scrollbar-color:#E2E8F0_#F8FAFC]`}>
-                        {categories.map((category, index) => {
-                            const isActive = activeCategory === index;
-                            return (
-                                <button
-                                    key={category.id}
-                                    onClick={() => setActiveCategory(index)}
-                                    className={`text-xs md:text-[13px] px-4 py-2 font-medium tracking-widest uppercase transition-all duration-200 whitespace-nowrap relative group ${
+
+                <div className="flex gap-1.5 overflow-x-auto whitespace-nowrap border-t border-slate-100/70 pt-1 pb-3 md:justify-start px-2">
+                    {categories.map((category) => {
+                        const isActive =
+                            activeCategory != null &&
+                            String(activeCategory) === String(category.id);
+
+                        return (
+                            <button
+                                key={category.id}
+                                onClick={() => setActiveCategory(category.id)}
+                                className={`text-xs md:text-[13px] px-4 py-2 font-medium tracking-widest uppercase transition-all duration-200 relative group whitespace-nowrap ${
+                                    isActive
+                                        ? "text-slate-950 font-bold"
+                                        : "text-slate-500 hover:text-slate-950"
+                                }`}
+                            >
+                                {category.name}
+
+                                <span
+                                    className={`absolute bottom-0 left-4 right-4 h-[2px] bg-slate-950 transition-transform duration-300 ${
                                         isActive
-                                            ? "text-slate-950 font-bold"
-                                            : "text-slate-500 hover:text-slate-950"
+                                            ? "scale-x-100"
+                                            : "scale-x-0 group-hover:scale-x-50"
                                     }`}
-                                >
-                                    {category.name}
-                                    <span className={`absolute bottom-0 left-4 right-4 h-[2px] bg-slate-950 transition-transform duration-300 ${
-                                        isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-50"
-                                    }`} />
-                                </button>
-                            );
-                        })}
-                    </nav>
-                )}
+                                />
+                            </button>
+                        );
+                    })}
+                </div>
 
             </div>
         </header>

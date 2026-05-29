@@ -1,0 +1,9 @@
+{
+    "id": "hamburguesas_gourmet",
+    "name": "Hamburguesas Gourmet",
+    "slug": "hamburguesas_gourmet",
+
+    "totalPages": 1,
+    "itemsPerPage": 20,
+    "totalItems": 3
+}

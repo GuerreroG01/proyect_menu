@@ -1,0 +1,9 @@
+{
+    "id": "pasteleria_premium",
+    "name": "Pastelería Premium",
+    "slug": "pasteleria_premium",
+
+    "totalPages": 1,
+    "itemsPerPage": 20,
+    "totalItems": 4
+}
