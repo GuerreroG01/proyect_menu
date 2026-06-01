@@ -1,17 +1,52 @@
 [
   {
-    "name": "Volcán de Queso",
-    "file": "/menus/la_fogata/categorias/hamburguesas_gourmet/page_1.json",
-    "index": 2
+    "id": "jugo_naranja",
+    "name": "Jugo Natural de Naranja",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_2.json"
   },
   {
-    "name": "Brownie con Helado",
-    "file": "/menus/la_fogata/categorias/postres/page_1.json",
-    "index": 0
+    "id": "latte_vainilla",
+    "name": "Latte de Vainilla",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_2.json"
   },
   {
-    "name": "Cheesecake de Frutos Rojos",
-    "file": "/menus/la_fogata/categorias/postres/page_1.json",
-    "index": 1
+    "id": "mocaccino",
+    "name": "Mocaccino Especial",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_2.json"
+  },
+  {
+    "id": "te_verde",
+    "name": "Té Verde Natural",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_2.json"
+  },
+  {
+    "id": "te_chai",
+    "name": "Té Chai Especiado",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_2.json"
+  },
+  {
+    "id": "frappe_caramelo",
+    "name": "Frappé de Caramelo",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_2.json"
+  },
+  {
+    "id": "limonada_menta",
+    "name": "Limonada con Menta",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_2.json"
+  },
+  {
+    "id": "puyazo_coulotte",
+    "name": "Puyazo (Coulotte)",
+    "file": "/menus/la_fogata/categorias/cortes_lena/page_1.json"
+  },
+  {
+    "id": "rib_eye_prime",
+    "name": "Rib Eye Prime",
+    "file": "/menus/la_fogata/categorias/cortes_lena/page_1.json"
+  },
+  {
+    "id": "nachos_la_fogata",
+    "name": "Nachos La Fogata",
+    "file": "/menus/la_fogata/categorias/entradas_entremeses/page_1.json"
   }
 ]

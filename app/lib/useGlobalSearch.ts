@@ -14,9 +14,6 @@ export function useGlobalSearch(
   slug: string,
   query: string
 ) {
-  console.log("useGlobalSearch folder:", folder);
-  console.log("useGlobalSearch slug:", slug);
-  console.log("useGlobalSearch query:", query);
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -71,7 +68,11 @@ export function useGlobalSearch(
                 ? json
                 : json.items || [];
 
-              const product = items[match.index];
+              const product = items.find(
+                (item: any) => item.id === match.id
+              );
+              console.log("Buscando:", match.id);
+              console.log("Encontrado:", product);
 
               if (product) {
                 foundProducts.push(product);

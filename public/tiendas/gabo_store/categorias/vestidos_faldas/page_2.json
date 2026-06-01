@@ -1,0 +1,28 @@
+[
+    {
+            "id": "blazer_elegante_03",
+            "name": "Blazer Elegante Oversize",
+            "description": "Blazer estructurado con corte moderno y hombros marcados, ideal para outfits formales o casual chic.",
+            "price": 950,
+            "image": "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=500",
+            "inStock": true,
+            "target": "femenino",
+            "features": {
+            "tallas": ["S", "M", "L"],
+            "colores": ["Negro", "Beige", "Blanco"]
+            }
+    },
+    {
+            "id": "jeans_slim_04",
+            "name": "Jeans Slim Fit Azul",
+            "description": "Pantalón de mezclilla ajustado con acabado moderno y elasticidad ligera.",
+            "price": 650,
+            "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500",
+            "inStock": true,
+            "target": "unisex",
+            "features": {
+            "tallas": ["28", "30", "32", "34"],
+            "colores": ["Azul Claro", "Azul Oscuro"]
+            }
+    }
+]

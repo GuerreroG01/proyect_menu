@@ -1,0 +1,75 @@
+{
+    "category": "Bebidas Calientes y Frías",
+    "items": [
+        {
+            "id": "cafe_negro_artesanal",
+            "name": "Café Negro Artesanal",
+            "price": 25,
+            "description": "Café fuerte de grano seleccionado recién molido.",
+            "image": "data:image/jpeg;base64,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"
+        },
+        {
+            "id": "capuccino_espumoso",
+            "name": "Capuccino Espumoso",
+            "price": 35,
+            "description": "Café con leche cremosa y espuma de leche artesanal.",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1oyw2PYsUM7hVtxR6c2GNrSQ_RCS2mNisSg&s"
+        },
+        {
+            "id": "chocolate_caliente",
+            "name": "Chocolate Caliente Espeso",
+            "price": 30,
+            "description": "Chocolate tradicional espeso con leche caliente.",
+            "image": "https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=400&q=70"
+        },
+        {
+            "id": "jugo_naranja",
+            "name": "Jugo Natural de Naranja",
+            "price": 28,
+            "description": "Jugo fresco exprimido al momento.",
+            "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=70"
+        },
+        {
+            "id": "latte_vainilla",
+            "name": "Latte de Vainilla",
+            "price": 40,
+            "description": "Espresso suave con leche vaporizada y esencia de vainilla.",
+            "image": "https://www.starbucksathome.com/uy/sites/default/files/styles/rdp_banner_image/public/2021-06/Vanilla%20Latte_ContactShadow_Green.png?itok=5xJvFZV2"
+        },
+        {
+            "id": "mocaccino",
+            "name": "Mocaccino Especial",
+            "price": 42,
+            "description": "Combinación de espresso, chocolate y leche cremosa.",
+            "image": "https://www.cremashop.eu/media/cache/content_teaser_fixed/content/pages/ce6ecadd0e7014a23a0b93676d4eba31.jpg"
+        },
+        {
+            "id": "te_verde",
+            "name": "Té Verde Natural",
+            "price": 22,
+            "description": "Infusión ligera con propiedades antioxidantes.",
+            "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&q=70"
+        },
+        {
+            "id": "te_chai",
+            "name": "Té Chai Especiado",
+            "price": 32,
+            "description": "Mezcla aromática de té negro y especias orientales.",
+            "image": "https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=400&q=70"
+        },
+        {
+            "id": "frappe_caramelo",
+            "name": "Frappé de Caramelo",
+            "price": 48,
+            "description": "Bebida fría con café, hielo triturado y caramelo.",
+            "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=70"
+        },
+        {
+            "id": "limonada_menta",
+            "name": "Limonada con Menta",
+            "price": 26,
+            "description": "Refrescante mezcla de limón natural y hojas de menta.",
+            "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&q=70"
+        }
+    ]
+}

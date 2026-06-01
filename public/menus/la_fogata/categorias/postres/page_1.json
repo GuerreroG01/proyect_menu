@@ -3,16 +3,18 @@
     "name": "Postres",
     "items": [
         {
-        "name": "Brownie con Helado",
-        "price": 95,
-        "description": "Brownie tibio de chocolate amargo con una bola de helado de vainilla y jarabe de caramelo.",
-        "image": "https://th.bing.com/th/id/R.c37a01047b5f73e9f2105819e3964e6d?rik=20S8lBifFwgYMg&pid=ImgRaw&r=0"
+            "id": "brownie_con_helado",
+            "name": "Brownie con Helado",
+            "price": 95,
+            "description": "Brownie tibio de chocolate amargo con una bola de helado de vainilla y jarabe de caramelo.",
+            "image": "https://th.bing.com/th/id/R.c37a01047b5f73e9f2105819e3964e6d?rik=20S8lBifFwgYMg&pid=ImgRaw&r=0"
         },
         {
-        "name": "Cheesecake de Frutos Rojos",
-        "price": 110,
-        "description": "Receta cremosa de la casa con coulis de fresas y frambuesas frescas.",
-        "image": "https://tse1.mm.bing.net/th/id/OIP.rt9-E_Zn23RH3eLWTGHRqwHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+            "id": "cheesecake_de_frutos_rojos",
+            "name": "Cheesecake de Frutos Rojos",
+            "price": 110,
+            "description": "Receta cremosa de la casa con coulis de fresas y frambuesas frescas.",
+            "image": "https://tse1.mm.bing.net/th/id/OIP.rt9-E_Zn23RH3eLWTGHRqwHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
         }
     ]
 }

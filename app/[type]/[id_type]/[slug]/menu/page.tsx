@@ -12,6 +12,7 @@ import { useMenu } from "./useMenu";
 import { useCategory } from "./useCategory";
 import { useCart } from "./useCart";
 import LocationAlert from "./LocationAlert";
+import Pagination from "./pagination";
 import { useGlobalSearch } from "../../../../lib/useGlobalSearch";
 import { useDebounce } from "use-debounce";
 
@@ -38,13 +39,12 @@ export default function MenuPage(props: {
   const [searchQuery, setSearchQuery] = useState("");
   const [orderType, setOrderType] = useState<"local" | "delivery">("local");
   const [locationError, setLocationError] = useState("");
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [activeCategory, setActiveCategory] = useState<string>("");
-  const [debouncedSearch] = useDebounce(searchQuery, 600);
+  const [debouncedSearch] = useDebounce(searchQuery, 300);
   const isTyping = searchQuery !== debouncedSearch;
   const safeCategory =
     activeCategory || data?.categories?.[0]?.id || "";
-
   useEffect(() => {
     if (data?.categories?.length && !activeCategory) {
       setActiveCategory(data.categories[0].id);
@@ -54,15 +54,20 @@ export default function MenuPage(props: {
   const { category } = useCategory(
     folder,
     params.slug,
-    safeCategory
+    safeCategory,
+    currentPage
   );
 
   const { results: searchResults, loading: searchLoading } =
   useGlobalSearch(folder, params.slug, debouncedSearch);
   const inputLoading = isTyping || searchLoading;
-  const itemsToShow = searchQuery
+  const itemsToShow = debouncedSearch
     ? searchResults
-    : category?.items || [];
+    : category?.items ?? [];
+  
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeCategory, searchQuery]);
 
   if (loading) return <LoadingMenu />;
 
@@ -70,6 +75,13 @@ export default function MenuPage(props: {
     return (
       <div className="p-10 text-center font-bold text-slate-400">
         Menú no encontrado
+      </div>
+    );
+  }
+  if (!loading && !searchQuery && !category) {
+    return (
+      <div className="p-10 text-center text-slate-400 font-bold">
+        Sin productos en esta categoría
       </div>
     );
   }
@@ -198,6 +210,7 @@ ${locationSection}
         setSearchQuery={setSearchQuery}
         searchLoading={inputLoading}
         router={router}
+        setCurrentPage={setCurrentPage}
       />
 
       <main className="p-5 max-w-2xl mx-auto w-full flex-1 mb-32">
@@ -216,7 +229,7 @@ ${locationSection}
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeCategory + searchQuery}
+            key={`${activeCategory}-${currentPage}-${searchQuery}`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -235,6 +248,13 @@ ${locationSection}
             ))}
           </motion.div>
         </AnimatePresence>
+        {!searchQuery && category?.totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={category?.totalPages ?? 1}
+            onPageChange={setCurrentPage}
+          />
+        )}
 
       </main>
 

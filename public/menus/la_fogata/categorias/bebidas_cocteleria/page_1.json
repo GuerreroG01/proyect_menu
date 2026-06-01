@@ -3,22 +3,53 @@
     "name": "Bebidas y Coctelería",
     "items": [
         {
-        "name": "Limonada con Hierbabuena",
-        "price": 55,
-        "description": "Refrescante limonada natural con hojas de hierbabuena maceradas.",
-        "image": "https://lepalito.com/wp-content/uploads/2024/05/Limonada-de-hierbabuena-scaled.webp"
+            "id": "limonada_hierbabuena",
+            "name": "Limonada con Hierbabuena",
+            "price": 55,
+            "description": "Refrescante limonada natural con hojas de hierbabuena maceradas.",
+            "image": "https://lepalito.com/wp-content/uploads/2024/05/Limonada-de-hierbabuena-scaled.webp"
         },
         {
-        "name": "Cerveza Artesanal",
-        "price": 85,
-        "description": "Consulte las variedades de temporada de nuestra micro-cervecería local.",
-        "image": "https://www.losvinos.com.ar/wp-content/uploads/2019/09/Cerveza-Artesanal1.jpg"
+            "id": "cerveza_artesanal",
+            "name": "Cerveza Artesanal",
+            "price": 85,
+            "description": "Consulte las variedades de temporada de nuestra micro-cervecería local.",
+            "image": "https://www.losvinos.com.ar/wp-content/uploads/2019/09/Cerveza-Artesanal1.jpg"
         },
         {
-        "name": "Coca Cola",
-        "price": 40,
-        "description": "Presentación original en botella de vidrio de 355ml.",
-        "image": "https://tse3.mm.bing.net/th/id/OIP.HlRzXzC6XleyXwgwh_72VwHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+            "id": "coca_cola",
+            "name": "Coca Cola",
+            "price": 40,
+            "description": "Presentación original en botella de vidrio de 355ml.",
+            "image": "https://tse3.mm.bing.net/th/id/OIP.HlRzXzC6XleyXwgwh_72VwHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+        },
+        {
+            "id": "smoothie_fresa",
+            "name": "Smoothie de Fresa",
+            "price": 45,
+            "description": "Batido frío preparado con fresas naturales y yogurt.",
+            "image": "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=400&q=70"
+        },
+        {
+            "id": "batido_mango",
+            "name": "Batido Tropical de Mango",
+            "price": 44,
+            "description": "Mango fresco licuado con hielo y leche.",
+            "image": "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400&q=70"
+        },
+        {
+            "id": "agua_horchata",
+            "name": "Agua de Horchata",
+            "price": 24,
+            "description": "Bebida tradicional dulce preparada con arroz y canela.",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh6cvE5gVeFCwcaTHPAm31dGG6W_0bDDegYA&s"
+        },
+        {
+            "id": "cafe_frio",
+            "name": "Cold Brew",
+            "price": 38,
+            "description": "Café extraído en frío durante varias horas para un sabor suave.",
+            "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400&q=70"
         }
     ]
 }

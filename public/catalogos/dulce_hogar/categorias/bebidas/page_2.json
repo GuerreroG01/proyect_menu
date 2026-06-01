@@ -1,0 +1,33 @@
+{
+    "category": "Bebidas Calientes y Frías",
+    "items": [
+        {
+            "id": "americano_clasico",
+            "name": "Americano Clásico",
+            "price": 27,
+            "description": "Espresso suave diluido con agua caliente para un sabor balanceado.",
+            "image": "https://thumbs.dreamstime.com/b/cl%C3%A1sico-caf%C3%A9-americano-con-leche-sobre-fondo-gris-218055944.jpg"
+        },
+        {
+            "id": "latte_avellana",
+            "name": "Latte de Avellana",
+            "price": 42,
+            "description": "Café con leche cremosa y toque dulce de avellana.",
+            "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=70"
+        },
+        {
+            "id": "espresso_doble",
+            "name": "Espresso Doble",
+            "price": 30,
+            "description": "Café intenso de doble extracción para mayor energía.",
+            "image": "https://images.unsplash.com/photo-1509785307050-d4066910ec1e?w=400&q=70"
+        },
+        {
+            "id": "chai_helado",
+            "name": "Chai Helado",
+            "price": 38,
+            "description": "Té chai especiado servido frío con hielo.",
+            "image": "https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=400&q=70"
+        }
+    ]
+}

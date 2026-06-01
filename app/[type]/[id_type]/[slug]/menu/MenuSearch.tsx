@@ -8,7 +8,6 @@ export default function MenuSearch({
     onClear,
     loading,
 }: any) {
-    console.log('El valor del loading es: ', loading);
     return (
         <div className="relative flex items-center">
 

@@ -3,7 +3,7 @@
 import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-
+import Pagination from "./pagination";
 import StoreHeader from "./StoreHeader";
 import StoreItemCard from "./StoreItemCard";
 import CartBar from "./CartBar";
@@ -37,7 +37,7 @@ export default function StorePage(props: {
     const { data, loading } = useStore(folder, params.slug);
 
     const { cart, addToCart, removeFromCart, totalItems, subtotal } = useCart();
-
+    const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState("");
     const [orderType, setOrderType] = useState<"local" | "delivery">("delivery");
     const [locationError, setLocationError] = useState("");
@@ -56,7 +56,8 @@ export default function StorePage(props: {
     const { category } = useCategory(
         folder,
         params.slug,
-        safeCategory
+        safeCategory,
+        currentPage
     );
     const { results: searchResults, loading: searchLoading } =
         useGlobalSearch(folder, params.slug, debouncedSearch);
@@ -66,6 +67,11 @@ export default function StorePage(props: {
         : category?.items || [];
 
     const inputLoading = isTyping || searchLoading;
+    
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [activeCategory]);
+    
     if (loading) return <LoadingStore />;
 
     if (!data?.categories?.length) {
@@ -183,6 +189,7 @@ export default function StorePage(props: {
                 gender={gender}
                 setGender={setGender}
                 inputLoading={inputLoading}
+                setCurrentPage={setCurrentPage}
             />
 
             <main className="p-5 max-w-2xl mx-auto w-full flex-1 mb-32">
@@ -220,6 +227,13 @@ export default function StorePage(props: {
                         ))}
                     </motion.div>
                 </AnimatePresence>
+                {!searchQuery && category?.totalPages > 1 && (
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={category?.totalPages ?? 1}
+                        onPageChange={setCurrentPage}
+                    />
+                )}
 
             </main>
 

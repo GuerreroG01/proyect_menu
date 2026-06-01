@@ -26,6 +26,7 @@ interface HeaderProps {
     gender: GenderType;
     setGender: (type: GenderType) => void;
     inputLoading: boolean;
+    setCurrentPage: (page: number) => void;
 }
 
 export default function StoreHeader({
@@ -39,7 +40,8 @@ export default function StoreHeader({
     router,
     gender,
     setGender,
-    inputLoading
+    inputLoading,
+    setCurrentPage
 }: HeaderProps) {
     const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
     const [isGenderMenuOpen, setIsGenderMenuOpen] = useState(false);
@@ -210,7 +212,10 @@ export default function StoreHeader({
                         return (
                             <button
                                 key={category.id}
-                                onClick={() => setActiveCategory(category.id)}
+                                onClick={() => {
+                                    setActiveCategory(category.id);
+                                    setCurrentPage(1);
+                                }}
                                 className={`text-xs md:text-[13px] px-4 py-2 font-medium tracking-widest uppercase transition-all duration-200 relative group whitespace-nowrap ${
                                     isActive
                                         ? "text-slate-950 font-bold"

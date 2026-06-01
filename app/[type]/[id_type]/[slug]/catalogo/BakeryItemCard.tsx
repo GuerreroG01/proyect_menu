@@ -19,10 +19,10 @@ export default function BakeryItemList({
 }: Props) {
 
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
+    
     return (
         <>
-            <main className="p-5 max-w-2xl mx-auto w-full flex-1 mb-32">
+            <main className="p-5 max-w-2xl mx-auto w-full flex-1">
                 <div className="grid gap-6">
 
                     <AnimatePresence>
@@ -38,7 +38,7 @@ export default function BakeryItemList({
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
-                                    transition={{ delay: i * 0.05 }}
+                                    transition={{ duration: 0.15 }}
                                     className="
                                         bg-white/80
                                         p-3

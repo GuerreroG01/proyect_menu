@@ -24,5 +24,109 @@
         "tallas": ["S", "M", "L"],
         "colores": ["Verde Oliva", "Negro", "Gris"]
         }
+    },
+    {
+        "id": "camisa_seda_05",
+        "name": "Camisa de Seda Fluida",
+        "description": "Camisa ligera con acabado satinado, ideal para ocasiones elegantes o trabajo.",
+        "price": 720,
+        "image": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500",
+        "inStock": true,
+        "target": "femenino",
+        "features": {
+        "tallas": ["S", "M", "L"],
+        "colores": ["Blanco Perla", "Champagne", "Negro"]
+        }
+    },
+    {
+        "id": "chaqueta_cuero_06",
+        "name": "Chaqueta de Cuero Sintético",
+        "description": "Chaqueta estilo biker con cierre metálico y acabado mate.",
+        "price": 1100,
+        "image": "https://images.unsplash.com/photo-1520975916090-3105956dac38?w=500",
+        "inStock": true,
+        "target": "unisex",
+        "features": {
+        "tallas": ["S", "M", "L", "XL"],
+        "colores": ["Negro", "Café Oscuro"]
+        }
+    },
+    {
+        "id": "vestido_verano_07",
+        "name": "Vestido de Verano Floral",
+        "description": "Vestido ligero con estampado floral, perfecto para clima cálido.",
+        "price": 540,
+        "image": "https://m.media-amazon.com/images/I/71-wgnP9DDL._AC_UY1000_.jpg",
+        "inStock": true,
+        "target": "femenino",
+        "features": {
+        "tallas": ["XS", "S", "M"],
+        "colores": ["Floral Rosa", "Floral Azul"]
+        }
+    },
+    {
+        "id": "shorts_denim_08",
+        "name": "Shorts Denim Desgastados",
+        "description": "Shorts de mezclilla con efecto desgastado y corte moderno.",
+        "price": 390,
+        "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500",
+        "inStock": true,
+        "target": "unisex",
+        "features": {
+        "tallas": ["S", "M", "L"],
+        "colores": ["Azul Claro", "Negro"]
+        }
+    },
+    {
+        "id": "top_crop_09",
+        "name": "Top Crop Básico",
+        "description": "Top corto ajustado, ideal para outfits casuales o deportivos.",
+        "price": 250,
+        "image": "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=500",
+        "inStock": true,
+        "target": "femenino",
+        "features": {
+        "tallas": ["XS", "S", "M"],
+        "colores": ["Blanco", "Negro", "Gris"]
+        }
+    },
+    {
+        "id": "abrigo_largo_10",
+        "name": "Abrigo Largo Elegante",
+        "description": "Abrigo largo de invierno con corte clásico y botones frontales.",
+        "price": 1800,
+        "image": "https://images.unsplash.com/photo-1542060748-10c28b62716f?w=500",
+        "inStock": true,
+        "target": "unisex",
+        "features": {
+        "tallas": ["S", "M", "L", "XL"],
+        "colores": ["Negro", "Camel", "Gris"]
+        }
+    },
+    {
+        "id": "blusa_encaje_11",
+        "name": "Blusa de Encaje",
+        "description": "Blusa delicada con detalles de encaje y transparencias suaves.",
+        "price": 620,
+        "image": "https://static.e-stradivarius.net/assets/public/d09a/c468/680e417886c6/3f60d3a645ab/06756854004-c/06756854004-c.jpg?ts=1721727767944&w=1082&f=auto",
+        "inStock": true,
+        "target": "femenino",
+        "features": {
+        "tallas": ["S", "M", "L"],
+        "colores": ["Blanco", "Crema", "Negro"]
+        }
+    },
+    {
+        "id": "pantalon_recto_12",
+        "name": "Pantalón Recto Formal",
+        "description": "Pantalón de vestir con corte recto y tela suave de alta calidad.",
+        "price": 780,
+        "image": "https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?w=500",
+        "inStock": true,
+        "target": "unisex",
+        "features": {
+        "tallas": ["28", "30", "32", "34"],
+        "colores": ["Negro", "Gris", "Azul Marino"]
+        }
     }
 ]

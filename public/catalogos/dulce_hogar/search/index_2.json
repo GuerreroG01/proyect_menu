@@ -1,52 +1,52 @@
 [
   {
-    "name": "Galletas de Mantequilla",
-    "file": "/catalogos/dulce_hogar/categorias/galletas_artesanales/page_1.json",
-    "index": 2
+    "id": "americano_clasico",
+    "name": "Americano Clásico",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_2.json"
   },
   {
-    "name": "Baguette Tradicional",
-    "file": "/catalogos/dulce_hogar/categorias/pan_artesanal/page_1.json",
-    "index": 0
+    "id": "latte_avellana",
+    "name": "Latte de Avellana",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_2.json"
   },
   {
-    "name": "Baguette con Ajo y Mantequilla",
-    "file": "/catalogos/dulce_hogar/categorias/pan_artesanal/page_1.json",
-    "index": 1
+    "id": "espresso_doble",
+    "name": "Espresso Doble",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_2.json"
   },
   {
-    "name": "Pan Integral con Semillas",
-    "file": "/catalogos/dulce_hogar/categorias/pan_artesanal/page_1.json",
-    "index": 2
+    "id": "chai_helado",
+    "name": "Chai Helado",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_2.json"
   },
   {
-    "name": "Pan de Masa Madre",
-    "file": "/catalogos/dulce_hogar/categorias/pan_artesanal/page_1.json",
-    "index": 3
+    "id": "croissant_de_mantequilla",
+    "name": "Croissant de Mantequilla",
+    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json"
   },
   {
-    "name": "Torta de Chocolate Intenso",
-    "file": "/catalogos/dulce_hogar/categorias/pasteleria_premium/page_1.json",
-    "index": 0
+    "id": "croissant_de_chocolate",
+    "name": "Croissant de Chocolate",
+    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json"
   },
   {
-    "name": "Tres Leches Tradicional",
-    "file": "/catalogos/dulce_hogar/categorias/pasteleria_premium/page_1.json",
-    "index": 1
+    "id": "dona_glaseada_clasica",
+    "name": "Dona Glaseada Clásica",
+    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json"
   },
   {
-    "name": "Cheesecake de Fresa",
-    "file": "/catalogos/dulce_hogar/categorias/pasteleria_premium/page_1.json",
-    "index": 2
+    "id": "dona_rellena_de_crema",
+    "name": "Dona Rellena de Crema",
+    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json"
   },
   {
-    "name": "Pastel Red Velvet",
-    "file": "/catalogos/dulce_hogar/categorias/pasteleria_premium/page_1.json",
-    "index": 3
+    "id": "galletas_avena_miel",
+    "name": "Galletas de Avena y Miel",
+    "file": "/catalogos/dulce_hogar/categorias/galletas_artesanales/page_1.json"
   },
   {
-    "name": "Mil Hojas",
-    "file": "/catalogos/dulce_hogar/categorias/reposteria_fina/page_1.json",
-    "index": 0
+    "id": "galletas_chocolate",
+    "name": "Galletas con Chispas de Chocolate",
+    "file": "/catalogos/dulce_hogar/categorias/galletas_artesanales/page_1.json"
   }
 ]

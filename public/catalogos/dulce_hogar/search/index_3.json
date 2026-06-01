@@ -1,12 +1,52 @@
 [
   {
-    "name": "Tarta de Manzana",
-    "file": "/catalogos/dulce_hogar/categorias/reposteria_fina/page_1.json",
-    "index": 1
+    "id": "galletas_mantequilla",
+    "name": "Galletas de Mantequilla",
+    "file": "/catalogos/dulce_hogar/categorias/galletas_artesanales/page_1.json"
   },
   {
-    "name": "Tiramisú",
-    "file": "/catalogos/dulce_hogar/categorias/reposteria_fina/page_1.json",
-    "index": 2
+    "id": "baguette_tradicional",
+    "name": "Baguette Tradicional",
+    "file": "/catalogos/dulce_hogar/categorias/pan_artesanal/page_1.json"
+  },
+  {
+    "id": "baguette_con_ajo_y_mantequilla",
+    "name": "Baguette con Ajo y Mantequilla",
+    "file": "/catalogos/dulce_hogar/categorias/pan_artesanal/page_1.json"
+  },
+  {
+    "id": "pan_integral_con_semillas",
+    "name": "Pan Integral con Semillas",
+    "file": "/catalogos/dulce_hogar/categorias/pan_artesanal/page_1.json"
+  },
+  {
+    "id": "pan_de_masa_madre",
+    "name": "Pan de Masa Madre",
+    "file": "/catalogos/dulce_hogar/categorias/pan_artesanal/page_1.json"
+  },
+  {
+    "id": "torta_chocolate_intenso",
+    "name": "Torta de Chocolate Intenso",
+    "file": "/catalogos/dulce_hogar/categorias/pasteleria_premium/page_1.json"
+  },
+  {
+    "id": "tres_leches_tradicional",
+    "name": "Tres Leches Tradicional",
+    "file": "/catalogos/dulce_hogar/categorias/pasteleria_premium/page_1.json"
+  },
+  {
+    "id": "cheesecake_de_fresa",
+    "name": "Cheesecake de Fresa",
+    "file": "/catalogos/dulce_hogar/categorias/pasteleria_premium/page_1.json"
+  },
+  {
+    "id": "pastel_red_velvet",
+    "name": "Pastel Red Velvet",
+    "file": "/catalogos/dulce_hogar/categorias/pasteleria_premium/page_1.json"
+  },
+  {
+    "id": "mil_hojas",
+    "name": "Mil Hojas",
+    "file": "/catalogos/dulce_hogar/categorias/reposteria_fina/page_1.json"
   }
 ]

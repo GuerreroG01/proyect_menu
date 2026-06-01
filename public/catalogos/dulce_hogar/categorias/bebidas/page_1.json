@@ -3,32 +3,74 @@
 
     "items": [
         {
-        "id": "cafe_negro_artesanal",
-        "name": "Café Negro Artesanal",
-        "price": 25,
-        "description": "Café fuerte de grano seleccionado recién molido.",
-        "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=70"
+            "id": "cafe_negro_artesanal",
+            "name": "Café Negro Artesanal",
+            "price": 25,
+            "description": "Café fuerte de grano seleccionado recién molido.",
+            "image": "https://thumbs.dreamstime.com/b/caf%C3%A9-negro-en-taza-artesanal-y-fondo-de-madera-vista-superior-del-sobre-el-casa-229097216.jpg"
         },
         {
-        "id": "capuccino_espumoso",
-        "name": "Capuccino Espumoso",
-        "price": 35,
-        "description": "Café con leche cremosa y espuma de leche artesanal.",
-        "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=70"
+            "id": "capuccino_espumoso",
+            "name": "Capuccino Espumoso",
+            "price": 35,
+            "description": "Café con leche cremosa y espuma de leche artesanal.",
+            "image": "https://www.verybestbaking.com/sites/g/files/jgfbjl326/files/srh_recipes/6a08b7f613cc6d081e768a04a11863b7.jpg"
         },
         {
-        "id": "chocolate_caliente",
-        "name": "Chocolate Caliente Espeso",
-        "price": 30,
-        "description": "Chocolate tradicional espeso con leche caliente.",
-        "image": "https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=400&q=70"
+            "id": "chocolate_caliente",
+            "name": "Chocolate Caliente Espeso",
+            "price": 30,
+            "description": "Chocolate tradicional espeso con leche caliente.",
+            "image": "https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=400&q=70"
         },
         {
-        "id": "jugo_naranja",
-        "name": "Jugo Natural de Naranja",
-        "price": 28,
-        "description": "Jugo fresco exprimido al momento.",
-        "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=70"
+            "id": "jugo_naranja",
+            "name": "Jugo Natural de Naranja",
+            "price": 28,
+            "description": "Jugo fresco exprimido al momento.",
+            "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=70"
+        },
+        {
+            "id": "matcha_latte",
+            "name": "Matcha Latte",
+            "price": 45,
+            "description": "Té verde matcha con leche cremosa y sabor suave.",
+            "image": "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=400&q=70"
+        },
+        {
+            "id": "smoothie_banana_avena",
+            "name": "Smoothie de Banana y Avena",
+            "price": 44,
+            "description": "Batido nutritivo de banana con avena y leche.",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMizx6I1tgev2DZWS3Ue9swYZIRZBePvtwiQ&s"
+        },
+        {
+            "id": "limonada_fresa",
+            "name": "Limonada de Fresa",
+            "price": 30,
+            "description": "Refrescante mezcla de limón con fresas naturales.",
+            "image": "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=400&q=70"
+        },
+        {
+            "id": "cafe_vainilla_helado",
+            "name": "Café Vainilla Helado",
+            "price": 39,
+            "description": "Café frío con hielo y suave aroma de vainilla.",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFqI8FKcG4bCRcWt_TgfteBlxnoe2JHiqGYg&s"
+        },
+        {
+            "id": "te_negro_clasico",
+            "name": "Té Negro Clásico",
+            "price": 20,
+            "description": "Infusión tradicional de té negro aromático.",
+            "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&q=70"
+        },
+        {
+            "id": "frappe_mocha",
+            "name": "Frappé Mocha",
+            "price": 48,
+            "description": "Bebida fría de café, chocolate y hielo triturado.",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMmdSX-IEkHHlzRPZYEHtXIhTBZGN9hUrRMg&s"
         }
     ]
 }

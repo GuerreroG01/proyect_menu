@@ -1,12 +1,52 @@
 [
   {
+    "id": "vestido_gala_01",
     "name": "Vestido de Noche Ajustado",
-    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json",
-    "index": 0
+    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json"
   },
   {
+    "id": "falda_plisada_02",
     "name": "Falda Plisada Midi",
-    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json",
-    "index": 1
+    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json"
+  },
+  {
+    "id": "camisa_seda_05",
+    "name": "Camisa de Seda Fluida",
+    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json"
+  },
+  {
+    "id": "chaqueta_cuero_06",
+    "name": "Chaqueta de Cuero Sintético",
+    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json"
+  },
+  {
+    "id": "vestido_verano_07",
+    "name": "Vestido de Verano Floral",
+    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json"
+  },
+  {
+    "id": "shorts_denim_08",
+    "name": "Shorts Denim Desgastados",
+    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json"
+  },
+  {
+    "id": "top_crop_09",
+    "name": "Top Crop Básico",
+    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json"
+  },
+  {
+    "id": "abrigo_largo_10",
+    "name": "Abrigo Largo Elegante",
+    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json"
+  },
+  {
+    "id": "blusa_encaje_11",
+    "name": "Blusa de Encaje Romántica",
+    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json"
+  },
+  {
+    "id": "pantalon_recto_12",
+    "name": "Pantalón Recto Formal",
+    "file": "/tiendas/gabo_store/categorias/vestidos_faldas/page_1.json"
   }
 ]

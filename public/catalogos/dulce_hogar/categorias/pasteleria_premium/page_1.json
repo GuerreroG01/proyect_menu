@@ -3,28 +3,32 @@
 
     "items": [
         {
-        "name": "Torta de Chocolate Intenso",
-        "price": 130,
-        "description": "Bizcocho húmedo con cacao 70% y ganache de chocolate oscuro.",
-        "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=70"
+            "id": "torta_chocolate_intenso",
+            "name": "Torta de Chocolate Intenso",
+            "price": 130,
+            "description": "Bizcocho húmedo con cacao 70% y ganache de chocolate oscuro.",
+            "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=70"
         },
         {
-        "name": "Tres Leches Tradicional",
-        "price": 110,
-        "description": "Bizcocho esponjoso bañado en mezcla cremosa de tres leches.",
-        "image": "https://images.unsplash.com/photo-1607478900766-efe13248b125?w=400&q=70"
+            "id": "tres_leches_tradicional",
+            "name": "Tres Leches Tradicional",
+            "price": 110,
+            "description": "Bizcocho esponjoso bañado en mezcla cremosa de tres leches.",
+            "image": "https://images.unsplash.com/photo-1607478900766-efe13248b125?w=400&q=70"
         },
         {
-        "name": "Cheesecake de Fresa",
-        "price": 140,
-        "description": "Base de galleta con queso crema suave y coulis de fresa natural.",
-        "image": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&q=70"
+            "id": "cheesecake_de_fresa",
+            "name": "Cheesecake de Fresa",
+            "price": 140,
+            "description": "Base de galleta con queso crema suave y coulis de fresa natural.",
+            "image": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&q=70"
         },
         {
-        "name": "Pastel Red Velvet",
-        "price": 150,
-        "description": "Bizcocho rojo aterciopelado con crema de queso suave.",
-        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYbt7zj7vio68GzZ5dDulU3Guu2IB0V6k98w&s"
+            "id": "pastel_red_velvet",
+            "name": "Pastel Red Velvet",
+            "price": 150,
+            "description": "Bizcocho rojo aterciopelado con crema de queso suave.",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYbt7zj7vio68GzZ5dDulU3Guu2IB0V6k98w&s"
         }
     ]
 }

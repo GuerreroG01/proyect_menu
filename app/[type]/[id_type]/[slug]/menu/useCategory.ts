@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export function useCategory(folder: string, slug: string, categoryId: string) {
+export function useCategory(folder: string, slug: string, categoryId: string, page: number = 1) {
     const [category, setCategory] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
@@ -10,6 +10,9 @@ export function useCategory(folder: string, slug: string, categoryId: string) {
         if (!categoryId) return;
 
         const load = async () => {
+            if (!categoryId) return;
+            if (page < 1) return;
+
             try {
                 setLoading(true);
 
@@ -24,7 +27,7 @@ export function useCategory(folder: string, slug: string, categoryId: string) {
 
                 const meta = await metaRes.json();
 
-                const pageRes = await fetch(`${basePath}/page_1.json`);
+                const pageRes = await fetch(`${basePath}/page_${page}.json`);
 
                 let items = [];
 
@@ -47,7 +50,7 @@ export function useCategory(folder: string, slug: string, categoryId: string) {
         };
 
         load();
-    }, [folder, slug, categoryId]);
+    }, [folder, slug, categoryId, page]);
 
     return { category, loading };
 }

@@ -9,13 +9,13 @@ import BakeryCategories from "./BakeryCategories";
 import BakeryItemCard from "./BakeryItemCard";
 import BakeryCartBar from "./BakeryCartBar";
 import LoadingBakery from "./LoadingBakery";
-
 import { useBakery } from "./usebakery";
 import { useCategory } from "./useCategory";
 import { useCart } from "./useCart";
 import { useGlobalSearch } from "../../../../lib/useGlobalSearch";
 import { useDebounce } from "use-debounce";
 import LocationAlert from "../menu/LocationAlert";
+import Pagination from "./pagination";
 
 type Params = {
   type: string;
@@ -33,7 +33,7 @@ export default function BakeryPage(props: {
 
   const { data, loading } = useBakery(folder, params.slug);
   const { cart, addToCart, removeFromCart } = useCart();
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [orderType, setOrderType] = useState<"local" | "delivery">("local");
   const [locationError, setLocationError] = useState("");
@@ -57,8 +57,13 @@ export default function BakeryPage(props: {
   const { category } = useCategory(
     folder,
     params.slug,
-    safeCategory
+    safeCategory,
+    currentPage
   );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeCategory]);
 
   if (loading) return <LoadingBakery />;
   if (!data?.categories?.length)
@@ -178,6 +183,8 @@ export default function BakeryPage(props: {
       "_blank"
     );
   };
+  const totalPages = category?.totalPages ?? 1;
+  const showPagination = !hasSearch && totalPages > 1;
 
   return (
     <div className="min-h-screen bg-[#FFF8F1] flex flex-col">
@@ -195,6 +202,7 @@ export default function BakeryPage(props: {
           categories={data.categories}
           active={activeCategory}
           setActive={setActiveCategory}
+          setCurrentPage={setCurrentPage}
         />
       )}
       <LocationAlert
@@ -203,12 +211,19 @@ export default function BakeryPage(props: {
       />
 
       <BakeryItemCard
+        key={`${safeCategory}-${currentPage}`}
         items={itemsToShow}
         cart={cart}
         addToCart={addToCart}
         removeFromCart={removeFromCart}
       />
-
+      {showPagination && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      )}
       <BakeryCartBar
         totalItems={totalItems}
         totalPrice={totalPrice}

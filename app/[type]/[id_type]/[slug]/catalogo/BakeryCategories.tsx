@@ -4,6 +4,7 @@ export default function BakeryCategories({
   categories,
   active,
   setActive,
+  setCurrentPage,
 }: any) {
 
   return (
@@ -13,7 +14,10 @@ export default function BakeryCategories({
 
         <button
           key={cat.id}
-          onClick={() => setActive(cat.id)}
+          onClick={() => {
+            setActive(cat.id);
+            setCurrentPage(1);
+          }}
           className={`px-6 py-2 rounded-[1.2rem] text-xs font-bold whitespace-nowrap ${
             active === cat.id
               ? "bg-[#C97B2A] text-white"

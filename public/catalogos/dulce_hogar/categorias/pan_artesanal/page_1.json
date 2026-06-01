@@ -3,28 +3,32 @@
 
     "items": [
         {
-        "name": "Baguette Tradicional",
-        "price": 35,
-        "description": "Pan crujiente de corteza dorada, fermentación lenta de 12 horas.",
-        "image": "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400&q=70"
+            "id": "baguette_tradicional",
+            "name": "Baguette Tradicional",
+            "price": 35,
+            "description": "Pan crujiente de corteza dorada, fermentación lenta de 12 horas.",
+            "image": "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400&q=70"
         },
         {
-        "name": "Baguette con Ajo y Mantequilla",
-        "price": 45,
-        "description": "Pan artesanal horneado con mantequilla de ajo y perejil fresco.",
-        "image": "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=400&q=70"
+            "id": "baguette_con_ajo_y_mantequilla",
+            "name": "Baguette con Ajo y Mantequilla",
+            "price": 45,
+            "description": "Pan artesanal horneado con mantequilla de ajo y perejil fresco.",
+            "image": "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=400&q=70"
         },
         {
-        "name": "Pan Integral con Semillas",
-        "price": 40,
-        "description": "Mezcla de linaza, chía y girasol con harina integral 100%.",
-        "image": "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=400&q=70"
+            "id": "pan_integral_con_semillas",
+            "name": "Pan Integral con Semillas",
+            "price": 40,
+            "description": "Mezcla de linaza, chía y girasol con harina integral 100%.",
+            "image": "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=400&q=70"
         },
         {
-        "name": "Pan de Masa Madre",
-        "price": 55,
-        "description": "Fermentación natural de 24 horas con sabor ácido suave y corteza rústica.",
-        "image": "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400&q=70"
+            "id": "pan_de_masa_madre",
+            "name": "Pan de Masa Madre",
+            "price": 55,
+            "description": "Fermentación natural de 24 horas con sabor ácido suave y corteza rústica.",
+            "image": "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400&q=70"
         }
     ]
 }

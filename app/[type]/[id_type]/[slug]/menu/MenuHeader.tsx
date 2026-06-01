@@ -14,6 +14,7 @@ export default function MenuHeader({
   setSearchQuery,
   searchLoading,
   router,
+  setCurrentPage
 }: any) {
     return (
         <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100">
@@ -24,7 +25,7 @@ export default function MenuHeader({
 
             <button
                 onClick={() => router.back()}
-                className="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-2xl"
+                className="p-2.5 bg-white hover:bg-slate-100 rounded-2xl border border-slate-200 text-slate-800"
             >
                 <ArrowLeft size={20} />
             </button>
@@ -58,9 +59,10 @@ export default function MenuHeader({
 
         {!searchQuery && (
             <MenuCategories
-            categories={categories}
-            active={activeCategory}
-            setActive={setActiveCategory}
+                categories={categories}
+                active={activeCategory}
+                setActive={setActiveCategory}
+                setCurrentPage={setCurrentPage}
             />
         )}
         </header>

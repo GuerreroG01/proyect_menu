@@ -1,52 +1,52 @@
 [
   {
+    "id": "limonada_hierbabuena",
     "name": "Limonada con Hierbabuena",
-    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json",
-    "index": 0
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json"
   },
   {
+    "id": "cerveza_artesanal",
     "name": "Cerveza Artesanal",
-    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json",
-    "index": 1
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json"
   },
   {
+    "id": "coca_cola",
     "name": "Coca Cola",
-    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json",
-    "index": 2
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json"
   },
   {
-    "name": "Puyazo (Coulotte)",
-    "file": "/menus/la_fogata/categorias/cortes_lena/page_1.json",
-    "index": 0
+    "id": "smoothie_fresa",
+    "name": "Smoothie de Fresa",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json"
   },
   {
-    "name": "Rib Eye Prime",
-    "file": "/menus/la_fogata/categorias/cortes_lena/page_1.json",
-    "index": 1
+    "id": "batido_mango",
+    "name": "Batido Tropical de Mango",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json"
   },
   {
-    "name": "Nachos La Fogata",
-    "file": "/menus/la_fogata/categorias/entradas_entremeses/page_1.json",
-    "index": 0
+    "id": "agua_horchata",
+    "name": "Agua de Horchata",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json"
   },
   {
-    "name": "Alitas Ahumadas",
-    "file": "/menus/la_fogata/categorias/entradas_entremeses/page_1.json",
-    "index": 1
+    "id": "cafe_frio",
+    "name": "Cold Brew",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_1.json"
   },
   {
-    "name": "Chicharrón de Rib Eye",
-    "file": "/menus/la_fogata/categorias/entradas_entremeses/page_1.json",
-    "index": 2
+    "id": "cafe_negro_artesanal",
+    "name": "Café Negro Artesanal",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_2.json"
   },
   {
-    "name": "La Clásica Grill",
-    "file": "/menus/la_fogata/categorias/hamburguesas_gourmet/page_1.json",
-    "index": 0
+    "id": "capuccino_espumoso",
+    "name": "Capuccino Espumoso",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_2.json"
   },
   {
-    "name": "Monster Bacon",
-    "file": "/menus/la_fogata/categorias/hamburguesas_gourmet/page_1.json",
-    "index": 1
+    "id": "chocolate_caliente",
+    "name": "Chocolate Caliente Espeso",
+    "file": "/menus/la_fogata/categorias/bebidas_cocteleria/page_2.json"
   }
 ]

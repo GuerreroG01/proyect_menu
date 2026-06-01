@@ -3,28 +3,32 @@
 
     "items": [
         {
-        "name": "Croissant de Mantequilla",
-        "price": 30,
-        "description": "Hojaldre francés recién horneado con capas crujientes.",
-        "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=70"
+            "id": "croissant_de_mantequilla",
+            "name": "Croissant de Mantequilla",
+            "price": 30,
+            "description": "Hojaldre francés recién horneado con capas crujientes.",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGuUkn67HjDZMQBGFh1zXH7f1lwY7PAGprIQ&s"
         },
         {
-        "name": "Croissant de Chocolate",
-        "price": 40,
-        "description": "Relleno de chocolate oscuro derretido en su interior.",
-        "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=70"
+            "id": "croissant_de_chocolate",
+            "name": "Croissant de Chocolate",
+            "price": 40,
+            "description": "Relleno de chocolate oscuro derretido en su interior.",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw3n751pHZ93ZP6l4VwQmlnzqlT0HgYgi26w&s"
         },
         {
-        "name": "Dona Glaseada Clásica",
-        "price": 25,
-        "description": "Dona suave cubierta con glaseado dulce brillante.",
-        "image": "https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&q=70"
+            "id": "dona_glaseada_clasica",
+            "name": "Dona Glaseada Clásica",
+            "price": 25,
+            "description": "Dona suave cubierta con glaseado dulce brillante.",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRap9xsY-FLd71_3puQEu5FpuzdJXUB9wFrjQ&s"
         },
         {
-        "name": "Dona Rellena de Crema",
-        "price": 30,
-        "description": "Dona esponjosa rellena de crema pastelera.",
-        "image": "https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&q=70"
+            "id": "dona_rellena_de_crema",
+            "name": "Dona Rellena de Crema",
+            "price": 30,
+            "description": "Dona esponjosa rellena de crema pastelera.",
+            "image": "https://pekis.net/sites/default/files/styles/325x325/public/2025-02/vanilijeva%20krema%20za%20krofe_0.jpg?itok=MiUgEAmT"
         }
     ]
 }

@@ -1,52 +1,52 @@
 [
   {
+    "id": "cafe_negro_artesanal",
     "name": "Café Negro Artesanal",
-    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json",
-    "index": 0
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json"
   },
   {
+    "id": "capuccino_espumoso",
     "name": "Capuccino Espumoso",
-    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json",
-    "index": 1
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json"
   },
   {
+    "id": "chocolate_caliente",
     "name": "Chocolate Caliente Espeso",
-    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json",
-    "index": 2
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json"
   },
   {
+    "id": "jugo_naranja",
     "name": "Jugo Natural de Naranja",
-    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json",
-    "index": 3
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json"
   },
   {
-    "name": "Croissant de Mantequilla",
-    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json",
-    "index": 0
+    "id": "matcha_latte",
+    "name": "Matcha Latte",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json"
   },
   {
-    "name": "Croissant de Chocolate",
-    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json",
-    "index": 1
+    "id": "smoothie_banana_avena",
+    "name": "Smoothie de Banana y Avena",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json"
   },
   {
-    "name": "Dona Glaseada Clásica",
-    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json",
-    "index": 2
+    "id": "limonada_fresa",
+    "name": "Limonada de Fresa",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json"
   },
   {
-    "name": "Dona Rellena de Crema",
-    "file": "/catalogos/dulce_hogar/categorias/bolleria_dulce/page_1.json",
-    "index": 3
+    "id": "cafe_vainilla_helado",
+    "name": "Café Vainilla Helado",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json"
   },
   {
-    "name": "Galletas de Avena y Miel",
-    "file": "/catalogos/dulce_hogar/categorias/galletas_artesanales/page_1.json",
-    "index": 0
+    "id": "te_negro_clasico",
+    "name": "Té Negro Clásico",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json"
   },
   {
-    "name": "Galletas con Chispas de Chocolate",
-    "file": "/catalogos/dulce_hogar/categorias/galletas_artesanales/page_1.json",
-    "index": 1
+    "id": "frappe_mocha",
+    "name": "Frappé Mocha",
+    "file": "/catalogos/dulce_hogar/categorias/bebidas/page_1.json"
   }
 ]

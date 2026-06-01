@@ -1,0 +1,37 @@
+[
+  {
+    "id": "alitas_ahumadas",
+    "name": "Alitas Ahumadas",
+    "file": "/menus/la_fogata/categorias/entradas_entremeses/page_1.json"
+  },
+  {
+    "id": "chicharron_rib_eye",
+    "name": "Chicharrón de Rib Eye",
+    "file": "/menus/la_fogata/categorias/entradas_entremeses/page_1.json"
+  },
+  {
+    "id": "la_clasica_grill",
+    "name": "La Clásica Grill",
+    "file": "/menus/la_fogata/categorias/hamburguesas_gourmet/page_1.json"
+  },
+  {
+    "id": "monster_bacon",
+    "name": "Monster Bacon",
+    "file": "/menus/la_fogata/categorias/hamburguesas_gourmet/page_1.json"
+  },
+  {
+    "id": "volcan_de_queso",
+    "name": "Volcán de Queso",
+    "file": "/menus/la_fogata/categorias/hamburguesas_gourmet/page_1.json"
+  },
+  {
+    "id": "brownie_con_helado",
+    "name": "Brownie con Helado",
+    "file": "/menus/la_fogata/categorias/postres/page_1.json"
+  },
+  {
+    "id": "cheesecake_de_frutos_rojos",
+    "name": "Cheesecake de Frutos Rojos",
+    "file": "/menus/la_fogata/categorias/postres/page_1.json"
+  }
+]
