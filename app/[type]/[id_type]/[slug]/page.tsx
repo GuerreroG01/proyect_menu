@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { MapPin, Clock, ArrowRight, Star, ChevronLeft, ShieldCheck } from "lucide-react";
+import { MapPin, Star, ChevronLeft, ShieldCheck } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import { getBusiness } from "@/app/lib/data";
 import HorariosModal from "./HorariosModal";
 import VerButton from "./VerButton";
+import ShareButton from "./ShareButton";
+import { Metadata } from "next";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -49,6 +51,48 @@ const TYPE_CONFIG: Record<string, { label: string; route: string; folder: string
     banner: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 };
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ type: string; id_type: string; slug: string }>; 
+}): Promise<Metadata> {
+  const { type, id_type, slug } = await params;
+
+  const config = TYPE_CONFIG[id_type] ?? TYPE_CONFIG["1"];
+  const folder = config.folder;
+
+  const restaurantData = getBusiness(folder, slug);
+  const name = restaurantData?.name || slug.replace(/_/g, " ");
+  
+  const shareUrl = `https://proyect-menu.vercel.app/${type}/${id_type}/${slug}`;
+
+  return {
+    title: `${name} | LocalNet Systems`,
+    description: `Explora el ${config.label.toLowerCase()} digital de ${name}.`,
+    openGraph: {
+      title: name,
+      description: `Explora nuestro ${config.label.toLowerCase()} interactivo en línea.`,
+      url: shareUrl,
+      siteName: "LocalNet Systems",
+      type: "website",
+      images: [
+        {
+          url: config.banner,
+          width: 1200,
+          height: 630,
+          alt: `Catálogo de ${name}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: name,
+      description: `Explora el ${config.label.toLowerCase()} digital de ${name}.`,
+      images: [config.banner],
+    },
+  };
+}
+
 function verificarSiEstaAbierto(horarios: Horario[] = []): boolean {
   if (!horarios.length) return false;
 
@@ -100,12 +144,9 @@ export default async function Page({ params }: { params: Promise<{ type: string;
   const folder = config.folder;
 
   const restaurantData = getBusiness(folder, slug);
-  const name =
-    restaurantData?.name ||
-    slug.replace(/_/g, " ");
+  const name = restaurantData?.name || slug.replace(/_/g, " ");
 
   const open = verificarSiEstaAbierto(restaurantData?.horarios);
-
   return (
     <div className={`${montserrat.className} min-h-screen bg-[#F8FAFC]`}>
 
@@ -113,14 +154,17 @@ export default async function Page({ params }: { params: Promise<{ type: string;
         <img
           src={config.banner}
           className="w-full h-full object-cover"
+          alt="Banner"
         />
 
         <div className="absolute inset-0 bg-black/40" />
 
-        <div className="absolute top-4 left-4">
-          <Link href="/" className="p-2 bg-white/20 backdrop-blur-md rounded-xl text-white">
+        <div className="absolute top-4 left-4 flex items-center gap-2">
+          <Link href="/" className="p-2 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-xl text-white block transition-colors">
             <ChevronLeft size={18} />
           </Link>
+          
+          <ShareButton title={name} />
         </div>
 
         <div className="absolute top-4 right-4">
@@ -157,7 +201,7 @@ export default async function Page({ params }: { params: Promise<{ type: string;
 
           <a
             href={restaurantData?.ubicacion || "#"}
-            className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm"
+            className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm hover:bg-slate-50 transition-colors"
           >
             <MapPin className="text-[#00A7E1]" />
             <div>
@@ -187,6 +231,7 @@ export default async function Page({ params }: { params: Promise<{ type: string;
               <img
                 src={restaurantData.QR_URL}
                 className="w-56 h-56 mx-auto bg-white p-2 rounded-2xl border"
+                alt="QR Code"
               />
 
               <p className="text-xs text-slate-400 mt-4">

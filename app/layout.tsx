@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   title: "LocalNet Systems | Catalogo Digital",
   description: "La plataforma inteligente para la gestión de tu catálogo digital.",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,10 +24,21 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body
+        className="
+          min-h-full
+          flex
+          flex-col
+          bg-gradient-to-br
+          from-white/95
+          via-white/80
+          to-slate-100/90
+          text-slate-900
+        "
+      >
         {children}
 
         {/* Botón global de scroll */}
