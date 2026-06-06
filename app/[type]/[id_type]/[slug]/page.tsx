@@ -6,6 +6,7 @@ import HorariosModal from "./HorariosModal";
 import VerButton from "./VerButton";
 import ShareButton from "./ShareButton";
 import { Metadata } from "next";
+import BusinessInfo from "./BusinessInfo";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -28,6 +29,9 @@ interface RestaurantData {
   categories: any[];
   QR_URL?: string;
   type: string;
+  instagram?: string;
+  facebook?: string;
+  images?: string[];
 }
 
 const TIMEZONE = "America/Managua";
@@ -51,6 +55,7 @@ const TYPE_CONFIG: Record<string, { label: string; route: string; folder: string
     banner: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 };
+
 export async function generateMetadata({ 
   params 
 }: { 
@@ -147,9 +152,11 @@ export default async function Page({ params }: { params: Promise<{ type: string;
   const name = restaurantData?.name || slug.replace(/_/g, " ");
 
   const open = verificarSiEstaAbierto(restaurantData?.horarios);
+
   return (
     <div className={`${montserrat.className} min-h-screen bg-[#F8FAFC]`}>
 
+      {/* BANNER SUPERIOR */}
       <div className="relative h-[28vh] w-full overflow-hidden">
         <img
           src={config.banner}
@@ -186,64 +193,83 @@ export default async function Page({ params }: { params: Promise<{ type: string;
         </div>
       </div>
 
-      <main className="max-w-6xl mx-auto px-6 py-6 grid lg:grid-cols-2 gap-6">
+      {/* CONTENIDO PRINCIPAL: GRID REESTRUCTURADO */}
+      {/* CONTENIDO PRINCIPAL REESTRUCTURADO */}
+<main className="max-w-6xl mx-auto px-6 py-6 space-y-10">
 
-        <div className="space-y-4">
-          <h1 className="text-3xl md:text-4xl font-black text-[#002B5B] leading-tight">
-            {name}
-          </h1>
+  {/* SECCIÓN SUPERIOR: Rejilla de 2 columnas para la Info Esencial y el QR */}
+  <div className="grid lg:grid-cols-2 gap-8 items-start">
+    
+    {/* COLUMNA IZQUIERDA: Información Esencial del Negocio */}
+    <div className="space-y-4 h-fit">
+      <h1 className="text-3xl md:text-4xl font-black text-[#002B5B] leading-tight">
+        {name}
+      </h1>
 
-          <div className="flex gap-1">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
-            ))}
-          </div>
+      <div className="flex gap-1">
+        {[...Array(5)].map((_, i) => (
+          <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
+        ))}
+      </div>
 
-          <a
-            href={restaurantData?.ubicacion || "#"}
-            className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm hover:bg-slate-50 transition-colors"
-          >
-            <MapPin className="text-[#00A7E1]" />
-            <div>
-              <p className="text-xs text-slate-400">Ubicación</p>
-              <p className="font-bold text-[#002B5B] text-sm">
-                {restaurantData?.labelUbicacion}
-              </p>
-            </div>
-          </a>
-
-          <HorariosModal horarios={restaurantData?.horarios || []} businessName={name} />
-
-          <VerButton
-            href={`/${type}/${id_type}/${slug}/${config.route}`}
-            label={config.label}
-          />
+      <a
+        href={restaurantData?.ubicacion || "#"}
+        className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm hover:bg-slate-50 transition-colors"
+      >
+        <MapPin className="text-[#00A7E1]" />
+        <div>
+          <p className="text-xs text-slate-400">Ubicación</p>
+          <p className="font-bold text-[#002B5B] text-sm">
+            {restaurantData?.labelUbicacion}
+          </p>
         </div>
+      </a>
 
-        {restaurantData?.QR_URL && (
-          <div className="flex items-center justify-center">
-            <div className="bg-white rounded-3xl shadow-xl p-8 text-center w-full max-w-sm">
+      <HorariosModal horarios={restaurantData?.horarios || []} businessName={name} />
 
-              <p className="text-xs uppercase tracking-widest text-slate-400 mb-4">
-                Escanea el {config.label.toLowerCase()}
-              </p>
+      <VerButton
+        href={`/${type}/${id_type}/${slug}/${config.route}`}
+        label={config.label}
+      />
+    </div>
 
-              <img
-                src={restaurantData.QR_URL}
-                className="w-56 h-56 mx-auto bg-white p-2 rounded-2xl border"
-                alt="QR Code"
-              />
+    {/* COLUMNA DERECHA: Tarjeta del QR Code */}
+    <div className="h-fit flex flex-col items-center lg:items-stretch">
+      {restaurantData?.QR_URL && (
+        <div className="bg-white rounded-3xl shadow-xl p-8 text-center w-full max-w-sm mx-auto lg:max-w-none">
+          <p className="text-xs uppercase tracking-widest text-slate-400 mb-4">
+            Escanea el {config.label.toLowerCase()}
+          </p>
 
-              <p className="text-xs text-slate-400 mt-4">
-                Abre la cámara de tu teléfono
-              </p>
+          <img
+            src={restaurantData.QR_URL}
+            className="w-56 h-56 mx-auto bg-white p-2 rounded-2xl border"
+            alt="QR Code"
+          />
 
-            </div>
-          </div>
-        )}
-      </main>
+          <p className="text-xs text-slate-400 mt-4">
+            Abre la cámara de tu teléfono
+          </p>
+        </div>
+      )}
+    </div>
 
-      <div className="text-center text-xs text-slate-400 pb-6">
+  </div>
+
+  {/* SECCIÓN INFERIOR INDEPENDIENTE: Ocupa todo el ancho del contenedor por sí misma */}
+  <div className="w-full">
+    <BusinessInfo 
+      whatsapp={restaurantData?.whatsapp}
+      instagram={restaurantData?.instagram}
+      facebook={restaurantData?.facebook}
+      images={restaurantData?.images}
+      businessName={name}
+    />
+  </div>
+
+</main>
+
+      <div className="text-center text-xs text-slate-400 pb-6 mt-8">
         LocalNet Systems
       </div>
     </div>
