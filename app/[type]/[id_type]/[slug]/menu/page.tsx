@@ -78,13 +78,6 @@ export default function MenuPage(props: {
       </div>
     );
   }
-  if (!loading && !searchQuery && !category) {
-    return (
-      <div className="p-10 text-center text-slate-400 font-bold">
-        Sin productos en esta categoría
-      </div>
-    );
-  }
 
   const deliveryFee =
     orderType === "delivery" ? (data.delivery ?? 0) : 0;
