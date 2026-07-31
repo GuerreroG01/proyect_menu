@@ -37,7 +37,10 @@ export default function MenuPage(props: {
     useCart();
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [orderType, setOrderType] = useState<"local" | "delivery">("local");
+  const [actionType, setActionType] = useState<"pedir" | "encargar" | null>(null);
+  const [deliveryType, setDeliveryType] = useState<"local" | "delivery" | null>(null);
+  const [pickupDate, setPickupDate] = useState("");
+  const [pickupTime, setPickupTime] = useState("");
   const [locationError, setLocationError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [activeCategory, setActiveCategory] = useState<string>("");
@@ -80,7 +83,7 @@ export default function MenuPage(props: {
   }
 
   const deliveryFee =
-    orderType === "delivery" ? (data.delivery ?? 0) : 0;
+    deliveryType === "delivery" ? (data.delivery ?? 0) : 0;
 
   const totalPrice = subtotal + deliveryFee;
 
@@ -98,7 +101,6 @@ export default function MenuPage(props: {
         if (permission.state === "denied") return "denied";
       }
     } catch {}
-
     return new Promise((resolve) => {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
@@ -117,6 +119,17 @@ export default function MenuPage(props: {
     });
   };
 
+  const formatDate = (date: string) => {
+    if (!date) return "";
+
+    return new Intl.DateTimeFormat("es-NI", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(`${date}T00:00:00`));
+  };
+
   const sendWhatsApp = async () => {
     if (totalItems === 0) return;
 
@@ -124,15 +137,14 @@ export default function MenuPage(props: {
 
     let locationSection = "";
 
-    if (orderType === "delivery") {
+    if (deliveryType === "delivery") {
+
       const location = await getLocation();
 
       if (location === "denied") {
-        setLocationError(`
-          La ubicación está bloqueada.
-
-          Actívala en tu navegador para continuar.
-        `);
+        setLocationError(
+          "La ubicación está bloqueada.\n\nActívala en tu navegador para continuar."
+        );
         return;
       }
 
@@ -142,47 +154,48 @@ export default function MenuPage(props: {
       }
 
       const mapLink = `https://www.google.com/maps?q=${location.lat},${location.lng}`;
-
-      locationSection = `
-*UBICACIÓN DEL CLIENTE*
-${mapLink}
-      `;
-    }
+      locationSection = `Te comparto mi ubicación: ${mapLink}`;}
 
     const itemsText = Object.values(cart)
       .map(
         (item: any) =>
-          `• ${item.quantity}x ${item.name} — $${(
+          `${item.quantity} ${item.name} - $${(
             item.price * item.quantity
           ).toFixed(2)}`
       )
       .join("\n");
 
     const message = `
-*${data.name}*
-
-━━━━━━━━━━━━━━
-
-*PEDIDO*
+Hola, soy ${data.name}.
+Quiero realizar un pedido con los siguientes productos:
 
 ${itemsText}
 
-━━━━━━━━━━━━━━
-
-*RESUMEN*
-
+El resumen de mi compra es:
 Subtotal: $${subtotal.toFixed(2)}
-${orderType === "delivery" ? `Delivery: $${deliveryFee.toFixed(2)}` : ""}
+${
+  deliveryType === "delivery"
+    ? `Costo de delivery: $${deliveryFee.toFixed(2)}`
+    : ""
+}
+Total a pagar: $${totalPrice.toFixed(2)}
 
-*TOTAL: $${totalPrice.toFixed(2)}*
-
-━━━━━━━━━━━━━━
-
-*ENTREGA*
-${orderType === "delivery" ? "A domicilio" : "Retiro en local"}
+${
+  actionType === "encargar"
+    ? `Me gustaría dejarlo encargado para el día ${formatDate(pickupDate)} a las ${pickupTime}.`
+    : `Me gustaría realizar el pedido ahora.`
+}
+La entrega sería ${
+  deliveryType === "delivery"
+    ? "a domicilio"
+    : "retirando en el local"
+}.
 
 ${locationSection}
-    `.trim();
+
+¿Me podrían confirmar si está todo correcto?
+Muchas gracias.
+`.trim();
 
     window.open(
       `https://wa.me/${data.whatsapp}?text=${encodeURIComponent(message)}`,
@@ -254,8 +267,14 @@ ${locationSection}
       <CartBar
         totalItems={totalItems}
         totalPrice={totalPrice}
-        orderType={orderType}
-        setOrderType={setOrderType}
+        actionType={actionType}
+        setActionType={setActionType}
+        deliveryType={deliveryType}
+        setDeliveryType={setDeliveryType}
+        pickupDate={pickupDate}
+        setPickupDate={setPickupDate}
+        pickupTime={pickupTime}
+        setPickupTime={setPickupTime}
         onConfirm={sendWhatsApp}
       />
     </div>

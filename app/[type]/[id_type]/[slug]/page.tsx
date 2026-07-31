@@ -19,19 +19,34 @@ interface Horario {
   cierra: string;
 }
 
-interface RestaurantData {
+interface Gallery {
+  type:
+    | "business_photos"
+    | "portfolio"
+    | "products"
+    | "services"
+    | "team"
+    | "none";
+  title: string;
+  description: string;
+  images: string[];
+}
+
+
+interface BusinessData {
   name: string;
   logo: string;
   whatsapp: string;
-  labelUbicacion: string;
-  ubicacion: string;
+  labelUbicacion?: string;
+  ubicacion?: string;
   horarios: Horario[];
   categories: any[];
   QR_URL?: string;
   type: string;
   instagram?: string;
   facebook?: string;
-  images?: string[];
+  presenceType?: | "physical" | "digital";
+  gallery?: Gallery;
 }
 
 const TIMEZONE = "America/Managua";
@@ -156,7 +171,6 @@ export default async function Page({ params }: { params: Promise<{ type: string;
   return (
     <div className={`${montserrat.className} min-h-screen bg-[#F8FAFC]`}>
 
-      {/* BANNER SUPERIOR */}
       <div className="relative h-[28vh] w-full overflow-hidden">
         <img
           src={config.banner}
@@ -193,14 +207,9 @@ export default async function Page({ params }: { params: Promise<{ type: string;
         </div>
       </div>
 
-      {/* CONTENIDO PRINCIPAL: GRID REESTRUCTURADO */}
-      {/* CONTENIDO PRINCIPAL REESTRUCTURADO */}
 <main className="max-w-6xl mx-auto px-6 py-6 space-y-10">
 
-  {/* SECCIÓN SUPERIOR: Rejilla de 2 columnas para la Info Esencial y el QR */}
   <div className="grid lg:grid-cols-2 gap-8 items-start">
-    
-    {/* COLUMNA IZQUIERDA: Información Esencial del Negocio */}
     <div className="space-y-4 h-fit">
       <h1 className="text-3xl md:text-4xl font-black text-[#002B5B] leading-tight">
         {name}
@@ -233,7 +242,6 @@ export default async function Page({ params }: { params: Promise<{ type: string;
       />
     </div>
 
-    {/* COLUMNA DERECHA: Tarjeta del QR Code */}
     <div className="h-fit flex flex-col items-center lg:items-stretch">
       {restaurantData?.QR_URL && (
         <div className="bg-white rounded-3xl shadow-xl p-8 text-center w-full max-w-sm mx-auto lg:max-w-none">
@@ -256,13 +264,11 @@ export default async function Page({ params }: { params: Promise<{ type: string;
 
   </div>
 
-  {/* SECCIÓN INFERIOR INDEPENDIENTE: Ocupa todo el ancho del contenedor por sí misma */}
   <div className="w-full">
     <BusinessInfo 
-      whatsapp={restaurantData?.whatsapp}
       instagram={restaurantData?.instagram}
       facebook={restaurantData?.facebook}
-      images={restaurantData?.images}
+      gallery={restaurantData?.gallery}
       businessName={name}
     />
   </div>

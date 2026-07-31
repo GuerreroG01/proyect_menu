@@ -10,7 +10,6 @@
     "delivery": 80,
     "type": "restaurant",
     "id_type": 1,
-
     "horarios": [
         {
         "dias": "Lunes a Viernes",
@@ -46,11 +45,17 @@
         "name": "Bebidas y Coctelería"
         }
     ],
-    "images": [
-        "https://foodandpleasure.com/wp-content/uploads/2019/11/huset-restaurantes-acogedores-2.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpRT9NGf5cXt2un2vG0efCMAQC43iJrp6zGQ&s",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO5_T1ZhcXFutsW-7EqxTxu1pg1it9SjaSmg&s",
-        "https://enlacocinamagazine.b-cdn.net/wp-content/uploads/2017/04/restaurante-2.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS4mTJ5tCxUVMbRTGRkFcUBKFa5D7Dp69gxA&s"
-    ]
+    "presenceType": "physical",
+    "gallery": {
+        "type": "business_photos",
+        "title": "Conoce nuestro espacio",
+        "description": "Disfruta un ambiente diseñado para compartir buenos momentos",
+        "images": [
+            "https://foodandpleasure.com/wp-content/uploads/2019/11/huset-restaurantes-acogedores-2.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpRT9NGf5cXt2un2vG0efCMAQC43iJrp6zGQ&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO5_T1ZhcXFutsW-7EqxTxu1pg1it9SjaSmg&s",
+            "https://enlacocinamagazine.b-cdn.net/wp-content/uploads/2017/04/restaurante-2.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS4mTJ5tCxUVMbRTGRkFcUBKFa5D7Dp69gxA&s"
+        ]
+    }
 }
