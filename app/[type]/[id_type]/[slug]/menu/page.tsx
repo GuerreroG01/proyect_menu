@@ -166,7 +166,7 @@ export default function MenuPage(props: {
       .join("\n");
 
     const message = `
-Hola, soy ${data.name}.
+Hola personal de ${data.name}.
 Quiero realizar un pedido con los siguientes productos:
 
 ${itemsText}
