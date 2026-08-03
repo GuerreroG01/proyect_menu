@@ -199,11 +199,16 @@ export default function BusinessInfo({
                                     px-4
                                     py-2.5
                                     bg-white
+                                    text-gray-700
+                                    hover:text-gray-900
                                     rounded-xl
                                     text-xs
                                     font-semibold
                                     border
                                     border-slate-200/60
+                                    shadow-sm
+                                    hover:shadow-md
+                                    transition-all
                                 "
                             >
                                 <Instagram
@@ -226,11 +231,16 @@ export default function BusinessInfo({
                                     px-4
                                     py-2.5
                                     bg-white
+                                    text-gray-700
+                                    hover:text-gray-900
                                     rounded-xl
                                     text-xs
                                     font-semibold
                                     border
                                     border-slate-200/60
+                                    shadow-sm
+                                    hover:shadow-md
+                                    transition-all
                                 "
                             >
                                 <Facebook
